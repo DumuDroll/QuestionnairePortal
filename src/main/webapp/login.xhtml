@@ -16,7 +16,7 @@
 
                 <h:outputText value="Username" />
 
-                <p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
+                <p:inputText id="username" value="#{loginMB.uname}" ></p:inputText>
 
                 <p:spacer></p:spacer>
 
@@ -24,7 +24,7 @@
 
                 <h:outputText value="Password" />
 
-                <p:password id="password" value="#{loginBean.password}" feedback="false"></p:password>
+                <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
 
                 <p:spacer></p:spacer>
 
@@ -32,10 +32,10 @@
 
                 <p:spacer></p:spacer>
 
-                <p:commandButton action="#{loginBean.logIn}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm" ajax="true"></p:commandButton>
 
                 <p:spacer></p:spacer>
-                <p:link value = "Not registered yet? Sign up!" href = "/sign-up"/>
+                <p:link value = "Not registered yet? Sign up!" outcome="signUp"/>
 
             </h:panelGrid>
 

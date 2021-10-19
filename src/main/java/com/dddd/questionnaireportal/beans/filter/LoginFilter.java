@@ -1,6 +1,6 @@
 package com.dddd.questionnaireportal.beans.filter;
 
-import com.dddd.questionnaireportal.beans.managedBeans.LoginBean;
+import com.dddd.questionnaireportal.beans.managedBeans.LoginMB;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +20,11 @@ public class LoginFilter implements Filter {
             HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-            LoginBean loginBean = (LoginBean) httpServletRequest
-                    .getSession().getAttribute("LoginBean");
+            LoginMB loginMB = (LoginMB) httpServletRequest
+                    .getSession().getAttribute("LoginController");
 
-            if (loginBean != null) {
-                if (loginBean.isLoggedIn()) {
+            if (loginMB != null) {
+                if (loginMB.isLoggedIn()) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     httpServletResponse.sendRedirect(httpServletRequest

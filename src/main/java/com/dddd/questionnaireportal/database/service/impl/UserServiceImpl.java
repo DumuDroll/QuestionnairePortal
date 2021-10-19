@@ -5,13 +5,16 @@ import com.dddd.questionnaireportal.database.dao.UserDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
 
-import javax.inject.Named;
-
-@Named("UserService")
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO = new UserDAO();
 
 
+    public boolean findByEmail(String email){
+        userDAO.beginTransaction();
+        User user = userDAO.findUserByEmail(email);
+        userDAO.closeTransaction();
+        return user!=null;
+    }
 
     public boolean isValidLogin(String email, String password){
         userDAO.beginTransaction();

@@ -8,26 +8,18 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-@Named
+
+@ManagedBean
 @SessionScoped
-@URLMapping(id="login", pattern = "/", viewId = "login.xhtml")
-public class LoginBean {
+public class LoginMB {
 
 
-    private final @Named("UserService") UserServiceImpl userService;
+    private final  UserServiceImpl userService = new UserServiceImpl();
 
     private String uname;
     private String password;
     private User user;
-
-    @Inject
-    public LoginBean(UserServiceImpl userService) {
-        this.userService = userService;
-    }
 
     public String getPassword() {
         return password;
@@ -48,7 +40,7 @@ public class LoginBean {
     public String logIn() {
         boolean result = userService.isValidLogin(uname, password);
         if (result) {
-            return "home";
+            return "fields";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,

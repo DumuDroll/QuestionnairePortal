@@ -16,8 +16,8 @@
        </url-mapping>
 
     <url-mapping id="sign-up">
-        <pattern value="/sign-up" />
-        <view-id value="/sign-up.xhtml" />
+        <pattern value="/signUp" />
+        <view-id value="/signUp.xhtml" />
     </url-mapping>
 
     <!-- Begin UrlMappings
