@@ -20,6 +20,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="QPortal" />
           <factory-entry name="QuestionnairePortal" />
         </datasource-mapping>
         <naming-strategy-map />
@@ -47,6 +48,7 @@
     <orderEntry type="library" name="Maven: org.jboss:jandex:1.2.4.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.faces:2.2.15" level="project" />
+    <orderEntry type="library" name="Maven: com.ocpsoft:prettyfaces-jsf2:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:10.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.6.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.4.2.Final" level="project" />
