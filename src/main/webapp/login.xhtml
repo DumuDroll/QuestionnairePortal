@@ -8,8 +8,7 @@
 <h:body>
     <h:form id="loginForm">
 
-
-        <p:growl id="msg" showDetail="true" life="3000" />
+        <p:growl showDetail="true" life="3000" />
         <p:panel header="Login" style="width: 360px;">
 
             <h:panelGrid id="loginPanel" columns="2">
@@ -32,7 +31,7 @@
 
                 <p:spacer></p:spacer>
 
-                <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm"></p:commandButton>
 
                 <p:spacer></p:spacer>
                 <p:link value = "Not registered yet? Sign up!" outcome="signUp"/>

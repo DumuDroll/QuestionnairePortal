@@ -21,7 +21,7 @@ public class LoginFilter implements Filter {
             HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
             LoginMB loginMB = (LoginMB) httpServletRequest
-                    .getSession().getAttribute("LoginController");
+                    .getSession().getAttribute("LoginMB");
 
             if (loginMB != null) {
                 if (loginMB.isLoggedIn()) {

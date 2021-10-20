@@ -1,13 +1,27 @@
 package com.dddd.questionnaireportal.database.service.impl;
 
 
-import com.dddd.questionnaireportal.database.dao.UserDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
 
-public class UserServiceImpl implements UserService {
-    private final UserDAO userDAO = new UserDAO();
+import com.dddd.questionnaireportal.database.dao.UserDAO;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+
+@ManagedBean(name = "userService")
+public class UserServiceImpl implements UserService {
+
+    @ManagedProperty("#{userDAO}")
+    private UserDAO userDAO;
+
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     public boolean findByEmail(String email){
         userDAO.beginTransaction();

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+        'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+
+<html xmlns='http://www.w3.org/1999/xhtml'
+      xmlns:ui='http://java.sun.com/jsf/facelets'
+      xmlns:h='http://java.sun.com/jsf/html'
+      xmlns:p='http://primefaces.org/ui' xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <ui:composition>
+        <div id="topNavBar">
+            <div class="p-field p-col-12 p-md-4">
+                <p:menuButton value="#{}">
+                    <p:menuitem value="Save (Non-Ajax)" action="#{loginMB.uname}" ajax="false" update="messages" icon="pi pi-save"/>
+                    <p:menuitem value="Update" action="#{menuView.update}" update="messages" icon="pi pi-refresh"/>
+                    <p:menuitem value="Delete" action="#{menuView.delete}" update="messages" icon="pi pi-times"/>
+                    <p:divider/>
+                    <p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link"/>
+                </p:menuButton>
+            </div>
+            <h:form>
+                <p:commandButton value="Log out" action="#{loginMB.logOut()}"/>
+            </h:form>
+        </div>
+    </ui:composition>
+</h:body>
+</html>

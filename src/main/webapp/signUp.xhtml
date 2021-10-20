@@ -11,7 +11,7 @@
 <body>
 <h:form id="signUpForm">
     <p:panel header="Sign Up" style="width: 500px;">
-        <p:messages/>
+        <p:growl showDetail="true" life="3000"/>
         <h:panelGrid columns="2">
             <p:outputLabel value="Email:"/>
             <p:inputText id="email" value="#{signUpMB.email}" label="UserName" />

@@ -1,25 +1,36 @@
 package com.dddd.questionnaireportal.beans.managedBeans;
 
 
+import com.dddd.questionnaireportal.common.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.impl.UserServiceImpl;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class LoginMB {
 
+    @ManagedProperty("#{userService}")
+    private UserServiceImpl userService;
 
-    private final  UserServiceImpl userService = new UserServiceImpl();
+    public UserServiceImpl getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     private String uname;
     private String password;
-    private User user;
 
     public String getPassword() {
         return password;
@@ -40,6 +51,8 @@ public class LoginMB {
     public String logIn() {
         boolean result = userService.isValidLogin(uname, password);
         if (result) {
+            HttpSession session = SessionUtil.getSession();
+            session.setAttribute("username", uname);
             return "fields";
         } else {
             FacesContext.getCurrentInstance().addMessage(
@@ -50,7 +63,13 @@ public class LoginMB {
             return "login";
         }
     }
+    public String logOut(){
+        HttpSession session = SessionUtil.getSession();
+        session.invalidate();
+        return "login";
+    }
+
     public boolean isLoggedIn(){
-        return user != null;
+        return SessionUtil.getSession().getAttribute("username") != null;
     }
 }

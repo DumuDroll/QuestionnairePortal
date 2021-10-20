@@ -6,15 +6,16 @@ import com.dddd.questionnaireportal.database.service.impl.UserServiceImpl;
 import javax.faces.application.FacesMessage;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import java.io.Serializable;
 
 @ManagedBean
 @RequestScoped
-public class SignUpMB implements Serializable {
+public class SignUpMB{
 
-    private final UserServiceImpl userService = new UserServiceImpl();
+    @ManagedProperty("#{userService}")
+    private UserServiceImpl userService;
 
     private User user;
     private String email;
@@ -23,6 +24,13 @@ public class SignUpMB implements Serializable {
     private String lastName;
     private String phoneNumber;
 
+    public UserServiceImpl getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     public String getEmail() {
         return email;
@@ -85,7 +93,7 @@ public class SignUpMB implements Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "This email is already ",
+                            "Account with such an email already exists",
                             "Please Try Again!"));
         }
         return "signUp";

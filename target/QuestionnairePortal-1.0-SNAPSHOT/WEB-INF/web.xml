@@ -14,7 +14,7 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>/login</welcome-file>
     </welcome-file-list>
 
     <servlet>

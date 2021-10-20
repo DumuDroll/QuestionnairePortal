@@ -4,20 +4,27 @@
                                    		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
 
     <!-- Begin Example RewriteRules
-
        // These are custom rewrite-rules, and are probably not necessary for your application.
+       <rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />-->
 
-       <rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />
+    <url-mapping id="login">
+        <pattern value="/login"/>
+        <view-id value="/login.xhtml"/>
+    </url-mapping>
 
-    -->
-       <url-mapping id="login">
-           <pattern value="/" />
-           <view-id value="/login.xhtml" />
-       </url-mapping>
+    <url-mapping id="signUp">
+        <pattern value="/signUp"/>
+        <view-id value="/signUp.xhtml"/>
+    </url-mapping>
 
-    <url-mapping id="sign-up">
-        <pattern value="/signUp" />
-        <view-id value="/signUp.xhtml" />
+    <url-mapping id="FieldList">
+        <pattern value="/fields"/>
+        <view-id value="/secured/fields/fieldList.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="ResponseList">
+        <pattern value="/"/>
+        <view-id value="/secured/response/responseList.xhtml"/>
     </url-mapping>
 
     <!-- Begin UrlMappings

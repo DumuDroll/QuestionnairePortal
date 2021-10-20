@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 @NamedQuery(name="User.findUserByEmail", query = "select u from User u where u.email = :email")
 public class User {
 
