@@ -14,8 +14,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class SignUpMB{
 
-    @ManagedProperty("#{userService}")
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService = new UserServiceImpl();
 
     private User user;
     private String email;
@@ -23,14 +22,6 @@ public class SignUpMB{
     private String firstName;
     private String lastName;
     private String phoneNumber;
-
-    public UserServiceImpl getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserServiceImpl userService) {
-        this.userService = userService;
-    }
 
     public String getEmail() {
         return email;
@@ -82,7 +73,7 @@ public class SignUpMB{
 
     public String signUp() {
         User user = new User(getEmail(), getPassword(), getFirstName(), getLastName(), false, getPhoneNumber());
-        if (!userService.findByEmail(user.getEmail())) {
+        if (userService.findByEmail(user.getEmail())!=null) {
             userService.createUser(user);
             FacesContext.getCurrentInstance().addMessage(
                     null,

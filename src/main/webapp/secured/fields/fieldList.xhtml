@@ -4,8 +4,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Login page</title>
+</h:head>
+<h:body>
+    <ui:insert name="divTop">
+        <ui:include src="/secured/top.xhtml"/>
+    </ui:insert>
+    <p:dataTable id="fields" var="field" value="#{fieldListMB.fieldList}">
+        <f:facet name="header">
+            Fields
+        </f:facet>
+        <p:column headerText="Label">
+            <h:outputText value="#{field.label}"/>
+        </p:column>
+        <p:column headerText="Type">
+            <h:outputText value="#{field.type.type}"/>
+        </p:column>
+        <p:column headerText="Required">
+            <h:outputText value="#{field.required}"/>
+        </p:column>
+        <p:column headerText="Is Active">
+            <h:outputText value="#{field.active}"/>
+        </p:column>
+        <p:column>
+            <h:form id="fieldDelete">
+                <p:growl id="message" showDetail="true"/>
+                <p:commandButton action="#{fieldListMB.showDeleteConfirmation}" update="message"
+                                 icon="pi pi-trash">
+                    <p:confirm header="Confirmation" message="Are you sure you want to delete this field?"
+                               icon="pi pi-info-circle"/>
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                    <p:commandButton update="fields" action="#{fieldListMB.delete}" value="Yes" styleClass="ui-confirmdialog-yes" />
+                </p:confirmDialog>
+            </h:form>
+        </p:column>
+    </p:dataTable>
+
+</h:body>
 </html>

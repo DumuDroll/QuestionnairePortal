@@ -3,11 +3,9 @@ package com.dddd.questionnaireportal.database.dao;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.User;
 
-import javax.faces.bean.ManagedBean;
 import java.util.HashMap;
 import java.util.Map;
 
-@ManagedBean
 public class UserDAO extends GenericDAO<User> {
 
     public UserDAO() {

@@ -27,9 +27,7 @@
             <p:inputText id="phoneNumber" value="#{signUpMB.user.phoneNumber}"/>
 
             <p:outputLabel value=""/>
-            <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>
-            <p:spacer></p:spacer>
-            <p:link value = "Already have an account?" outcome="login"/>
+            <p:commandButton action="#{editUserMB.edit}" value="SignUp" update="signUpForm"/>
         </h:panelGrid>
     </p:panel>
 </h:form>

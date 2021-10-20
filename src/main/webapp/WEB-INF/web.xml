@@ -14,7 +14,7 @@
     </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>/login</welcome-file>
+        <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -45,5 +45,14 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+
+    <listener>
+        <listener-class>com.dddd.questionnaireportal.common.emf.EMF</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>facelets.SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
 </web-app>

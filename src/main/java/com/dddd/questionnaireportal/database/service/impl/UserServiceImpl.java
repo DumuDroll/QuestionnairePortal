@@ -9,31 +9,21 @@ import com.dddd.questionnaireportal.database.dao.UserDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-@ManagedBean(name = "userService")
 public class UserServiceImpl implements UserService {
 
-    @ManagedProperty("#{userDAO}")
-    private UserDAO userDAO;
+    private final UserDAO userDAO = new UserDAO();
 
-    public UserDAO getUserDAO() {
-        return userDAO;
-    }
-
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
-    public boolean findByEmail(String email){
-        userDAO.beginTransaction();
+    public User findByEmail(String email){
+       // userDAO.beginTransaction();
         User user = userDAO.findUserByEmail(email);
-        userDAO.closeTransaction();
-        return user!=null;
+       // userDAO.commitAndCloseTransaction();
+        return user;
     }
 
     public boolean isValidLogin(String email, String password){
-        userDAO.beginTransaction();
+       // userDAO.beginTransaction();
         User user = userDAO.findUserByEmail(email);
-        userDAO.closeTransaction();
+        //userDAO.commitAndCloseTransaction();
         return user != null && user.getPassword().equals(password);
     }
 

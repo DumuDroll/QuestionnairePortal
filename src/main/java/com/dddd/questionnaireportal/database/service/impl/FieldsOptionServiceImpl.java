@@ -11,16 +11,7 @@ import javax.faces.bean.ManagedProperty;
 @ManagedBean(name="FieldsOptionService")
 public class FieldsOptionServiceImpl implements FieldsOptionService {
 
-    @ManagedProperty("#{fieldsOptionDAO}")
-    private FieldsOptionDAO fieldsOptionDAO;
-
-    public FieldsOptionDAO getFieldsOptionDAO() {
-        return fieldsOptionDAO;
-    }
-
-    public void setFieldsOptionDAO(FieldsOptionDAO fieldsOptionDAO) {
-        this.fieldsOptionDAO = fieldsOptionDAO;
-    }
+    private final FieldsOptionDAO fieldsOptionDAO = new FieldsOptionDAO();
 
     public void createFieldsOption(FieldsOption fieldsOption) {
         fieldsOptionDAO.beginTransaction();

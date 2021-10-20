@@ -7,20 +7,12 @@ import com.dddd.questionnaireportal.database.service.FieldService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import java.util.List;
 
-@ManagedBean(name="FieldService")
 public class FieldServiceImpl implements FieldService {
 
-    @ManagedProperty("#{fieldDAO}")
-    private FieldDAO fieldDAO;
-
-    public FieldDAO getFieldDAO() {
-        return fieldDAO;
-    }
-
-    public void setFieldDAO(FieldDAO fieldDAO) {
-        this.fieldDAO = fieldDAO;
-    }
+    private final FieldDAO fieldDAO = new FieldDAO();
 
     public void createField(Field field){
         fieldDAO.beginTransaction();
@@ -38,10 +30,17 @@ public class FieldServiceImpl implements FieldService {
         fieldDAO.commitAndCloseTransaction();
     }
 
-    public void deleteField(Field field){
+    public void deleteField(int id){
         fieldDAO.beginTransaction();
-        Field persistedFieldWithIdOnly = fieldDAO.findReferenceOnly(field.getId());
+        Field persistedFieldWithIdOnly = fieldDAO.findReferenceOnly(id);
         fieldDAO.delete(persistedFieldWithIdOnly);
         fieldDAO.commitAndCloseTransaction();
+    }
+
+    public List<Field> findAll(){
+        fieldDAO.beginTransaction();
+        List<Field> fields = fieldDAO.findAll();
+        fieldDAO.closeTransaction();
+        return fields;
     }
 }
