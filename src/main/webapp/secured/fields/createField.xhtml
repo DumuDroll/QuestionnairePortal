@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Create Field</title>
+</h:head>
+
+<h:body>
+    <h:form id="createFieldForm">
+        <p:panel header="Add Field" style="width: 500px;">
+            <p:growl showDetail="true" life="3000"/>
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Label:"/>
+                <p:inputText id="label" value="#{fieldCreateView.label}" label="UserName" />
+
+                <p:outputLabel value="Type:"/>
+                <p:selectOneMenu id="type" value="#{fieldCreateView.selectedType}">
+                    <f:selectItem itemLabel="Single line text" itemValue="#{fieldCreateView}"/>
+                    <f:selectItem itemLabel="Multiline text" itemValue="#{fieldCreateView}"/>
+                    <f:selectItem itemLabel="Radio button" itemValue="#{fieldCreateView}"/>
+                    <f:selectItem itemLabel="Checkbox" itemValue="#{fieldCreateView}"/>
+                    <f:selectItem itemLabel="Combobox" itemValue="#{fieldCreateView}"/>
+                    <f:selectItem itemLabel="Date" itemValue="#{fieldCreateView}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Oprions:"/>
+                <p:inputTextarea id="options" rows="6" cols="33" value="#{fieldCreateView.options}"/>
+                <p:selectBooleanCheckbox value="#{fieldCreateView.required}" label="Required"/>
+                <p:selectBooleanCheckbox value="#{fieldCreateView.active}" label="Active"/>
+
+                <p:commandButton action="#{fieldCreateView}" value="CANCEL" update="createFieldForm"/>
+                <p:commandButton action="#{fieldCreateView.save()}" value="SAVE" update="createFieldForm"/>
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+
+</html>

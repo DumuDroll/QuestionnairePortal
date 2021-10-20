@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.beans.managedBeans;
+package com.dddd.questionnaireportal.beans.managedBeans.fields;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.Field;
@@ -29,7 +29,6 @@ public class FieldListMB {
 
     public void delete(int fieldId) throws IOException {
         fieldService.deleteField(fieldId);
-        System.out.println("dsadas");
         FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
     }
 

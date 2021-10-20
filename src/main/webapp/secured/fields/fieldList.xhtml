@@ -9,6 +9,9 @@
 <h:head>
     <title>Login page</title>
 </h:head>
+<h:form>
+    <p:commandButton value="View" icon="pi pi-plus" action="#{fieldCreateView.viewProducts}" styleClass="p-mr-2" />
+</h:form>
 <h:body>
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
@@ -39,7 +42,7 @@
                 </p:commandButton>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-                    <p:commandButton update="fields" action="#{fieldListMB.delete}" value="Yes" styleClass="ui-confirmdialog-yes" />
+                    <p:commandButton update="fields" action="#{fieldListMB.delete(field.id)}" value="Yes" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
             </h:form>
         </p:column>
