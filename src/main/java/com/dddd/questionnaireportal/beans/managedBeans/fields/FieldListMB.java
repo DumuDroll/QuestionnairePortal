@@ -4,21 +4,31 @@ import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.service.FieldService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.util.List;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class FieldListMB {
 
+    private List<Field> fields;
 
+    public List<Field> getFields() {
+        return fields;
+    }
 
-    public List<Field> getFieldList() {
-        return FieldService.findAll();
+    @PostConstruct
+    public void init() {
+        this.fields = FieldService.findAll();
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
     }
 
     public void showDeleteConfirmation() {
