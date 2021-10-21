@@ -2,11 +2,10 @@ package com.dddd.questionnaireportal.beans.managedBeans.fields;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.Field;
-import com.dddd.questionnaireportal.database.service.impl.FieldServiceImpl;
+import com.dddd.questionnaireportal.database.service.FieldService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
@@ -17,10 +16,9 @@ import java.util.List;
 public class FieldListMB {
 
 
-    private final FieldServiceImpl fieldService = new FieldServiceImpl();
 
     public List<Field> getFieldList() {
-        return fieldService.findAll();
+        return FieldService.findAll();
     }
 
     public void showDeleteConfirmation() {
@@ -28,7 +26,7 @@ public class FieldListMB {
     }
 
     public void delete(int fieldId) throws IOException {
-        fieldService.deleteField(fieldId);
+        FieldService.deleteField(fieldId);
         FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
     }
 

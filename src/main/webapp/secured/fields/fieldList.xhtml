@@ -9,13 +9,20 @@
 <h:head>
     <title>Login page</title>
 </h:head>
-<h:form>
-    <p:commandButton value="View" icon="pi pi-plus" action="#{fieldCreateView.viewProducts}" styleClass="p-mr-2" />
-</h:form>
 <h:body>
+
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
     </ui:insert>
+    <p:toolbar>
+        <p:toolbarGroup align="right">
+            <p:commandButton value="ADD FIELD" icon="pi pi-plus" actionListener="#{fieldCreateMB.openNew}"
+                             update="manage-field" onclick="PF('addFieldDialog').show()"
+                             styleClass="p-mr-2">
+            </p:commandButton>
+        </p:toolbarGroup>
+    </p:toolbar>
+
     <p:dataTable id="fields" var="field" value="#{fieldListMB.fieldList}">
         <f:facet name="header">
             Fields
@@ -24,7 +31,7 @@
             <h:outputText value="#{field.label}"/>
         </p:column>
         <p:column headerText="Type">
-            <h:outputText value="#{field.type.type}"/>
+            <h:outputText value="#{field.type}"/>
         </p:column>
         <p:column headerText="Required">
             <h:outputText value="#{field.required}"/>
@@ -42,11 +49,48 @@
                 </p:commandButton>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-                    <p:commandButton update="fields" action="#{fieldListMB.delete(field.id)}" value="Yes" styleClass="ui-confirmdialog-yes" />
+                    <p:commandButton update="fields" action="#{fieldListMB.delete(field.id)}" value="Yes"
+                                     styleClass="ui-confirmdialog-yes"/>
                 </p:confirmDialog>
             </h:form>
         </p:column>
     </p:dataTable>
+
+    <p:dialog widgetVar="addFieldDialog" header="Add Field" showEffect="fade" modal="true" responsive="true">
+        <p:outputPanel id="manage-field" class="ui-fluid">
+                <p:outputLabel value="Label:"/>
+                <div class="p-field">
+                    <p:inputText id="label" value="#{fieldCreateMB.label}"/>
+                </div>
+                <div class="p-field">
+                    <p:outputLabel value="Type:"/>
+                    <p:selectOneMenu id="type" value="#{fieldCreateMB.type}">
+                        <f:selectItems value="#{fieldCreateMB.types}" var="type"
+                                       itemValue="#{type}" itemLabel="#{type.label}"/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="p-field">
+                    <p:outputLabel value="Oprions:"/>
+                    <p:inputTextarea id="options" rows="6" cols="33" value="#{fieldCreateMB.options}"/>
+                </div>
+                <div class="p-formgrid p-grid">
+                    <div class="p-field p-col">
+                        <p:outputLabel value="Required"/>
+                        <p:selectBooleanCheckbox value="#{fieldCreateMB.required}"/>
+                    </div>
+                    <div class="p-field p-col">
+                        <p:outputLabel value="Active"/>
+                        <p:selectBooleanCheckbox value="#{fieldCreateMB.active}"/>
+                    </div>
+                </div>
+        </p:outputPanel>
+        <f:facet name="footer">
+            <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('addFieldDialog').hide()"
+                             class="ui-button-secondary"/>
+            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{fieldCreateMB.save()}"
+                             update="manage-field" process="manage-field @this"/>
+        </f:facet>
+    </p:dialog>
 
 </h:body>
 </html>

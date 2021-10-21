@@ -1,14 +1,14 @@
 package com.dddd.questionnaireportal.beans.managedBeans;
 
 
+import com.dddd.questionnaireportal.common.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.common.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.User;
-import com.dddd.questionnaireportal.database.service.impl.UserServiceImpl;
+import com.dddd.questionnaireportal.database.service.UserService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -18,9 +18,7 @@ import java.io.IOException;
 @RequestScoped
 public class LoginMB {
 
-    private final UserServiceImpl userService = new UserServiceImpl();
-
-    private String uname;
+    private String email;
     private String password;
 
     public String getPassword() {
@@ -31,30 +29,37 @@ public class LoginMB {
         this.password = password;
     }
 
-    public String getUname() {
-        return uname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void logIn() throws IOException {
-        User user = userService.findByEmail(uname);
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+    public void logIn() throws IOException{
+        User user = UserService.findByEmail(email);
         if (user != null) {
-            if (user.getPassword().equals(password)) {
-                HttpSession session = SessionUtil.getSession();
-                session.setAttribute("email", uname);
-                session.setAttribute("firstName", user.getFirstName());
-                session.setAttribute("lastName", user.getLastName());
-                facesContext.getExternalContext().redirect(Constants.FIELDS_URL);
+            if (user.isActive()) {
+                if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
+                    HttpSession session = SessionUtil.getSession();
+                    session.setAttribute("email", email);
+                    session.setAttribute("firstName", user.getFirstName());
+                    session.setAttribute("lastName", user.getLastName());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                    "Invalid Password!",
+                                    "Please Try Again!"));
+                }
             } else {
                 FacesContext.getCurrentInstance().addMessage(
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                "Invalid Login!",
-                                "Please Try Again!"));
+                                "Account Is Not Activated!",
+                                "Please Confirm Registration!"));
             }
         }
     }

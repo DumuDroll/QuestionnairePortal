@@ -7,31 +7,30 @@
 <h:head>
     <title>Create Field</title>
 </h:head>
-
 <h:body>
     <h:form id="createFieldForm">
         <p:panel header="Add Field" style="width: 500px;">
             <p:growl showDetail="true" life="3000"/>
             <h:panelGrid columns="2">
                 <p:outputLabel value="Label:"/>
-                <p:inputText id="label" value="#{fieldCreateView.label}" label="UserName" />
+                <p:inputText id="label" value="#{fieldCreateMB.label}" label="UserName" />
 
                 <p:outputLabel value="Type:"/>
-                <p:selectOneMenu id="type" value="#{fieldCreateView.selectedType}">
-                    <f:selectItem itemLabel="Single line text" itemValue="#{fieldCreateView}"/>
-                    <f:selectItem itemLabel="Multiline text" itemValue="#{fieldCreateView}"/>
-                    <f:selectItem itemLabel="Radio button" itemValue="#{fieldCreateView}"/>
-                    <f:selectItem itemLabel="Checkbox" itemValue="#{fieldCreateView}"/>
-                    <f:selectItem itemLabel="Combobox" itemValue="#{fieldCreateView}"/>
-                    <f:selectItem itemLabel="Date" itemValue="#{fieldCreateView}"/>
+                <p:selectOneMenu id="type" value="#{fieldCreateMB.type}">
+                    <f:selectItem itemLabel="Single line text" itemValue="#{fieldCreateMB}"/>
+                    <f:selectItem itemLabel="Multiline text" itemValue="#{fieldCreateMB}"/>
+                    <f:selectItem itemLabel="Radio button" itemValue="#{fieldCreateMB}"/>
+                    <f:selectItem itemLabel="Checkbox" itemValue="#{fieldCreateMB}"/>
+                    <f:selectItem itemLabel="Combobox" itemValue="#{fieldCreateMB}"/>
+                    <f:selectItem itemLabel="Date" itemValue="#{fieldCreateMB}"/>
                 </p:selectOneMenu>
                 <p:outputLabel value="Oprions:"/>
-                <p:inputTextarea id="options" rows="6" cols="33" value="#{fieldCreateView.options}"/>
-                <p:selectBooleanCheckbox value="#{fieldCreateView.required}" label="Required"/>
-                <p:selectBooleanCheckbox value="#{fieldCreateView.active}" label="Active"/>
+                <p:inputTextarea id="options" rows="6" cols="33" value="#{fieldCreateMB.options}"/>
+                <p:selectBooleanCheckbox value="#{fieldCreateMB.required}" label="Required"/>
+                <p:selectBooleanCheckbox value="#{fieldCreateMB.active}" label="Active"/>
 
-                <p:commandButton action="#{fieldCreateView}" value="CANCEL" update="createFieldForm"/>
-                <p:commandButton action="#{fieldCreateView.save()}" value="SAVE" update="createFieldForm"/>
+                <p:commandButton action="#{fieldCreateMB}" value="CANCEL" update="createFieldForm"/>
+                <p:commandButton action="#{fieldCreateMB.save()}" value="SAVE" update="createFieldForm"/>
             </h:panelGrid>
         </p:panel>
     </h:form>

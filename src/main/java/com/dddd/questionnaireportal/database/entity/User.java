@@ -1,10 +1,8 @@
 package com.dddd.questionnaireportal.database.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name="users")
@@ -21,18 +19,21 @@ public class User {
     private String lastName;
     private boolean isActive;
     private String phoneNumber;
+    private byte[] salt;
+    private String confirmationHash;
+    private Date expirationDate;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<ResponsePerUser> responsePerUser = new ArrayList<>();
 
-    public User(String email, String password, String firstName, String lastName, boolean isActive, String phoneNumber) {
+    public User(String email, String password, String firstName, String lastName, boolean isActive,
+                String phoneNumber, byte[] salt, Date expirationDate) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isActive = isActive;
         this.phoneNumber = phoneNumber;
+        this.salt=salt;
+        this.expirationDate=expirationDate;
     }
 
     public User() {
@@ -99,11 +100,20 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<ResponsePerUser> getResponsePerUser() {
-        return responsePerUser;
+    public byte[] getSalt() {
+        return salt;
     }
 
-    public void setResponsePerUser(List<ResponsePerUser> responsePerUser) {
-        this.responsePerUser = responsePerUser;
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
+
+    public String getConfirmationHash() {
+        return confirmationHash;
+    }
+
+    public void setConfirmationHash(String confirmationHash) {
+        this.confirmationHash = confirmationHash;
+    }
+
 }
