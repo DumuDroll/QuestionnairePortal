@@ -13,9 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @ManagedBean
 @ViewScoped
@@ -25,7 +23,6 @@ public class FieldListMB {
     private Field selectedField;
     private List<Field> fields;
     private String options;
-    private boolean optionsRender;
 
     public String getOptions() {
         if (selectedField.getId()!=0) {
