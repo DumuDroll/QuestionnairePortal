@@ -25,12 +25,7 @@ public class FieldDAO {
     public static void update(Field entity) {
         try {
             em.getTransaction().begin();
-            Field persistedEntity = em.find(Field.class, entity.getId());
-            persistedEntity.setActive(entity.isActive());
-            persistedEntity.setType(entity.getType());
-            persistedEntity.setRequired(entity.isRequired());
-            persistedEntity.setLabel(entity.getLabel());
-            em.merge(persistedEntity);
+            em.merge(entity);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -47,6 +42,19 @@ public class FieldDAO {
             em.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    public static Field findById(int id) {
+        Field field = null;
+        try {
+            em.getTransaction().begin();
+            field = em.find(Field.class, id);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return field;
     }
 
     public static List<Field> findAll() {

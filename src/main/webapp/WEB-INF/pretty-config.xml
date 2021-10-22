@@ -37,11 +37,6 @@
         <view-id value="/secured/fields/fieldList.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="fieldCreate">
-        <pattern value="/createField"/>
-        <view-id value="/secured/fields/createField.xhtml"/>
-    </url-mapping>
-
     <url-mapping id="responseList">
         <pattern value="/"/>
         <view-id value="/secured/response/responseList.xhtml"/>

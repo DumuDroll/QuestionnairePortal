@@ -12,19 +12,6 @@ public class UserDAO{
 
     private static final EntityManager em = EMF.createEntityManager();
 
-    public static User findById(int id) {
-        User user = null;
-        try {
-            em.getTransaction().begin();
-            user = em.find(User.class, id);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-        }
-        return user;
-    }
-
     public static void save(User entity) {
         try {
             em.getTransaction().begin();
@@ -54,6 +41,19 @@ public class UserDAO{
         }
     }
 
+    public static User findById(int id) {
+        User user = null;
+        try {
+            em.getTransaction().begin();
+            user = em.find(User.class, id);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     public static User findByEmail(String email) {
         User result = null;
         try {
@@ -62,7 +62,6 @@ public class UserDAO{
             query.setParameter("email", email);
             result = (User) query.getSingleResult();
             em.getTransaction().commit();
-
         } catch (NoResultException e) {
             System.out.println("No result found for named query: " + Constants.FIND_BY_EMAIL);
         } catch (Exception e) {
