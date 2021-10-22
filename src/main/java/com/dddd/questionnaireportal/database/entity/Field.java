@@ -20,7 +20,7 @@ public class Field {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    @OneToMany(mappedBy = "field", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<FieldsOption> options;
 

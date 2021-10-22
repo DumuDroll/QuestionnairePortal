@@ -1,34 +1,40 @@
 package com.dddd.questionnaireportal.database.dao;
 
 
-import com.dddd.questionnaireportal.common.emf.EMF;
+import com.dddd.questionnaireportal.common.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.entity.ResponsePerUser;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import javax.persistence.EntityManager;
-
-public class ResponsePerUserDAO{
-
-    private static final EntityManager em = EMF.createEntityManager();
+public class ResponsePerUserDAO {
 
     public static void save(ResponsePerUser entity) {
+        Transaction transaction = null;
         try {
-            em.getTransaction().begin();
-            em.persist(entity);
-            em.getTransaction().commit();
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
     public static void delete(int id) {
+        Transaction transaction = null;
         try {
-            em.getTransaction().begin();
-            em.remove(em.getReference(Response.class, id));
-            em.getTransaction().commit();
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            transaction = session.beginTransaction();
+            session.remove(session.getReference(Response.class, id));
+            session.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }

@@ -46,10 +46,6 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
-    <listener>
-        <listener-class>com.dddd.questionnaireportal.common.emf.EMF</listener-class>
-    </listener>
-
     <context-param>
         <param-name>facelets.SKIP_COMMENTS</param-name>
         <param-value>true</param-value>

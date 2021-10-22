@@ -39,7 +39,7 @@ public class LoginMB {
 
     public void logIn() throws IOException{
         User user = UserService.findByEmail(email);
-        if (user != null) {
+        if (user!=null) {
             if (user.isActive()) {
                 if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
                     HttpSession session = SessionUtil.getSession();
@@ -61,6 +61,12 @@ public class LoginMB {
                                 "Account Is Not Activated!",
                                 "Please Confirm Registration!"));
             }
+        }else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Invalid Login",
+                            "Please Try Again!"));
         }
     }
 
