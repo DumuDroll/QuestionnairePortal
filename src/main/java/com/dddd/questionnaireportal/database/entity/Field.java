@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class Field {
 
     @OneToMany(mappedBy = "field", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<FieldsOption> options;
+    private List<FieldsOption> options;
 
     @ManyToMany(mappedBy = "fields")
     private Set<Response> responses = new HashSet<>();
@@ -77,11 +78,11 @@ public class Field {
         this.type = type;
     }
 
-    public Set<FieldsOption> getOptions() {
+    public List<FieldsOption> getOptions() {
         return options;
     }
 
-    public void setOptions(Set<FieldsOption> options) {
+    public void setOptions(List<FieldsOption> options) {
         this.options = options;
     }
 

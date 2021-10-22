@@ -73,12 +73,17 @@
                             <p:selectOneMenu id="type" value="#{fieldListMB.selectedField.type}">
                                 <f:selectItems value="#{fieldListMB.types}" var="type"
                                                itemValue="#{type}" itemLabel="#{type.label}"/>
+                                <p:ajax event="change" update=":form:ta-options"></p:ajax>
                             </p:selectOneMenu>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel value="Oprions:"/>
-                            <p:inputTextarea id="options" rows="6" cols="33"
+                            <p:outputPanel id="ta-options">
+                            <p:outputLabel value="Options:"/>
+                            <p:inputTextarea rendered="#{fieldListMB.selectedField.type eq 'COMBOBOX'
+                            || fieldListMB.selectedField.type eq 'RADIO_BUTTON'
+                             || fieldListMB.selectedField.type eq 'CHECKBOX'}" id="options" rows="6" cols="33"
                                              value="#{fieldListMB.options}"/>
+                            </p:outputPanel>
                         </div>
                         <div class="p-formgrid p-grid">
                             <div class="p-field p-col">
