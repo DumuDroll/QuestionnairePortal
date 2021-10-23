@@ -32,7 +32,7 @@ public class FieldListMB {
 
 
     public String getOptions() {
-        if (selectedField.getId() != 0) {
+        if (selectedField.getId() != 0 && selectedField.getOptions()!=null) {
             return takeOptions();
         }
         return options;

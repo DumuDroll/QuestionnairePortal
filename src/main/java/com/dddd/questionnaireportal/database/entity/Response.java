@@ -3,7 +3,9 @@ package com.dddd.questionnaireportal.database.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,7 +29,7 @@ public class Response {
     @JoinTable(name = "fields_responses",
             joinColumns = @JoinColumn(name = "response_id"),
             inverseJoinColumns = @JoinColumn(name = "field_id"))
-    private Set<Field> fields = new HashSet<>();
+    private List<Field> fields = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -53,11 +55,11 @@ public class Response {
         this.response = response;
     }
 
-    public Set<Field> getFields() {
+    public List<Field> getFields() {
         return fields;
     }
 
-    public void setFields(Set<Field> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 

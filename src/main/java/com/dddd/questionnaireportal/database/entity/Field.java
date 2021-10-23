@@ -3,10 +3,7 @@ package com.dddd.questionnaireportal.database.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "fields")
@@ -18,6 +15,7 @@ public class Field {
     private String label;
     private boolean required;
     private boolean active;
+    private String response;
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
@@ -26,7 +24,7 @@ public class Field {
     private List<FieldsOption> options;
 
     @ManyToMany(mappedBy = "fields")
-    private Set<Response> responses = new HashSet<>();
+    private List<Response> responses = new ArrayList<>();
 
     public Field(String label, boolean required, boolean active, Type type) {
         this.label = label;
@@ -87,12 +85,20 @@ public class Field {
         this.options = options;
     }
 
-    public Set<Response> getResponses() {
+    public List<Response> getResponses() {
         return responses;
     }
 
-    public void setResponses(Set<Response> responses) {
+    public void setResponses(List<Response> responses) {
         this.responses = responses;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
     }
 
     @Override

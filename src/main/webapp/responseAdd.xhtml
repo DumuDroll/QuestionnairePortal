@@ -18,6 +18,60 @@
             </p:link>
         </p:toolbarGroup>
     </p:toolbar>
-    <h:outputLabel value="Response adding form"/>
+    <div class="card">
+        <h:form id="form">
+            <p:panel>
+                <p:repeat value="#{responsesAddMB.fields}" var="field">
+                    <p:column>
+                        <div class="field">
+                            <p:column rendered="#{field.type == 'SINGLE_LINE_TEXT' and field.active==true}">
+                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <br></br>
+                                <h:inputText value="#{field.response}"
+                                             required="#{field.required}"/>
+                            </p:column>
+                            <p:column rendered="#{field.type == 'MULTILINE_TEXT' and field.active==true}">
+                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <br></br>
+                                <h:inputTextarea value="#{field.response}"
+                                                 required="#{field.required}"/>
+                            </p:column>
+                            <p:column rendered="#{field.type == 'RADIO_BUTTON' and field.active==true}">
+                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <br></br>
+                                <h:selectOneRadio value="#{field.response}"
+                                                  required="#{field.required}">
+                                    <f:selectItems value="#{field.options}" var="option"
+                                                   itemValue="#{option.option}"
+                                                   itemLabel="#{option.option}"></f:selectItems>
+                                </h:selectOneRadio>
+                            </p:column>
+                            <p:column rendered="#{field.type == 'CHECKBOX' and field.active==true}">
+                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <br></br>
+                                <h:selectBooleanCheckbox value="#{field.response}"
+                                                         required="#{field.required}">
+                                    <f:selectItems value="#{field.options}" var="option"
+                                                   itemValue="#{option.option}"/>
+                                </h:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column rendered="#{field.type == 'COMBOBOX' and field.active==true}">
+                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <br></br>
+                                <h:selectOneMenu value="#{field.response}"
+                                                 required="#{field.required}">
+                                    <f:selectItems value="#{field.options}" var="option"
+                                                   itemValue="#{option.option}" itemLabel="#{option.option}"/>
+                                </h:selectOneMenu>
+                            </p:column>
+                        </div>
+                    </p:column>
+                </p:repeat>
+            </p:panel>
+            <p:commandButton value="Save" icon="pi pi-check" action="#{responsesAddMB.save}"
+                             update="form" process="form">
+            </p:commandButton>
+        </h:form>
+    </div>
 </h:body>
 </html>

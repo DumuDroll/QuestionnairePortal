@@ -73,7 +73,7 @@ public class LoginMB {
     public void logOut() throws IOException {
         HttpSession session = SessionUtil.getSession();
         session.invalidate();
-        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.LOGIN_URL);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
     }
 
     public boolean isLoggedIn() {
