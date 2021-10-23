@@ -2,12 +2,16 @@ package com.dddd.questionnaireportal.database.dao;
 
 import com.dddd.questionnaireportal.common.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.Field;
+import com.dddd.questionnaireportal.database.entity.FieldsOption;
+import com.dddd.questionnaireportal.database.entity.Type;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class FieldDAO {
 
@@ -81,7 +85,7 @@ public class FieldDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
-            fields = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            fields = criteria.addOrder(Order.asc("id")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

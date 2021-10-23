@@ -16,11 +16,5 @@ public class UserMB {
         return SessionUtil.getSession().getAttribute("firstName").toString()+
                 SessionUtil.getSession().getAttribute("lastName").toString();
     }
-    public void goToEdit() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.EDIT_USER_URL);
-    }
 
-    public void goToPassword() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.CHANGE_PASSWORD_URL);
-    }
 }

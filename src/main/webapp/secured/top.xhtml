@@ -6,19 +6,34 @@
       xmlns:h='http://java.sun.com/jsf/html'
       xmlns:p='http://primefaces.org/ui' xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
-
     <ui:composition>
         <p:toolbar>
-            <p:toolbarGroup></p:toolbarGroup>
-            <p:toolbarGroup align="right">
-                <h:form>
-                    <p:menuButton value="#{userMB.getFullName()}">
-                        <p:menuitem value="Edit Profile" action="#{userMB.goToEdit()}"/>
-                        <p:menuitem value="Change Password" action="#{userMB.goToPassword()}"/>
-                        <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
-                    </p:menuButton>
-                </h:form>
-            </p:toolbarGroup>
+            <div class="p-grid">
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <p:toolbarGroup align="left">LOGO</p:toolbarGroup>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                </div>
+                <p:toolbarGroup>
+                    <h:form>
+                        <div class="p-col-12 p-md-6 p-lg-3">
+                            <p:commandButton action="#{routerBean.goToFields()}" value="Fields">
+                            </p:commandButton>
+                            <p:commandButton action="#{routerBean.goToResponses()}" value="Responses">
+                            </p:commandButton>
+                        </div>
+                    </h:form>
+                    <div class="p-col-12 p-md-6 p-lg-3">
+                        <h:form>
+                            <p:menuButton value="#{userMB.getFullName()}">
+                                <p:menuitem value="Edit Profile" action="#{routerBean.goToEdit()}"/>
+                                <p:menuitem value="Change Password" action="#{routerBean.goToPassword()}"/>
+                                <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
+                            </p:menuButton>
+                        </h:form>
+                    </div>
+                </p:toolbarGroup>
+            </div>
         </p:toolbar>
     </ui:composition>
 </h:body>

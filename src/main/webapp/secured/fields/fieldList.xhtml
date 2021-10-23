@@ -103,7 +103,9 @@
                     <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageFieldDialog').hide()"
                                      class="ui-button-secondary"/>
                     <p:commandButton value="Save" icon="pi pi-check" actionListener="#{fieldListMB.save}"
-                                     update=":form:manage-field" process=":form:manage-field @this"/>
+                                     update=":form:manage-field" process=":form:manage-field @this"
+                    >
+                    </p:commandButton>
                 </f:facet>
             </p:dialog>
 

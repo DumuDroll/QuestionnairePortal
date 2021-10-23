@@ -24,19 +24,30 @@ public class FieldListMB {
     private List<Field> fields;
     private String options;
 
+
+    @PostConstruct
+    public void init() {
+        this.fields = FieldService.findAll();
+    }
+
+
     public String getOptions() {
-        if (selectedField.getId()!=0) {
+        if (selectedField.getId() != 0) {
             return takeOptions();
         }
         return options;
     }
 
-    public void setOptions(String options) {
-        this.options = options;
-    }
-
     public List<Field> getFields() {
         return fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
     }
 
     public Type[] getTypes() {
@@ -51,18 +62,9 @@ public class FieldListMB {
         this.selectedField = selectedField;
     }
 
-
-    @PostConstruct
-    public void init() {
-        this.fields = FieldService.findAll();
-    }
-
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
-    }
-
     public void deleteField() {
         FieldService.deleteField(selectedField.getId());
+        fields.remove(selectedField);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Field Removed"));
         PrimeFaces.current().ajax().update("form:messages", "form:fields");
     }
@@ -72,15 +74,22 @@ public class FieldListMB {
     }
 
     public void save() {
+        boolean optionsNeeded = selectedField.getType().equals(Type.COMBOBOX) || selectedField.getType().equals(Type.CHECKBOX)
+                || selectedField.getType().equals(Type.RADIO_BUTTON);
         if (selectedField.getId() == 0) {
-            selectedField.setOptions(new ArrayList<>());
-            addOptionsToField();
+            if (optionsNeeded) {
+                selectedField.setOptions(new ArrayList<>());
+                addOptionsToField();
+            }
             FieldService.createField(selectedField);
+            fields.add(selectedField);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Field Added"));
         } else {
             FieldsOptionService.deleteOptionsByField(selectedField);
             selectedField.setOptions(new ArrayList<>());
-            addOptionsToField();
+            if (optionsNeeded) {
+                addOptionsToField();
+            }
             FieldService.updateField(selectedField);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Field Updated"));
         }
@@ -103,9 +112,6 @@ public class FieldListMB {
         List<FieldsOption> fieldsOptionSet = selectedField.getOptions();
         StringBuilder sb = new StringBuilder();
         boolean first = true;
-        for (int i=fieldsOptionSet.size()-1; i>=0;i--){
-
-        }
         for (FieldsOption fieldsOption : fieldsOptionSet) {
             if (first) {
                 first = false;

@@ -8,11 +8,6 @@
        <rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />-->
 
     <url-mapping id="login">
-        <pattern value="/"/>
-        <view-id value="/login.xhtml"/>
-    </url-mapping>
-
-    <url-mapping id="login">
         <pattern value="/login"/>
         <view-id value="/login.xhtml"/>
     </url-mapping>
@@ -32,14 +27,19 @@
         <view-id value="/secured/user/passChange.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="fieldList">
+    <url-mapping id="fields">
         <pattern value="/fields"/>
         <view-id value="/secured/fields/fieldList.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="responseList">
+    <url-mapping id="responseAdd">
         <pattern value="/"/>
-        <view-id value="/secured/response/responseList.xhtml"/>
+        <view-id value="/responseAdd.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="responseList">
+        <pattern value="/responses"/>
+        <view-id value="/secured/response/responsesList.xhtml"/>
     </url-mapping>
 
     <!-- Begin UrlMappings

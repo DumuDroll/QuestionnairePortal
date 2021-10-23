@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -92,5 +93,18 @@ public class Field {
 
     public void setResponses(Set<Response> responses) {
         this.responses = responses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Field field = (Field) o;
+        return id == field.id && required == field.required && active == field.active && Objects.equals(label, field.label) && type == field.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
