@@ -20,6 +20,7 @@
     <div class="card">
         <h:form id="form">
             <p:panel>
+                <p:growl id="msg" showDetail="true"></p:growl>
                 <p:repeat value="#{responsesAddMB.fields}" var="field">
                     <p:column>
                         <div class="field">
@@ -62,6 +63,13 @@
                                     <f:selectItems value="#{field.options}" var="option"
                                                    itemValue="#{option.option}" itemLabel="#{option.option}"/>
                                 </h:selectOneMenu>
+                            </p:column>
+                            <p:column rendered="#{field.type == 'DATE' and field.active==true}">
+                                <p:outputLabel for="button" value="#{field.label}"/>
+                                <br></br>
+                                <p:calendar id="button" value="#{field.response}" showOn="button">
+                                    <f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
+                                </p:calendar>
                             </p:column>
                         </div>
                     </p:column>
