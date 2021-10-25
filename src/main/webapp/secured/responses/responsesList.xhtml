@@ -18,16 +18,12 @@
         <p:dataTable id="dt-responses" widgetVar="dtResponses" var="responsePerUser"
                      value="#{responseListMB.responsePerUserList}">
             <p:column>
-                <f:facet name="header">
-                    Responses
-                </f:facet>
                 <p:repeat value="#{responsePerUser.responses}" var="response">
-                    <p:column headerText="#{response.label}">
                         <h:outputText value="#{response.response}"></h:outputText>
-                    </p:column>
                 </p:repeat>
             </p:column>
         </p:dataTable>
     </h:form>
 </h:body>
+<script type="module"></script>
 </html>
