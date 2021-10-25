@@ -16,17 +16,17 @@
     <h:form id="form">
         <p:growl id="messages" showDetail="true"/>
         <p:dataTable id="dt-responses" widgetVar="dtResponses" var="responsePerUser"
-                     value="#{responseListMB.responsePerUserList}"
-                     reflow="true" styleClass="products-table">
-            <f:facet name="header">
-                Responses
-            </f:facet>
-                <p:columns value="#{responsePerUser.responses}" var="response">
-                    <f:facet name="header">
-                        <h:outputText value="#{response.label}" />
-                    </f:facet>
-                    <h:outputText value="#{response.response}" />
-                </p:columns>
+                     value="#{responseListMB.responsePerUserList}">
+            <p:column>
+                <f:facet name="header">
+                    Responses
+                </f:facet>
+                <p:repeat value="#{responsePerUser.responses}" var="response">
+                    <p:column headerText="#{response.label}">
+                        <h:outputText value="#{response.response}"></h:outputText>
+                    </p:column>
+                </p:repeat>
+            </p:column>
         </p:dataTable>
     </h:form>
 </h:body>
