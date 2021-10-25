@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Login page</title>
+    <title>Fields</title>
 </h:head>
 <h:body>
     <ui:insert name="divTop">
@@ -49,7 +49,6 @@
                                      oncomplete="PF('manageFieldDialog').show()"
                                      styleClass="edit-button rounded-button ui-button-success"
                                      process="@this">
-
                         <f:setPropertyActionListener value="#{field}" target="#{fieldListMB.selectedField}"/>
                         <p:resetInput target=":form:manage-field"/>
                     </p:commandButton>
@@ -63,7 +62,6 @@
             <p:dialog widgetVar="manageFieldDialog" header="Add Field" modal="true">
                 <p:outputPanel id="manage-field" class="ui-fluid">
                     <p:outputPanel rendered="#{not empty fieldListMB.selectedField}">
-
                         <div class="p-field">
                             <p:outputLabel for="label" value="Label:"/>
                             <p:inputText id="label" value="#{fieldListMB.selectedField.label}"/>

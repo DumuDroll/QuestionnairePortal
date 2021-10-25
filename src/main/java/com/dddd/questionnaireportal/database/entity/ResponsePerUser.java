@@ -15,7 +15,7 @@ public class ResponsePerUser {
     private int id;
 
 
-    @OneToMany(mappedBy = "responsePerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "responsePerUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Response> responses;
 

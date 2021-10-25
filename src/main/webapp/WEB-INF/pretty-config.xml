@@ -39,7 +39,7 @@
 
     <url-mapping id="responseList">
         <pattern value="/responses"/>
-        <view-id value="/secured/response/responsesList.xhtml"/>
+        <view-id value="/secured/responses/responsesList.xhtml"/>
     </url-mapping>
 
     <!-- Begin UrlMappings

@@ -12,9 +12,15 @@ import java.io.IOException;
 @ManagedBean
 public class UserMB {
 
-    public String getFullName(){
-        return SessionUtil.getSession().getAttribute("firstName").toString()+
-                SessionUtil.getSession().getAttribute("lastName").toString();
+    public String getFullName() {
+        String fullName;
+        try{
+            fullName = SessionUtil.getSession().getAttribute("firstName").toString() + " " +
+                   SessionUtil.getSession().getAttribute("lastName").toString();
+       } catch (NullPointerException npe){
+           return null;
+       }
+        return fullName;
     }
 
 }
