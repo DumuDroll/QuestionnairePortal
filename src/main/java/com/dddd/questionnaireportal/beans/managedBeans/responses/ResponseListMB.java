@@ -21,6 +21,7 @@ public class ResponseListMB {
     @PostConstruct
     public void init() {
         responsePerUserList = ResponsePerUserService.findAll();
+
     }
 
     public List<ResponsePerUser> getResponsePerUserList() {

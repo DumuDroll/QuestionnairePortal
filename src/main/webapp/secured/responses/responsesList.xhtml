@@ -21,14 +21,12 @@
             <f:facet name="header">
                 Responses
             </f:facet>
-            <p:dataTable value=""><!-- Empty string as value forces 1 row. -->
                 <p:columns value="#{responsePerUser.responses}" var="response">
                     <f:facet name="header">
                         <h:outputText value="#{response.label}" />
                     </f:facet>
                     <h:outputText value="#{response.response}" />
                 </p:columns>
-            </p:dataTable>
         </p:dataTable>
     </h:form>
 </h:body>
