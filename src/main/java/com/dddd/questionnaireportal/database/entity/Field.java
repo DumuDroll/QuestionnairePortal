@@ -1,6 +1,8 @@
 package com.dddd.questionnaireportal.database.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.*;
@@ -23,8 +25,10 @@ public class Field {
     @JsonManagedReference
     private List<FieldsOption> options;
 
-    @ManyToMany(mappedBy = "fields")
-    private List<Response> responses = new ArrayList<>();
+    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Response> responses;
 
     public Field(String label, boolean required, boolean active, Type type) {
         this.label = label;
@@ -106,7 +110,7 @@ public class Field {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Field field = (Field) o;
-        return id == field.id && required == field.required && active == field.active && Objects.equals(label, field.label) && type == field.type;
+        return id == field.id && required == field.required && active == field.active && Objects.equals(label, field.label) && Objects.equals(response, field.response) && type == field.type;
     }
 
     @Override

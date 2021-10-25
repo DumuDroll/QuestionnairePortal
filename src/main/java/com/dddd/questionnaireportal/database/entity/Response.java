@@ -22,14 +22,9 @@ public class Response {
     @JsonBackReference
     private ResponsePerUser responsePerUser;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "fields_responses",
-            joinColumns = @JoinColumn(name = "response_id"),
-            inverseJoinColumns = @JoinColumn(name = "field_id"))
-    private List<Field> fields = new ArrayList<>();
+    @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @JsonBackReference
+    private Field field;
 
     public int getId() {
         return id;
@@ -55,12 +50,12 @@ public class Response {
         this.response = response;
     }
 
-    public List<Field> getFields() {
-        return fields;
+    public Field getField() {
+        return field;
     }
 
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
+    public void setField(Field field) {
+        this.field = field;
     }
 
     public ResponsePerUser getResponsePerUser() {

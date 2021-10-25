@@ -2,7 +2,9 @@ package com.dddd.questionnaireportal.beans.managedBeans.responses;
 
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
+import com.dddd.questionnaireportal.database.entity.ResponsePerUser;
 import com.dddd.questionnaireportal.database.service.FieldService;
+import com.dddd.questionnaireportal.database.service.ResponsePerUserService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -41,17 +43,23 @@ public class ResponsesAddMB {
 
     public void save(){
         responses = new ArrayList<>();
+        ResponsePerUser responsePerUser = new ResponsePerUser();
         for (Field field: fields){
             Response response = new Response();
-            response.setId(field.getId());
-            response.setFields(fields);
+            response.setField(field);
             response.setLabel(field.getLabel());
             response.setResponse(field.getResponse());
+            response.setResponsePerUser(responsePerUser);
+            if(field.getResponses()==null){
+                field.setResponses(new ArrayList<>());
+            }else{
+                field.getResponses().add(response);
+            }
+            field.setResponse(null);
             responses.add(response);
         }
-        for(Response response: responses){
-            
-        }
+        responsePerUser.setResponses(responses);
+        ResponsePerUserService.createResponsePerUser(responsePerUser);
     }
 
 //    public void populateForm(ComponentSystemEvent event) {

@@ -3,7 +3,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
@@ -25,21 +24,21 @@
                     <p:column>
                         <div class="field">
                             <p:column rendered="#{field.type == 'SINGLE_LINE_TEXT' and field.active==true}">
-                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <p:outputLabel for="inputText" value="#{field.label}"></p:outputLabel>
                                 <br></br>
-                                <h:inputText value="#{field.response}"
+                                <h:inputText id="inputText" value="#{field.response}"
                                              required="#{field.required}"/>
                             </p:column>
                             <p:column rendered="#{field.type == 'MULTILINE_TEXT' and field.active==true}">
-                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <p:outputLabel for="inputTA" value="#{field.label}"></p:outputLabel>
                                 <br></br>
-                                <h:inputTextarea value="#{field.response}"
+                                <h:inputTextarea id="inputTA" value="#{field.response}"
                                                  required="#{field.required}"/>
                             </p:column>
                             <p:column rendered="#{field.type == 'RADIO_BUTTON' and field.active==true}">
-                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <p:outputLabel for="radio" value="#{field.label}"></p:outputLabel>
                                 <br></br>
-                                <h:selectOneRadio value="#{field.response}"
+                                <h:selectOneRadio id="radio" value="#{field.response}"
                                                   required="#{field.required}">
                                     <f:selectItems value="#{field.options}" var="option"
                                                    itemValue="#{option.option}"
@@ -47,18 +46,18 @@
                                 </h:selectOneRadio>
                             </p:column>
                             <p:column rendered="#{field.type == 'CHECKBOX' and field.active==true}">
-                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <p:outputLabel for="checkbox" value="#{field.label}"></p:outputLabel>
                                 <br></br>
-                                <h:selectBooleanCheckbox value="#{field.response}"
+                                <h:selectBooleanCheckbox id="checkbox" value="#{field.response}"
                                                          required="#{field.required}">
                                     <f:selectItems value="#{field.options}" var="option"
                                                    itemValue="#{option.option}"/>
                                 </h:selectBooleanCheckbox>
                             </p:column>
                             <p:column rendered="#{field.type == 'COMBOBOX' and field.active==true}">
-                                <p:outputLabel value="#{field.label}"></p:outputLabel>
+                                <p:outputLabel for="combobox" value="#{field.label}"></p:outputLabel>
                                 <br></br>
-                                <h:selectOneMenu value="#{field.response}"
+                                <h:selectOneMenu id="combobox" value="#{field.response}"
                                                  required="#{field.required}">
                                     <f:selectItems value="#{field.options}" var="option"
                                                    itemValue="#{option.option}" itemLabel="#{option.option}"/>
@@ -70,6 +69,7 @@
             </p:panel>
             <p:commandButton value="Save" icon="pi pi-check" action="#{responsesAddMB.save}"
                              update="form" process="form">
+                <p:resetInput target="form"/>
             </p:commandButton>
         </h:form>
     </div>

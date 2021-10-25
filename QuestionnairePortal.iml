@@ -19,7 +19,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="QuestionnairePortal" value="e8ce9500-40c3-4f3b-a923-92dd06a8964d" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
