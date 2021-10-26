@@ -15,20 +15,11 @@ import java.util.UUID;
 @ViewScoped
 public class ResponsesAddMB {
 
-    private List<Response> responses;
     private List<Field> fields;
 
     @PostConstruct
     public void init() {
         fields = FieldService.findAll();
-    }
-
-    public List<Response> getResponses() {
-        return responses;
-    }
-
-    public void setResponses(List<Response> responses) {
-        this.responses = responses;
     }
 
     public List<Field> getFields() {

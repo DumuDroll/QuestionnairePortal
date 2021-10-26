@@ -43,8 +43,8 @@
                                 <h:selectOneRadio id="radio" value="#{field.response}"
                                                   required="#{field.required}">
                                     <f:selectItems value="#{field.options}" var="option"
-                                                   itemValue="#{option.option}"
-                                                   itemLabel="#{option.option}"></f:selectItems>
+                                                   itemLabel="#{option.option}"
+                                                   itemValue="#{option.option}"></f:selectItems>
                                 </h:selectOneRadio>
                             </p:column>
                             <p:column rendered="#{field.type == 'CHECKBOX' and field.active==true}">

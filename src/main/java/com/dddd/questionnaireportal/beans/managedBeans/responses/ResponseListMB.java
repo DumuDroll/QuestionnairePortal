@@ -4,7 +4,6 @@ import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.service.FieldService;
 import com.dddd.questionnaireportal.database.service.ResponseService;
-import org.primefaces.component.datatable.DataTable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -15,11 +14,9 @@ import java.util.*;
 @ViewScoped
 public class ResponseListMB {
 
-    private List<Response> headers;
     private List<Response> responses;
     private List<String> columns = new ArrayList<>();
     private List<Map<String, Object>> rows = new ArrayList<>();
-    private long columnsNumber;
 
     @PostConstruct
     public void init() {
@@ -29,21 +26,6 @@ public class ResponseListMB {
         fields.forEach(field -> columns.add(field.getLabel()));
     }
 
-    public List<Response> getResponses() {
-        return responses;
-    }
-
-    public void setResponses(List<Response> responses) {
-        this.responses = responses;
-    }
-
-    public List<Response> getHeaders() {
-        return headers;
-    }
-
-    public void setHeaders(List<Response> headers) {
-        this.headers = headers;
-    }
 
     public List<String> getColumns() {
         return columns;
@@ -59,14 +41,6 @@ public class ResponseListMB {
 
     public void setRows(List<Map<String, Object>> rows) {
         this.rows = rows;
-    }
-
-    public long getColumnsNumber() {
-        return columnsNumber;
-    }
-
-    public void setColumnsNumber(long columnsNumber) {
-        this.columnsNumber = columnsNumber;
     }
 
     public void populateRows() {
