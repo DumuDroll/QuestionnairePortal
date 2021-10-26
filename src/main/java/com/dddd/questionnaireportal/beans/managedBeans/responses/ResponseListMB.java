@@ -1,51 +1,40 @@
 package com.dddd.questionnaireportal.beans.managedBeans.responses;
 
+import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
-import com.dddd.questionnaireportal.database.entity.ResponsePerUser;
-import com.dddd.questionnaireportal.database.service.ResponsePerUserService;
+import com.dddd.questionnaireportal.database.service.FieldService;
+import com.dddd.questionnaireportal.database.service.ResponseService;
 import org.primefaces.component.datatable.DataTable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ManagedBean
 @ViewScoped
 public class ResponseListMB {
 
-    private List<ResponsePerUser> responsePerUserList;
     private List<Response> headers;
+    private List<Response> responses;
     private List<String> columns = new ArrayList<>();
-    List<Map<String, Object>> rows = new ArrayList<>();
-
-    private DataTable myDataTable;
-
-    public DataTable getMyDataTable() {
-        return myDataTable;
-    }
-
-    public void setMyDataTable(DataTable myDataTable) {
-        this.myDataTable = myDataTable;
-    }
+    private List<Map<String, Object>> rows = new ArrayList<>();
+    private long columnsNumber;
 
     @PostConstruct
     public void init() {
-        responsePerUserList = ResponsePerUserService.findAll();
-        headers=responsePerUserList.get(0).getResponses();
-        populateColumns(columns, headers.size());
-        populateRows(rows, headers.size(), responsePerUserList.size());
+        responses = ResponseService.findAll();
+        populateRows();
+        List<Field> fields = FieldService.findAllActive();
+        fields.forEach(field -> columns.add(field.getLabel()));
     }
 
-    public List<ResponsePerUser> getResponsePerUserList() {
-        return responsePerUserList;
+    public List<Response> getResponses() {
+        return responses;
     }
 
-    public void setResponsePerUserList(List<ResponsePerUser> responsePerUserList) {
-        this.responsePerUserList = responsePerUserList;
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
     }
 
     public List<Response> getHeaders() {
@@ -72,21 +61,38 @@ public class ResponseListMB {
         this.rows = rows;
     }
 
-    public void populateRows(List<Map<String,Object>> rows, int columnNumber, int rowNumber){
-        for(int i = 0 ; i < rowNumber ; i++)
-        {
-            List<Response> responses = responsePerUserList.get(i).getResponses();
-            Map<String,Object> m = new HashMap<>();
-            for(int j = 0 ; j < columnNumber; j++)
-            {
-                m.put("Column" + j, responses.get(j).getResponse());
-            }
-            rows.add(m);
-        }
+    public long getColumnsNumber() {
+        return columnsNumber;
     }
 
-    private void populateColumns(List<String> list, int size) {
-        for(int i = 0 ; i < size ; i++)
-            list.add("Column" + i);
+    public void setColumnsNumber(long columnsNumber) {
+        this.columnsNumber = columnsNumber;
     }
+
+    public void populateRows() {
+        Map<String, Object> tempResponses = new HashMap<>();
+        StringBuilder currentUuid = new StringBuilder();
+        Iterator<Response> iterator = responses.iterator();
+        while (iterator.hasNext()) {
+            Response response = iterator.next();
+            if (!currentUuid.toString().equals(response.getResponsePerUser().toString())) {
+                if (!currentUuid.toString().equals("")) {
+                    rows.add(tempResponses);
+                    currentUuid.setLength(0);
+                }
+                currentUuid.append(response.getResponsePerUser().toString());
+                tempResponses = new HashMap<>();
+            }
+            if(response.getResponse()==null){
+                tempResponses.put(response.getLabel(), "N/A");
+            }else{
+                tempResponses.put(response.getLabel(), response.getResponse());
+            }
+            if (!iterator.hasNext()) {
+                rows.add(tempResponses);
+            }
+        }
+
+    }
+
 }

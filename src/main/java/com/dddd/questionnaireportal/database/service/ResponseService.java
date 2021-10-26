@@ -3,6 +3,8 @@ package com.dddd.questionnaireportal.database.service;
 import com.dddd.questionnaireportal.database.dao.ResponseDAO;
 import com.dddd.questionnaireportal.database.entity.Response;
 
+import java.util.List;
+
 public class ResponseService {
     public static void createResponse(Response response) {
         ResponseDAO.save(response);
@@ -16,4 +18,15 @@ public class ResponseService {
         ResponseDAO.delete(id);
     }
 
+    public static List<Response> findAll(){
+        return ResponseDAO.findAll();
+    }
+
+    public static long findNumberOfRows(){
+        return ResponseDAO.findNumberOfRows();
+    }
+
+    public static long findNumberOfColumns(){
+        return ResponseDAO.findNumberOfColumns();
+    }
 }

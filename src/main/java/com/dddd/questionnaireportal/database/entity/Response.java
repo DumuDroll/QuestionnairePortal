@@ -3,10 +3,7 @@ package com.dddd.questionnaireportal.database.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "responses")
@@ -17,10 +14,7 @@ public class Response {
     private int id;
     private String label;
     private String response;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
-    private ResponsePerUser responsePerUser;
+    private UUID responsePerUser;
 
     @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     @JsonBackReference
@@ -58,11 +52,11 @@ public class Response {
         this.field = field;
     }
 
-    public ResponsePerUser getResponsePerUser() {
+    public UUID getResponsePerUser() {
         return responsePerUser;
     }
 
-    public void setResponsePerUser(ResponsePerUser responsePerUser) {
+    public void setResponsePerUser(UUID responsePerUser) {
         this.responsePerUser = responsePerUser;
     }
 }

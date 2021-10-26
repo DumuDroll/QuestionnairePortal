@@ -22,4 +22,7 @@ public class FieldService {
     public static List<Field> findAll(){
         return FieldDAO.findAll();
     }
+    public static List<Field> findAllActive(){
+        return FieldDAO.findAllActive();
+    }
 }

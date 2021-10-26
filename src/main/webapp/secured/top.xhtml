@@ -8,32 +8,22 @@
 <h:body>
     <ui:composition>
         <p:toolbar>
-            <div class="p-grid">
-                <div class="p-col-12 p-md-6 p-lg-3">
-                    <p:toolbarGroup align="left">LOGO</p:toolbarGroup>
-                </div>
-                <div class="p-col-12 p-md-6 p-lg-3">
-                </div>
-                <p:toolbarGroup>
-                    <h:form>
-                        <div class="p-col-12 p-md-6 p-lg-3">
-                            <p:link url="/fields" value="Fields">
-                            </p:link>
-                            <p:link url="/responses" value="Responses">
-                            </p:link>
-                        </div>
-                    </h:form>
-                    <div class="p-col-12 p-md-6 p-lg-3">
-                        <h:form>
-                            <p:menuButton value="#{userMB.getFullName()}">
-                                <p:menuitem value="Edit Profile" action="#{routerBean.goToEdit()}"/>
-                                <p:menuitem value="Change Password" action="#{routerBean.goToPassword()}"/>
-                                <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
-                            </p:menuButton>
-                        </h:form>
-                    </div>
-                </p:toolbarGroup>
-            </div>
+            <p:toolbarGroup align="left">LOGO</p:toolbarGroup>
+            <p:toolbarGroup>
+                <p:menu>
+                    <p:menuitem value="Fields" url="/fields"></p:menuitem>
+                </p:menu>
+                <p:menu>
+                    <p:menuitem value="Responses" url="/responses"></p:menuitem>
+                </p:menu>
+                <h:form>
+                    <p:menuButton value="#{userMB.getFullName()}">
+                        <p:menuitem value="Edit Profile" action="#{routerBean.goToEdit()}"/>
+                        <p:menuitem value="Change Password" action="#{routerBean.goToPassword()}"/>
+                        <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
+                    </p:menuButton>
+                </h:form>
+            </p:toolbarGroup>
         </p:toolbar>
     </ui:composition>
 </h:body>
