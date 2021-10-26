@@ -8,6 +8,7 @@ import com.dddd.questionnaireportal.database.service.ResponseService;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,32 +16,35 @@ import java.util.UUID;
 @ViewScoped
 public class ResponsesAddMB {
 
-    private List<Field> fields;
+    private List<Response> responses;
 
     @PostConstruct
     public void init() {
-        fields = FieldService.findAll();
+        List<Field> fields = FieldService.findAll();
+        responses = new ArrayList<>();
+        if (fields != null) {
+            for (Field field : fields) {
+                Response response = new Response();
+                response.setField(field);
+                response.setLabel(field.getLabel());
+                responses.add(response);
+            }
+        }
     }
 
-    public List<Field> getFields() {
-        return fields;
+    public List<Response> getResponses() {
+        return responses;
     }
 
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
     }
 
     public void save() {
         UUID responsePerUser = UUID.randomUUID();
-        Response response;
-        for (Field field : fields) {
-            response = new Response();
-            response.setField(field);
-            response.setLabel(field.getLabel());
-            response.setResponse(field.getResponse());
+        responses.forEach(response -> {
             response.setResponsePerUser(responsePerUser);
-            field.setResponse(null);
             ResponseService.createResponse(response);
-        }
+        });
     }
 }

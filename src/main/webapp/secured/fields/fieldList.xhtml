@@ -28,7 +28,10 @@
             </p:toolbar>
 
             <p:dataTable id="fields" widgetVar="dtFields" var="field" value="#{fieldListMB.fields}"
-                         reflow="true" styleClass="products-table">
+                         reflow="true" rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">
                 <f:facet name="header">
                     Fields
                 </f:facet>

@@ -17,7 +17,6 @@ public class Field {
     private String label;
     private boolean required;
     private boolean active;
-    private String response;
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
@@ -97,20 +96,12 @@ public class Field {
         this.responses = responses;
     }
 
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Field field = (Field) o;
-        return id == field.id && required == field.required && active == field.active && Objects.equals(label, field.label) && Objects.equals(response, field.response) && type == field.type;
+        return id == field.id && required == field.required && active == field.active && Objects.equals(label, field.label) && type == field.type;
     }
 
     @Override

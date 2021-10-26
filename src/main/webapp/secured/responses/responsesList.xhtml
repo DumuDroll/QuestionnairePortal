@@ -15,7 +15,11 @@
     </ui:insert>
     <h:form id="form">
         <p:growl id="messages" showDetail="true"/>
-        <p:dataTable value="#{responseListMB.rows}" var="row">
+        <p:dataTable value="#{responseListMB.rows}" var="row"
+                     rows="10" paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">>
             <p:columnGroup type="header">
                 <p:row>
                     <ui:repeat value="#{responseListMB.columns}" var="column">
