@@ -7,13 +7,14 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.util.ArrayList;
 
-@ServerEndpoint(value = "/notification")
+@ServerEndpoint(value = "/responsesWS")
 public class ResponseListEndpoint {
 
     static ArrayList<Session> sessions = new ArrayList<>();
 
     @OnMessage
     public void messageReceiver(String message) {
+
         System.out.println("Received message:" + message);
     }
 
@@ -34,17 +35,4 @@ public class ResponseListEndpoint {
         return sessions;
     }
 
-    public static void setSessions(ArrayList<Session> sessions) {
-        ResponseListEndpoint.sessions = sessions;
-    }
-
-    public static void sendAll(String text) {
-        synchronized (sessions) {
-            for (Session session : sessions) {
-                if (session.isOpen()) {
-                    session.getAsyncRemote().sendText(text);
-                }
-            }
-        }
-    }
 }

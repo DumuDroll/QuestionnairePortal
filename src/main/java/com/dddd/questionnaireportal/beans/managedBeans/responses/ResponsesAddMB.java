@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans.responses;
 
+import com.dddd.questionnaireportal.beans.managedBeans.webSocket.MessageSender;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.service.FieldService;
@@ -46,5 +47,6 @@ public class ResponsesAddMB {
             response.setResponsePerUser(responsePerUser);
             ResponseService.createResponse(response);
         });
+        MessageSender.sendMessage("test");
     }
 }
