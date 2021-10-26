@@ -43,7 +43,7 @@
                                                   required="#{response.field.required}">
                                     <f:selectItems value="#{response.field.options}" var="option"
                                                    itemLabel="#{option.option}"
-                                                   itemValue="#{option.option}"></f:selectItems>
+                                                   itemValue="#{option.option}"/>
                                 </h:selectOneRadio>
                             </p:column>
                             <p:column rendered="#{response.field.type == 'CHECKBOX' and response.field.active==true}">
@@ -51,8 +51,6 @@
                                 <br></br>
                                 <h:selectBooleanCheckbox id="checkbox" value="#{response.response}"
                                                          required="#{response.field.required}">
-                                    <f:selectItems value="#{response.field.options}" var="option"
-                                                   itemValue="#{option.option}"/>
                                 </h:selectBooleanCheckbox>
                             </p:column>
                             <p:column rendered="#{response.field.type == 'COMBOBOX' and response.field.active==true}">
