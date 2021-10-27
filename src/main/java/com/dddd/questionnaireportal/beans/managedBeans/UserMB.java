@@ -1,12 +1,9 @@
 package com.dddd.questionnaireportal.beans.managedBeans;
 
-import com.dddd.questionnaireportal.common.SessionUtil.SessionUtil;
-import com.dddd.questionnaireportal.common.contants.Constants;
+import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import java.io.IOException;
 
 @SessionScoped
 @ManagedBean

@@ -1,32 +1,13 @@
 package com.dddd.questionnaireportal.database.dao;
 
-import com.dddd.questionnaireportal.common.contants.Constants;
-import com.dddd.questionnaireportal.common.hibernate.HibernateUtil;
+import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
-
-import java.util.Optional;
 
 public class UserDAO {
-
-    public static void save(User entity) {
-        Transaction transaction = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(entity);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
 
     public static void update(User entity) {
         Transaction transaction = null;

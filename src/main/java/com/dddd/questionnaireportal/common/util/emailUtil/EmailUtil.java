@@ -1,8 +1,7 @@
-package com.dddd.questionnaireportal.common.emailUtil;
+package com.dddd.questionnaireportal.common.util.emailUtil;
 
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
@@ -13,8 +12,7 @@ public class EmailUtil {
     private static final String SENDER_USERNAME="studyloaddocs@gmail.com";
     private static final String SENDER_PASSWORD="rT7un34Lm5";
 
-    public static void sendEmail(String toAddress, String subject, String message) throws AddressException,
-            MessagingException {
+    public static void sendEmail(String toAddress, String subject, String message) throws MessagingException {
 
         // sets SMTP server properties
         Properties properties = new Properties();

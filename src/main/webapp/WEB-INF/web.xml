@@ -4,12 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-
-
     <filter>
         <filter-name>login</filter-name>
         <filter-class>com.dddd.questionnaireportal.beans.filter.LoginFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>login</filter-name>
         <url-pattern>/secured/*</url-pattern>
@@ -51,5 +50,11 @@
         <param-name>facelets.SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>javax.faces.WEBAPP_RESOURCES_DIRECTORY</param-name>
+        <param-value>/static</param-value>
+    </context-param>
+
 
 </web-app>

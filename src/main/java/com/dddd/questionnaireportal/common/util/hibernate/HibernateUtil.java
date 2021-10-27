@@ -1,7 +1,6 @@
-package com.dddd.questionnaireportal.common.hibernate;
+package com.dddd.questionnaireportal.common.util.hibernate;
 
 import com.dddd.questionnaireportal.database.entity.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

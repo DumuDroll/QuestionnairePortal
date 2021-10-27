@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.common.MD5Util;
+package com.dddd.questionnaireportal.common.util.MD5Util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,9 +16,8 @@ public class MD5Util {
             //This bytes[] has bytes in decimal format;
             //Convert it to hexadecimal format
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
         }

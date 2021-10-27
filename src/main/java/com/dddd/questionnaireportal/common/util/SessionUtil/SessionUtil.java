@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.common.SessionUtil;
+package com.dddd.questionnaireportal.common.util.SessionUtil;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans;
 
-import com.dddd.questionnaireportal.common.MD5Util.MD5Util;
+import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
 

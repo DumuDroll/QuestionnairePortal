@@ -1,8 +1,7 @@
 package com.dddd.questionnaireportal.database.dao;
 
 
-import com.dddd.questionnaireportal.common.hibernate.HibernateUtil;
-import com.dddd.questionnaireportal.database.entity.Field;
+import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.Response;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -14,21 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseDAO {
-
-    public static void save(Response entity) {
-        Transaction transaction = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(entity);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
 
     public static void update(Response entity) {
         Transaction transaction = null;

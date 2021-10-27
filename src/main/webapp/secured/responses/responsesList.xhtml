@@ -4,54 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Response list page</title>
-    <script type="text/javascript">
-        const host = "ws://localhost:8080/responsesWS";
-        const wSocket = new WebSocket(host);
-        const browserSupport = ("WebSocket" in window);
-
-        // called  body onLoad()
-        function initializeReception()
-        {
-            if (browserSupport)
-            {
-                wSocket.onopen = function()
-                {
-                    alert(" Web Socket is connected, sending data");
-                    wSocket.send("ping");
-                };
-            }
-            else
-            {
-                // The browser doesn't support WebSocket
-                alert("WebSocket is NOT supported by your Browser!");
-            }
-        }
-        wSocket.onmessage = function(event)
-        {
-            const received_msg = event.data;
-            //alert('server msg:' + received_msg);
-            #{responseListMB.test()}
-            console.log(received_msg);
-        };
-
-        // called when socket closes
-        wSocket.onclose = function()
-        {
-            // websocket is closed.
-            //alert("Connection is closed...");
-        };
-    </script>
+    <h:outputScript name="websocketConnect.js"></h:outputScript>
 </h:head>
 <h:body onload="initializeReception()">
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
     </ui:insert>
+    <h:form>
+        <p:remoteCommand name="updateMenu" update=":form:dt-responses"></p:remoteCommand>
+    </h:form>
     <h:form id="form">
         <p:growl id="messages" showDetail="true"/>
+
         <p:dataTable id="dt-responses" value="#{responseListMB.rows}" var="row"
                      rows="10" paginator="true"
                      paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"

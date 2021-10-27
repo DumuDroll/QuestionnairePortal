@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.database.service;
 
+import com.dddd.questionnaireportal.database.dao.saverDAO;
 import com.dddd.questionnaireportal.database.dao.UserDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 
@@ -9,7 +10,7 @@ public class UserService {
     }
 
     public static void createUser(User user) {
-        UserDAO.save(user);
+        saverDAO.save(user);
     }
 
     public static void updateUser(User user) {
