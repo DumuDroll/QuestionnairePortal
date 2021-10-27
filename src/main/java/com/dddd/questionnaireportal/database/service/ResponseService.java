@@ -11,23 +11,7 @@ public class ResponseService {
         saverDAO.save(response);
     }
 
-    public static void updateField(Response response) {
-        ResponseDAO.update(response);
-    }
-
-    public static void deleteField(int id) {
-        ResponseDAO.delete(id);
-    }
-
     public static List<Response> findAll(){
         return ResponseDAO.findAll();
-    }
-
-    public static long findNumberOfRows(){
-        return ResponseDAO.findNumberOfRows();
-    }
-
-    public static long findNumberOfColumns(){
-        return ResponseDAO.findNumberOfColumns();
     }
 }

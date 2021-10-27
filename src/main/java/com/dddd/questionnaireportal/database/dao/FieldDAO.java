@@ -43,23 +43,6 @@ public class FieldDAO {
         }
     }
 
-    public static Field findById(int id) {
-        Field field = null;
-        Transaction transaction = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            transaction = session.beginTransaction();
-            field = session.find(Field.class, id);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return field;
-    }
-
     @SuppressWarnings("deprecation")
     public static List<Field> findAll() {
         List<Field> fields = new ArrayList<>();
