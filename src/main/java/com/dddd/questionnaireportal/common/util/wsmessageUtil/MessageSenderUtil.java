@@ -9,6 +9,7 @@ public class MessageSenderUtil {
 
     public static void sendMessage(String message) {
         List<Session> list = ResponseListEndpoint.getSessions();
+        System.out.println("Open sessions: " + list.size());
         for (Session s : list) {
             if (s.isOpen()) {
                 s.getAsyncRemote().sendText(message);

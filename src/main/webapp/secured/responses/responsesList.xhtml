@@ -13,14 +13,13 @@
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
     </ui:insert>
-    <h:form>
-        <p:remoteCommand name="updateMenu" update=":form:dt-responses"></p:remoteCommand>
-    </h:form>
     <h:form id="form">
         <p:growl id="messages" showDetail="true"/>
 
-        <p:dataTable id="dt-responses" value="#{responseListMB.rows}" var="row"
-                     rows="10" paginator="true"
+        <p:remoteCommand name="rc" update="dt-responses" action="#{responseListMB.addRow}"/>
+
+        <p:dataTable id="dt-responses"  widgetVar="responses"
+                     value="#{responseListMB.rows}" var="row" rows="10" paginator="true"
                      paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                      rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">>

@@ -65,7 +65,7 @@
                             <p:column rendered="#{response.field.type == 'DATE' and response.field.active==true}">
                                 <p:outputLabel for="button" value="#{response.field.label}"/>
                                 <br></br>
-                                <p:calendar id="button" value="#{response.response}" showOn="button">
+                                <p:calendar id="button" value="#{response.date}" showOn="button">
                                     <f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
                                 </p:calendar>
                             </p:column>
@@ -73,7 +73,7 @@
                     </p:column>
                 </p:repeat>
             </p:panel>
-            <p:commandButton value="Save" icon="pi pi-check" action="#{responsesAddMB.save}"
+            <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
                              update="form" process="form">
                 <p:resetInput target="form"/>
             </p:commandButton>

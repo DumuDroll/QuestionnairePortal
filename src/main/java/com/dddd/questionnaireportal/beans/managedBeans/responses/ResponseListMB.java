@@ -4,10 +4,13 @@ import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.service.FieldService;
 import com.dddd.questionnaireportal.database.service.ResponseService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.util.*;
 
 @ManagedBean
@@ -25,7 +28,6 @@ public class ResponseListMB {
         List<Field> fields = FieldService.findAllActive();
         fields.forEach(field -> columns.add(field.getLabel()));
     }
-
 
     public List<String> getColumns() {
         return columns;
@@ -66,7 +68,14 @@ public class ResponseListMB {
                 rows.add(tempResponses);
             }
         }
+    }
 
+    public void addRow(){
+        Map<String, Object> map1 = new Gson()
+                .fromJson(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param1"),
+                        new TypeToken<HashMap<String, Object>>() {
+                }.getType());
+       rows.add(map1);
     }
 
 }

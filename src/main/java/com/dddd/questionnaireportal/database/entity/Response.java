@@ -15,6 +15,8 @@ public class Response {
     private String label;
     private String response;
     private UUID responsePerUser;
+    @Transient
+    private Date date;
 
     @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     @JsonBackReference
@@ -58,5 +60,13 @@ public class Response {
 
     public void setResponsePerUser(UUID responsePerUser) {
         this.responsePerUser = responsePerUser;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

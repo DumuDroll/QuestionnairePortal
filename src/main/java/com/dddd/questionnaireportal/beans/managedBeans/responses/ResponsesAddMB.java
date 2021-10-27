@@ -3,6 +3,7 @@ package com.dddd.questionnaireportal.beans.managedBeans.responses;
 import com.dddd.questionnaireportal.common.util.wsmessageUtil.MessageSenderUtil;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
+import com.dddd.questionnaireportal.database.entity.Type;
 import com.dddd.questionnaireportal.database.service.FieldService;
 import com.dddd.questionnaireportal.database.service.ResponseService;
 import com.google.gson.Gson;
@@ -10,6 +11,8 @@ import com.google.gson.Gson;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @ManagedBean
@@ -43,11 +46,16 @@ public class ResponsesAddMB {
     public void save() {
         Map<String, String> responseMap = new HashMap<>();
         UUID responsePerUser = UUID.randomUUID();
+        SimpleDateFormat formatter2 = new SimpleDateFormat("dd MMM yyy", Locale.ENGLISH);
         responses.forEach(response -> {
+            if (response.getField().getType() == Type.DATE) {
+                response.setResponse(formatter2.format(response.getDate()));
+                response.setDate(null);
+            }
             response.setResponsePerUser(responsePerUser);
             ResponseService.createResponse(response);
-            responseMap.put(response.getLabel(),response.getResponse());
-
+            responseMap.put(response.getLabel(), response.getResponse());
+            response.setResponse(null);
         });
         Gson gson = new Gson();
         String json = gson.toJson(responseMap);

@@ -6,7 +6,6 @@ import java.util.Date;
 
 @Entity
 @Table(name="users")
-@NamedQuery(name="User.findUserByEmail", query = "select u from User u where u.email = :email")
 public class User {
 
 
