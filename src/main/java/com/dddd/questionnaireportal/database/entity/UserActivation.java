@@ -2,7 +2,6 @@ package com.dddd.questionnaireportal.database.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name="user_activation")
@@ -12,12 +11,10 @@ public class UserActivation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(mappedBy = "userActivation", cascade = CascadeType.ALL)
-    @JoinColumn(
-            name="id", unique=true, nullable=false, updatable=false)
+    @OneToOne
     private User user;
 
-    private UUID uuid;
+    private String uuid;
     private Date confirmationExpireDate;
     private Date confirmationDate;
 
@@ -37,11 +34,11 @@ public class UserActivation {
         this.user = user;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

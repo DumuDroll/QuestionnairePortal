@@ -22,7 +22,9 @@ public class User {
     private String confirmationHash;
     private Date expirationDate;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
+    @JoinColumn(
+            name="id", unique=true, nullable=false, updatable=false)
     private UserActivation userActivation;
 
     public User(String email, String password, String firstName, String lastName, boolean isActive,

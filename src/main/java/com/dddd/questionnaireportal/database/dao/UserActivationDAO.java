@@ -28,7 +28,7 @@ public class UserActivationDAO {
     }
 
     @SuppressWarnings("deprecation")
-    public static UserActivation findByUUID(UUID uuid) {
+    public static UserActivation findByUUID(String uuid) {
         UserActivation result = null;
         Transaction transaction = null;
         try {
