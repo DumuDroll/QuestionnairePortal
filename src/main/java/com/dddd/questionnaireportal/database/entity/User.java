@@ -22,6 +22,8 @@ public class User {
     private String confirmationHash;
     private Date expirationDate;
 
+    @OneToOne
+    private UserActivation userActivation;
 
     public User(String email, String password, String firstName, String lastName, boolean isActive,
                 String phoneNumber, byte[] salt, Date expirationDate) {
@@ -115,4 +117,11 @@ public class User {
         this.confirmationHash = confirmationHash;
     }
 
+    public UserActivation getUserActivation() {
+        return userActivation;
+    }
+
+    public void setUserActivation(UserActivation userActivation) {
+        this.userActivation = userActivation;
+    }
 }

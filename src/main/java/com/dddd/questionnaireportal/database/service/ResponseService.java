@@ -1,6 +1,6 @@
 package com.dddd.questionnaireportal.database.service;
 
-import com.dddd.questionnaireportal.database.dao.saverDAO;
+import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.ResponseDAO;
 import com.dddd.questionnaireportal.database.entity.Response;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ResponseService {
     public static void createResponse(Response response) {
-        saverDAO.save(response);
+        SaverHelperDAO.save(response);
     }
 
     public static List<Response> findAll(){

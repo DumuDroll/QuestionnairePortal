@@ -9,4 +9,6 @@ public class Constants {
     public static final String LOGIN_URL = "login";
     public static final String EDIT_USER_URL = "editUser";
     public static final String CHANGE_PASSWORD_URL = "changePassword";
+    public static final String USER_REGISTRATION_SUBJECT = "Activate your account on Questionnaire Portal";
+    public static final String USER_ACTIVATION_LINK = "Activate account on a link: http://localhost:8080/activation.xhtml?key=";
 }

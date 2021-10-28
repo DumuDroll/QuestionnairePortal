@@ -30,6 +30,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Field.class);
                 configuration.addAnnotatedClass(FieldsOption.class);
                 configuration.addAnnotatedClass(Response.class);
+                configuration.addAnnotatedClass(UserActivation.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
 

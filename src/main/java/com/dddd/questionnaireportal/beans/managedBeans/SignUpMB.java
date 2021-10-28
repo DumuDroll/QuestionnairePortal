@@ -1,8 +1,12 @@
 package com.dddd.questionnaireportal.beans.managedBeans;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
+import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
+import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
 import com.dddd.questionnaireportal.database.entity.User;
+import com.dddd.questionnaireportal.database.entity.UserActivation;
 import com.dddd.questionnaireportal.database.service.UserService;
 
 import javax.faces.application.FacesMessage;
@@ -13,6 +17,10 @@ import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @ManagedBean
 @RequestScoped
@@ -79,8 +87,9 @@ public class SignUpMB {
         if (UserService.findByEmail(getEmail()) == null) {
             if (confirmPassword()) {
                 byte[] salt = MD5Util.getSalt();
-                UserService.createUser(new User(getEmail(), MD5Util.getSecurePassword(password, salt),
-                        getFirstName(), getLastName(), false, getPhoneNumber(), salt, null));
+                User user = new User(getEmail(), MD5Util.getSecurePassword(password, salt),
+                        getFirstName(), getLastName(), false, getPhoneNumber(), salt, null);
+                UserService.createUser(user);
             } else {
                 FacesContext.getCurrentInstance().addMessage(
                         null,

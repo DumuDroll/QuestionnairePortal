@@ -76,7 +76,4 @@ public class LoginMB {
         FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
     }
 
-    public boolean isLoggedIn() {
-        return SessionUtil.getSession().getAttribute("email") != null;
-    }
 }
