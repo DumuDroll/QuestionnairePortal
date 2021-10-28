@@ -1,6 +1,5 @@
 package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
 import com.dddd.questionnaireportal.database.service.UserActivationService;
@@ -13,16 +12,15 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Email;
 import java.util.Date;
 
 @ManagedBean
 @RequestScoped
-public class Activation {
+public class RegistrationActivationBean {
 
     @ManagedProperty(value = "#{param.key}")
     private String key;
-
     private String email;
     private boolean valid;
 
@@ -30,22 +28,27 @@ public class Activation {
     public void init() {
         UserActivation userActivation = UserActivationService.findByUUID(key);
         if (userActivation != null) {
-            if (userActivation.getConfirmationDate() != null) {
-                login(userActivation);
+            if (userActivation.getUser().isActive()) {
                 valid = true;
             } else {
                 Date date = new Date();
                 if (date.compareTo(userActivation.getConfirmationExpireDate()) <= 0) {
-                    userActivation.setConfirmationDate(date);
                     valid = true;
                     User user = userActivation.getUser();
                     user.setActive(true);
                     UserService.updateUser(user);
                     UserActivationService.update(userActivation);
-                    login(userActivation);
                 }
             }
         }
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public boolean isValid() {
@@ -62,13 +65,6 @@ public class Activation {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void login(UserActivation userActivation) {
-        HttpSession session = SessionUtil.getSession();
-        session.setAttribute("email", userActivation.getUser().getEmail());
-        session.setAttribute("firstName", userActivation.getUser().getFirstName());
-        session.setAttribute("lastName", userActivation.getUser().getLastName());
     }
 
     public String send() throws MessagingException {

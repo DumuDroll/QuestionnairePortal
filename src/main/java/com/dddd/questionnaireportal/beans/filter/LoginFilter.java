@@ -1,8 +1,5 @@
 package com.dddd.questionnaireportal.beans.filter;
 
-import com.dddd.questionnaireportal.beans.managedBeans.LoginMB;
-import com.dddd.questionnaireportal.beans.managedBeans.UserMB;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +30,7 @@ public class LoginFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {
+    public void init(FilterConfig arg0) {
     }
 
     @Override

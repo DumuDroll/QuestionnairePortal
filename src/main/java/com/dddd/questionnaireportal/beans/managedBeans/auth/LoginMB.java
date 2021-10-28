@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.beans.managedBeans;
+package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
 
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
@@ -51,8 +51,8 @@ public class LoginMB {
                     FacesContext.getCurrentInstance().addMessage(
                             null,
                             new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                    "Invalid Password!",
-                                    "Please Try Again!"));
+                                    Constants.INVALID_PASSWORD,
+                                    Constants.TRY_AGAIN));
                 }
             } else {
                 FacesContext.getCurrentInstance().addMessage(
@@ -66,7 +66,7 @@ public class LoginMB {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Invalid Login",
-                            "Please Try Again!"));
+                            Constants.TRY_AGAIN));
         }
     }
 

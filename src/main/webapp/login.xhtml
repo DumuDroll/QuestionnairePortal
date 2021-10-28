@@ -4,44 +4,35 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Login page</title>
+    <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
-    <h:form id="loginForm">
+    <div id="centeredDiv">
+        <h:form id="loginForm">
+            <p:growl showDetail="true" life="3000"/>
+            <p:panel header="Login" style="width: 360px;">
+                <h:panelGrid id="loginPanel" columns="2">
 
-        <p:growl showDetail="true" life="3000" />
-        <p:panel header="Login" style="width: 360px;">
+                    <h:outputText value="Username"/>
+                    <p:inputText id="username" value="#{loginMB.email}"></p:inputText>
+                    <p:spacer></p:spacer>
+                    <p:message for="username"></p:message>
 
-            <h:panelGrid id="loginPanel" columns="2">
+                    <h:outputText value="Password"/>
+                    <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
+                    <p:spacer></p:spacer>
+                    <p:message for="password"></p:message>
 
-                <h:outputText value="Username" />
+                    <p:spacer></p:spacer>
+                    <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm"></p:commandButton>
+                    <p:spacer></p:spacer>
 
-                <p:inputText id="username" value="#{loginMB.email}" ></p:inputText>
+                    <p:link value="Not registered yet? Sign up!" outcome="signUp"/>
 
-                <p:spacer></p:spacer>
-
-                <p:message for="username" ></p:message>
-
-                <h:outputText value="Password" />
-
-                <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
-
-                <p:spacer></p:spacer>
-
-                <p:message for="password"></p:message>
-
-                <p:spacer></p:spacer>
-
-                <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm"></p:commandButton>
-
-                <p:spacer></p:spacer>
-                <p:link value = "Not registered yet? Sign up!" outcome="signUp"/>
-
-            </h:panelGrid>
-
-        </p:panel>
-
-    </h:form>
-
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </div>
 </h:body>
 
 </html>

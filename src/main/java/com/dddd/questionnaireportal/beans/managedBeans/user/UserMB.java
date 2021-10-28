@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.beans.managedBeans;
+package com.dddd.questionnaireportal.beans.managedBeans.user;
 
 import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 

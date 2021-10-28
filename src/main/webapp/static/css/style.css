@@ -1,0 +1,27 @@
+#centeredDiv {
+    top: 33%;
+    left: 50%;
+    width:30%;
+    height:50%;
+    margin-top: -9em;
+    margin-left: -15em;
+    position:fixed;
+}
+#centeredDivFields {
+    top: 33%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    margin-top: -9em;
+    margin-left: -45%;
+    position:fixed;
+}
+#centeredDivResponses {
+    top: 33%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    margin-top: -9em;
+    margin-left: -45%;
+    position:fixed;
+}

@@ -1,5 +1,6 @@
-package com.dddd.questionnaireportal.beans.managedBeans;
+package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
@@ -10,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
+import javax.validation.constraints.Email;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
@@ -17,6 +19,7 @@ import java.security.NoSuchProviderException;
 @RequestScoped
 public class SignUpMB {
 
+    @Email(message = "must be a valid email")
     private String email;
     private String password;
     private String passwordConfirm;
@@ -85,8 +88,8 @@ public class SignUpMB {
                 FacesContext.getCurrentInstance().addMessage(
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                "Passwords dont match",
-                                "Please Try Again!"));
+                                Constants.PASSWORDS_DONT_MATCH,
+                                Constants.TRY_AGAIN));
             }
             FacesContext.getCurrentInstance().addMessage(
                     null,
@@ -98,7 +101,7 @@ public class SignUpMB {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Account with such an email already exists",
-                            "Please Try Again!"));
+                            Constants.TRY_AGAIN));
         }
         return "signUp";
     }

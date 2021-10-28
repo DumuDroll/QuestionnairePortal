@@ -9,7 +9,6 @@ function initializeReception()
     {
         wSocket.onopen = function()
         {
-            alert(" Web Socket is connected, sending data");
         };
     }
     else

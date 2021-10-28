@@ -8,14 +8,16 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Fields</title>
+    <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
     </ui:insert>
+
     <h:form id="form">
-        <div class="card crud-demo">
-            <p:growl id="messages" showDetail="true"/>
+        <p:growl id="messages" showDetail="true"/>
+        <div id="centeredDivFields">
             <p:toolbar>
                 <p:toolbarGroup></p:toolbarGroup>
                 <p:toolbarGroup align="right">
@@ -118,5 +120,6 @@
             </p:confirmDialog>
         </div>
     </h:form>
+
 </h:body>
 </html>

@@ -8,32 +8,35 @@
 <h:head>
     <title>Response list page</title>
     <h:outputScript name="websocketConnect.js"></h:outputScript>
+    <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body onload="initializeReception()">
     <ui:insert name="divTop">
         <ui:include src="/secured/top.xhtml"/>
     </ui:insert>
-    <h:form id="form">
-        <p:growl id="messages" showDetail="true"/>
+    <div id="centeredDivResponses">
+        <h:form id="form">
+            <p:growl id="messages" showDetail="true"/>
 
-        <p:remoteCommand name="rc" update="dt-responses" action="#{responseListMB.addRow}"/>
+            <p:remoteCommand name="rc" update="dt-responses" action="#{responseListMB.addRow}"/>
 
-        <p:dataTable id="dt-responses"  widgetVar="responses"
-                     value="#{responseListMB.rows}" var="row" rows="10" paginator="true"
-                     paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
-                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                     rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">>
-            <p:columnGroup type="header">
-                <p:row>
-                    <ui:repeat value="#{responseListMB.columns}" var="column">
-                        <p:column headerText="#{column}"></p:column>
-                    </ui:repeat>
-                </p:row>
-            </p:columnGroup>
-            <p:columns value="#{responseListMB.columns}" var="column">
-                #{empty row[column]?'N/A':row[column]}
-            </p:columns>
-        </p:dataTable>
-    </h:form>
+            <p:dataTable id="dt-responses" widgetVar="responses"
+                         value="#{responseListMB.rows}" var="row" rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">>
+                <p:columnGroup type="header">
+                    <p:row>
+                        <ui:repeat value="#{responseListMB.columns}" var="column">
+                            <p:column headerText="#{column}"></p:column>
+                        </ui:repeat>
+                    </p:row>
+                </p:columnGroup>
+                <p:columns value="#{responseListMB.columns}" var="column">
+                    #{empty row[column]?'N/A':row[column]}
+                </p:columns>
+            </p:dataTable>
+        </h:form>
+    </div>
 </h:body>
 </html>

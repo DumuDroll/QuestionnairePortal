@@ -16,7 +16,8 @@ public class UserActivation {
 
     private String uuid;
     private Date confirmationExpireDate;
-    private Date confirmationDate;
+    private Date passChangeExpireDate;
+    private String newPass;
 
     public int getId() {
         return id;
@@ -50,11 +51,19 @@ public class UserActivation {
         this.confirmationExpireDate = confirmationExpireDate;
     }
 
-    public Date getConfirmationDate() {
-        return confirmationDate;
+    public String getNewPass() {
+        return newPass;
     }
 
-    public void setConfirmationDate(Date confirmationDate) {
-        this.confirmationDate = confirmationDate;
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
+    }
+
+    public Date getPassChangeExpireDate() {
+        return passChangeExpireDate;
+    }
+
+    public void setPassChangeExpireDate(Date passChangeExpireDate) {
+        this.passChangeExpireDate = passChangeExpireDate;
     }
 }
