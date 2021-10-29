@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Edit profile</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<h:body>
+    <div id="centeredDiv">
+        <h:form id="editForm">
+            <p:panel header="Email for pass reset letter" style="width: 500px;">
+                <p:messages showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="Email:"/>
+                    <p:inputText id="email" value="#{forgotPassBean.email}" label="UserName"/>
+
+                    <p:outputLabel value=""/>
+                    <p:commandButton action="#{forgotPassBean.sendResetPassLetter}" value="SEND" update="editForm"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>

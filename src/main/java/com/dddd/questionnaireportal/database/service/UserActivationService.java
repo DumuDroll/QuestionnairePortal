@@ -2,6 +2,7 @@ package com.dddd.questionnaireportal.database.service;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
+import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.common.util.date.DateHelper;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
@@ -9,12 +10,13 @@ import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
 
-import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.UUID;
 
 public class UserActivationService {
 
-    public static void update(UserActivation userActivation){
+    public static void update(UserActivation userActivation) {
         SaverHelperDAO.update(userActivation);
     }
 
@@ -22,13 +24,15 @@ public class UserActivationService {
         UserActivation userActivation = user.getUserActivation();
         userActivation.setPassChangeExpireDate(DateHelper.currentDatePlusOneDay());
         userActivation.setNewPass(MD5Util.getSecurePassword(newPass, user.getSalt()));
-        EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT, Constants.PASSWORD_CHANGE_LINK+userActivation.getUuid());
+        EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT, Constants.PASSWORD_CHANGE_LINK + userActivation.getUuid());
         update(userActivation);
     }
+
     public static boolean updateForPassChangeConfirmation(UserActivation userActivation) {
         Date date = new Date();
         if (date.compareTo(userActivation.getPassChangeExpireDate()) <= 0) {
             userActivation.setPassChangeExpireDate(date);
+            userActivation.setUuid(UUID.randomUUID().toString());
             User user = userActivation.getUser();
             user.setPassword(userActivation.getNewPass());
             UserService.updateUser(user);
@@ -38,7 +42,28 @@ public class UserActivationService {
         return false;
     }
 
-    public static UserActivation findByUUID(String uuid){
+    public static void updateForForgotPassLetter(User user) {
+        UserActivation userActivation = user.getUserActivation();
+        userActivation.setForgotPassExpireDate(DateHelper.currentDatePlusOneDay());
+        SaverHelperDAO.update(userActivation);
+        EmailUtil.sendEmail(user.getEmail(), "Questionnaire Portal: new password",
+                "http://localhost:8080/newPassConfirmation.xhtml?key=" + userActivation.getUuid());
+    }
+
+    public static boolean updateForNewPassConfirmation(UserActivation userActivation) {
+        Date date = new Date();
+        if (date.compareTo(userActivation.getForgotPassExpireDate()) <= 0) {
+            userActivation.setForgotPassExpireDate(date);
+            SaverHelperDAO.update(userActivation);
+            HttpSession session = SessionUtil.getSession();
+            session.setAttribute(Constants.EMAIL, userActivation.getUser().getEmail());
+            session.setAttribute(Constants.FIRST_NAME, userActivation.getUser().getFirstName());
+            session.setAttribute(Constants.LAST_NAME, userActivation.getUser().getLastName());
+            return true;
+        }
+        return false;
+    }
+    public static UserActivation findByUUID(String uuid) {
         return UserActivationDAO.findByUUID(uuid);
     }
 }

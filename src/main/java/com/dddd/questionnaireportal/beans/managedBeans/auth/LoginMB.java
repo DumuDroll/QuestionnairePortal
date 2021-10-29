@@ -37,7 +37,7 @@ public class LoginMB {
         this.email = email;
     }
 
-    public void logIn() throws IOException{
+    public void logIn() {
         User user = UserService.findByEmail(email);
         if (user!=null) {
             if (user.isActive()) {
@@ -46,7 +46,12 @@ public class LoginMB {
                     session.setAttribute(Constants.EMAIL, email);
                     session.setAttribute(Constants.FIRST_NAME, user.getFirstName());
                     session.setAttribute(Constants.LAST_NAME, user.getLastName());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
+                    try {
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+
                 } else {
                     FacesContext.getCurrentInstance().addMessage(
                             null,
@@ -65,15 +70,20 @@ public class LoginMB {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "Invalid Login",
+                            Constants.NO_USER_WITH_THIS_EMAIL,
                             Constants.TRY_AGAIN));
         }
     }
 
-    public void logOut() throws IOException {
+    public void logOut() {
         HttpSession session = SessionUtil.getSession();
         session.invalidate();
-        FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

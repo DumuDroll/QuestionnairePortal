@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
 import com.dddd.questionnaireportal.database.service.UserActivationService;
@@ -12,7 +13,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
-import javax.validation.constraints.Email;
 import java.util.Date;
 
 @ManagedBean
@@ -67,7 +67,7 @@ public class RegistrationActivationBean {
         this.email = email;
     }
 
-    public String send() throws MessagingException {
+    public String send() {
         User user = UserService.findByEmail(email);
         if (user != null) {
             UserService.updateActivationLink(user);
@@ -75,13 +75,13 @@ public class RegistrationActivationBean {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Check your email for new confirmation letter",
-                            ""));
+                            null));
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "There's no account to activate with such an email",
-                            ""));
+                            Constants.NO_USER_WITH_THIS_EMAIL,
+                            null));
         }
         return "reActivation";
     }

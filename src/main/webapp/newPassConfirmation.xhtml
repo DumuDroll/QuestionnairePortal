@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <ui:fragment rendered="#{newPassConfirmationBean.valid}">
+        <meta http-equiv="refresh" content="3;url=/secured/user/newPass.xhtml"/>
+    </ui:fragment>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<h:body>
+    <div id="centeredDiv">
+        <h:form id="reactivateForm">
+            <h:panelGroup layout="block" rendered="#{newPassConfirmationBean.valid}">
+                <h:outputText value="Your password change is confirmed!"></h:outputText>
+                <h:outputText value="You will be redirected to a password change page in a 3 seconds"></h:outputText>
+            </h:panelGroup>
+            <h:panelGroup layout="block" rendered="#{!newPassConfirmationBean.valid}">
+                <h:outputText value="Your confirmation link is already expired,
+                        to change pass click on &#34;forgot password?&#34; link on a login page"></h:outputText>
+                <p:menu>
+                    <p:menuitem url="/login" value="To login page"></p:menuitem>
+                </p:menu>
+            </h:panelGroup>
+        </h:form>
+    </div>
+</h:body>
+</html>

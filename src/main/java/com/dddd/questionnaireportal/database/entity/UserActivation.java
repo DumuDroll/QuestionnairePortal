@@ -17,6 +17,7 @@ public class UserActivation {
     private String uuid;
     private Date confirmationExpireDate;
     private Date passChangeExpireDate;
+    private Date forgotPassExpireDate;
     private String newPass;
 
     public int getId() {
@@ -65,5 +66,13 @@ public class UserActivation {
 
     public void setPassChangeExpireDate(Date passChangeExpireDate) {
         this.passChangeExpireDate = passChangeExpireDate;
+    }
+
+    public Date getForgotPassExpireDate() {
+        return forgotPassExpireDate;
+    }
+
+    public void setForgotPassExpireDate(Date forgotPassExpireDate) {
+        this.forgotPassExpireDate = forgotPassExpireDate;
     }
 }

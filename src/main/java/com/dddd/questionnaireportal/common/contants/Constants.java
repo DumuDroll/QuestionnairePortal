@@ -9,9 +9,9 @@ public class Constants {
     public static final String EMAIL = "email";
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
-    public static final String RESPONSES_URL = "responses";
+    public static final String NO_USER_WITH_THIS_EMAIL = "There's no user with such an email";
     public static final String RESPONSE_ADD_URL = "";
-    public static final String LOGIN_URL = "login";
+    public static final String EMAIL_SENT = "We have sent an email to your address";
     public static final String EDIT_USER_URL = "editUser";
     public static final String CHANGE_PASSWORD_URL = "changePassword";
     public static final String USER_REGISTRATION_SUBJECT = "Activate your account on Questionnaire Portal";

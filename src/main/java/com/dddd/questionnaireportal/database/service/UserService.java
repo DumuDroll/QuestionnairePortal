@@ -1,6 +1,7 @@
 package com.dddd.questionnaireportal.database.service;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
+import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.common.util.date.DateHelper;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
@@ -8,7 +9,6 @@ import com.dddd.questionnaireportal.database.dao.UserDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
 
-import javax.mail.MessagingException;
 import java.util.UUID;
 
 public class UserService {
@@ -26,7 +26,6 @@ public class UserService {
         SaverHelperDAO.save(userActivation);
         EmailUtil.sendEmail(user.getEmail(), Constants.USER_REGISTRATION_SUBJECT,
                 Constants.USER_ACTIVATION_LINK + uuid);
-
     }
 
     public static void updateActivationLink(User user) {
@@ -41,7 +40,13 @@ public class UserService {
         UserDAO.update(user);
     }
 
-    public static User findUser(int userId) {
-        return UserDAO.findById(userId);
+    public static void updateUserForPassReset(User user, String newPass) {
+        user.setSalt(MD5Util.getSalt());
+        user.setPassword(MD5Util.getSecurePassword(newPass, user.getSalt()));
+        UserActivation userActivation = user.getUserActivation();
+        userActivation.setUuid(UUID.randomUUID().toString());
+        SaverHelperDAO.update(userActivation);
+        UserDAO.update(user);
+
     }
 }

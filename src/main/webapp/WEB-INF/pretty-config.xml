@@ -27,6 +27,11 @@
         <view-id value="/secured/user/passChange.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="newPassConfirm">
+        <pattern value="/newPassConfirm"/>
+        <view-id value="/newPassConfirmation.xhtml"/>
+    </url-mapping>
+
     <url-mapping id="fields">
         <pattern value="/fields"/>
         <view-id value="/secured/fields/fieldList.xhtml"/>

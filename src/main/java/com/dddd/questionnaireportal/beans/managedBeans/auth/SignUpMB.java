@@ -76,7 +76,7 @@ public class SignUpMB {
     }
 
 
-    public String signUp() throws NoSuchAlgorithmException, NoSuchProviderException, MessagingException {
+    public String signUp() {
 
         if (UserService.findByEmail(getEmail()) == null) {
             if (confirmPassword()) {
@@ -94,7 +94,7 @@ public class SignUpMB {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "We have sent an email to your address",
+                            Constants.EMAIL_SENT,
                             "Please confirm registration"));
         } else {
             FacesContext.getCurrentInstance().addMessage(

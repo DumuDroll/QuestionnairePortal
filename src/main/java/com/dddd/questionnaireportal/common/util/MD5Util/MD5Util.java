@@ -29,11 +29,15 @@ public class MD5Util {
         return generatedPassword;
     }
 
-    public static byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException
-    {
-        SecureRandom sr = SecureRandom.getInstance(SHA1PRNG, SUN);
-        byte[] salt = new byte[16];
-        sr.nextBytes(salt);
-        return salt;
+    public static byte[] getSalt() {
+        try {
+            SecureRandom sr = SecureRandom.getInstance(SHA1PRNG, SUN);
+            byte[] salt = new byte[16];
+            sr.nextBytes(salt);
+            return salt;
+        } catch (NoSuchAlgorithmException | NoSuchProviderException exception){
+            exception.printStackTrace();
+            return null;
+        }
     }
 }
