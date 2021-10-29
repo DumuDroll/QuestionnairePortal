@@ -47,8 +47,8 @@ public class ChangePasswordMB {
         this.newPassConfirm = newPassConfirm;
     }
 
-    public void change() throws MessagingException {
-        User user = UserService.findByEmail(SessionUtil.getSession().getAttribute("email").toString());
+    public void change() {
+        User user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
         if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
             if (newPassword.equals(newPassConfirm)) {
                 UserActivationService.updateForPassChange(user, newPassword);

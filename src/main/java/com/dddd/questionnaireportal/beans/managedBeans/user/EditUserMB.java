@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
@@ -17,7 +18,7 @@ public class EditUserMB {
 
     @PostConstruct
     private void init(){
-        user = UserService.findByEmail(SessionUtil.getSession().getAttribute("email").toString());
+        user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
     }
 
     public User getUser() {

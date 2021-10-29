@@ -10,20 +10,30 @@ import org.hibernate.service.ServiceRegistry;
 import java.util.Properties;
 
 public class HibernateUtil {
+
+    private static final String DRIVER = "org.postgresql.Driver";
+    private static final String URL = "jdbc:postgresql://localhost:5432/QPortal";
+    private static final String USER = "postgres";
+    private static final String PASS = "root";
+    private static final String SHOW_SQL = "true";
+    private static final String CURRENT_SESSION_CONTEXT_CLASS = "thread";
+    private static final String HBM2DDL_AUTO = "update";
+
     private static SessionFactory sessionFactory;
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
 
                 Properties settings = new Properties();
-                settings.put(Environment.DRIVER, "org.postgresql.Driver");
-                settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/QPortal");
-                settings.put(Environment.USER, "postgres");
-                settings.put(Environment.PASS, "root");
-                settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.DRIVER, DRIVER);
+                settings.put(Environment.URL, URL);
+                settings.put(Environment.USER, USER);
+                settings.put(Environment.PASS, PASS);
+                settings.put(Environment.SHOW_SQL, SHOW_SQL);
+                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, CURRENT_SESSION_CONTEXT_CLASS);
+                settings.put(Environment.HBM2DDL_AUTO, HBM2DDL_AUTO);
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);

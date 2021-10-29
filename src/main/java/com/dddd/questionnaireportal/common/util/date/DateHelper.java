@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DateHelper {
 
-    public static Date cuurentDatePlusOneDay(){
+    public static Date currentDatePlusOneDay(){
         return new Date(new Date().getTime() + TimeUnit.DAYS.toMillis( 1 ));
     }
 

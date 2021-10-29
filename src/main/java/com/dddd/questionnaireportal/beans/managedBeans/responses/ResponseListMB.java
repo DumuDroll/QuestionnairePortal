@@ -25,8 +25,6 @@ public class ResponseListMB {
     public void init() {
         responses = ResponseService.findAll();
         populateRows();
-        List<Field> fields = FieldService.findAllActive();
-        fields.forEach(field -> columns.add(field.getLabel()));
     }
 
     public List<String> getColumns() {
@@ -68,6 +66,9 @@ public class ResponseListMB {
                 rows.add(tempResponses);
             }
         }
+        //Getting headers from only active fields
+        List<Field> fields = FieldService.findAllActive();
+        fields.forEach(field -> columns.add(field.getLabel()));
     }
 
     public void addRow(){

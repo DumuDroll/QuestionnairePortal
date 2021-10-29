@@ -4,7 +4,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml'
       xmlns:ui='http://java.sun.com/jsf/facelets'
       xmlns:h='http://java.sun.com/jsf/html'
-      xmlns:p='http://primefaces.org/ui' xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p='http://primefaces.org/ui'>
 <h:body>
     <ui:composition>
         <p:toolbar>
@@ -18,8 +18,8 @@
                 </p:menu>
                 <h:form>
                     <p:menuButton value="#{userMB.getFullName()}">
-                        <p:menuitem value="Edit Profile" action="#{routerBean.goToEdit()}"/>
-                        <p:menuitem value="Change Password" action="#{routerBean.goToPassword()}"/>
+                        <p:menuitem value="Edit Profile" url="/editUser"/>
+                        <p:menuitem value="Change Password" url="/changePassword"/>
                         <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
                     </p:menuButton>
                 </h:form>

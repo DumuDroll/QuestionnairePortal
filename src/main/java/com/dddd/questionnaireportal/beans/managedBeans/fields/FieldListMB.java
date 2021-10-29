@@ -19,6 +19,7 @@ import java.util.List;
 @ViewScoped
 public class FieldListMB {
 
+    private static final String OPTIONS_REGEX = "\\r?\\n";
 
     private Field selectedField;
     private List<Field> fields;
@@ -98,7 +99,7 @@ public class FieldListMB {
     }
 
     public void addOptionsToField() {
-        String[] lines = options.split("\\r?\\n");
+        String[] lines = options.split(OPTIONS_REGEX);
         for (String line : lines) {
             line = line.trim();
             FieldsOption fieldsOption = new FieldsOption();

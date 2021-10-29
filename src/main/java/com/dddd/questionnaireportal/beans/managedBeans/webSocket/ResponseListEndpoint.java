@@ -13,13 +13,11 @@ public class ResponseListEndpoint {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("Opened");
         sessions.add(session);
     }
 
     @OnClose
     public void onClose(Session session) {
-        System.out.println("Closed");
         sessions.remove(session);
     }
 

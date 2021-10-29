@@ -16,22 +16,22 @@ public class UserService {
         return UserDAO.findByEmail(email);
     }
 
-    public static void createUser(User user) throws MessagingException {
+    public static void createUser(User user) {
         UserActivation userActivation = new UserActivation();
         UUID uuid = UUID.randomUUID();
         userActivation.setUuid(uuid.toString());
         SaverHelperDAO.save(user);
         userActivation.setUser(user);
-        userActivation.setConfirmationExpireDate(DateHelper.cuurentDatePlusOneDay());
+        userActivation.setConfirmationExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.save(userActivation);
         EmailUtil.sendEmail(user.getEmail(), Constants.USER_REGISTRATION_SUBJECT,
                 Constants.USER_ACTIVATION_LINK + uuid);
 
     }
 
-    public static void updateActivationLink(User user) throws MessagingException {
+    public static void updateActivationLink(User user) {
         UserActivation userActivation = user.getUserActivation();
-        userActivation.setConfirmationExpireDate(DateHelper.cuurentDatePlusOneDay());
+        userActivation.setConfirmationExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.update(userActivation);
         EmailUtil.sendEmail(user.getEmail(), Constants.USER_REGISTRATION_SUBJECT,
                 Constants.USER_ACTIVATION_LINK + userActivation.getUuid());
