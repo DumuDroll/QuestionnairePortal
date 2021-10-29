@@ -28,14 +28,13 @@ public class User {
     private UserActivation userActivation;
 
     public User(String email, String password, String firstName, String lastName, boolean isActive,
-                String phoneNumber, byte[] salt, Date expirationDate) {
+                String phoneNumber, Date expirationDate) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.isActive = isActive;
         this.phoneNumber = phoneNumber;
-        this.salt=salt;
         this.expirationDate=expirationDate;
     }
 
@@ -101,14 +100,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
     }
 
     public String getConfirmationHash() {

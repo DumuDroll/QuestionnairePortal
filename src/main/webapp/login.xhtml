@@ -22,13 +22,11 @@
                     <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
                     <p:spacer></p:spacer>
                     <p:message for="password"></p:message>
-                    <p:link value="Forgot youe password?" outcome="forgotPass"/>
+                    <p:link value="Forgot your password?" outcome="forgotPass"/>
                     <p:spacer></p:spacer>
                     <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm"></p:commandButton>
                     <p:spacer></p:spacer>
-
-                    <p:link value="Not registered yet? Sign up!" outcome="signUp"/>
-
+                    <p:outputLabel value="Not registered yet?"></p:outputLabel><p:link value="Sign Up" outcome="signUp"/>
 
                 </h:panelGrid>
             </p:panel>

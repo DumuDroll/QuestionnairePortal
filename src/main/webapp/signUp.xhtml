@@ -34,7 +34,8 @@
                 <p:outputLabel value=""/>
                 <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>
                 <p:spacer></p:spacer>
-                <p:link value="Already have an account?" outcome="login"/>
+                <p:outputLabel value="Already have an account?"></p:outputLabel>
+                <p:link value="Log In" outcome="login"/>
             </h:panelGrid>
         </p:panel>
     </h:form>

@@ -41,8 +41,7 @@ public class UserService {
     }
 
     public static void updateUserForPassReset(User user, String newPass) {
-        user.setSalt(MD5Util.getSalt());
-        user.setPassword(MD5Util.getSecurePassword(newPass, user.getSalt()));
+        user.setPassword(MD5Util.getSecurePassword(newPass));
         UserActivation userActivation = user.getUserActivation();
         userActivation.setUuid(UUID.randomUUID().toString());
         SaverHelperDAO.update(userActivation);

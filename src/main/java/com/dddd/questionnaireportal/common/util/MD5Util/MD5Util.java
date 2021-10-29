@@ -12,15 +12,10 @@ public class MD5Util {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private final static String MD5 = "MD5";
-    private final static String SHA1PRNG = "SHA1PRNG";
-    private final static String SUN = "SUN";
-
-    public static String getSecurePassword(String passwordToHash, byte[] salt){
+    public static String getSecurePassword(String passwordToHash){
         String generatedPassword = null;
         try {
-            MessageDigest md = MessageDigest.getInstance(MD5);
-            md.update(salt);
+            MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] bytes = md.digest(passwordToHash.getBytes());
             StringBuilder sb = new StringBuilder();
             for (byte aByte : bytes) {
@@ -32,17 +27,5 @@ public class MD5Util {
             logger.catching(e);
         }
         return generatedPassword;
-    }
-
-    public static byte[] getSalt() {
-        try {
-            SecureRandom sr = SecureRandom.getInstance(SHA1PRNG, SUN);
-            byte[] salt = new byte[16];
-            sr.nextBytes(salt);
-            return salt;
-        } catch (NoSuchAlgorithmException | NoSuchProviderException e){
-            logger.catching(e);
-            return null;
-        }
     }
 }

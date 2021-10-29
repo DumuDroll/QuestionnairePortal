@@ -42,7 +42,6 @@ public class NewPasswordBean {
     public void change() {
         User user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
         if (newPassword.equals(newPassConfirm)) {
-            user.setPassword(newPassword);
             UserService.updateUserForPassReset(user, newPassword);
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../fields/fieldList.xhtml");

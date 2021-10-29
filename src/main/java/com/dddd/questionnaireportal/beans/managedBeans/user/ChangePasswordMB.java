@@ -48,7 +48,7 @@ public class ChangePasswordMB {
 
     public void change() {
         User user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
-        if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
+        if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
             if (newPassword.equals(newPassConfirm)) {
                 UserActivationService.updateForPassChange(user, newPassword);
                 FacesContext.getCurrentInstance().addMessage(

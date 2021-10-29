@@ -23,7 +23,7 @@ public class UserActivationService {
     public static void updateForPassChange(User user, String newPass) {
         UserActivation userActivation = user.getUserActivation();
         userActivation.setPassChangeExpireDate(DateHelper.currentDatePlusOneDay());
-        userActivation.setNewPass(MD5Util.getSecurePassword(newPass, user.getSalt()));
+        userActivation.setNewPass(MD5Util.getSecurePassword(newPass));
         EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT, Constants.PASSWORD_CHANGE_LINK + userActivation.getUuid());
         update(userActivation);
     }

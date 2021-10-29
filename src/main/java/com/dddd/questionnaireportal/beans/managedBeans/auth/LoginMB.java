@@ -45,7 +45,7 @@ public class LoginMB {
         User user = UserService.findByEmail(email);
         if (user!=null) {
             if (user.isActive()) {
-                if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
+                if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
                     HttpSession session = SessionUtil.getSession();
                     session.setAttribute(Constants.EMAIL, email);
                     session.setAttribute(Constants.FIRST_NAME, user.getFirstName());
@@ -55,7 +55,6 @@ public class LoginMB {
                     } catch (IOException e){
                         logger.catching(e);
                     }
-
                 } else {
                     FacesContext.getCurrentInstance().addMessage(
                             null,
