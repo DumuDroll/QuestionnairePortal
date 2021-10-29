@@ -31,9 +31,11 @@ public class EditUserMB {
 
     public void edit() {
         UserService.updateUser(user);
+        SessionUtil.getSession().setAttribute(Constants.FIRST_NAME, user.getFirstName());
+        SessionUtil.getSession().setAttribute(Constants.LAST_NAME, user.getLastName());
         FacesContext.getCurrentInstance().addMessage(
                 null,
                 new FacesMessage(FacesMessage.SEVERITY_WARN,
-                        "Profile has been updated", ""));
+                        "Your profile info has been updated", ""));
     }
 }

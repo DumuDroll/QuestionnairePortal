@@ -43,9 +43,9 @@ public class LoginMB {
             if (user.isActive()) {
                 if (user.getPassword().equals(MD5Util.getSecurePassword(password, user.getSalt()))) {
                     HttpSession session = SessionUtil.getSession();
-                    session.setAttribute("email", email);
-                    session.setAttribute("firstName", user.getFirstName());
-                    session.setAttribute("lastName", user.getLastName());
+                    session.setAttribute(Constants.EMAIL, email);
+                    session.setAttribute(Constants.FIRST_NAME, user.getFirstName());
+                    session.setAttribute(Constants.LAST_NAME, user.getLastName());
                     FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
                 } else {
                     FacesContext.getCurrentInstance().addMessage(

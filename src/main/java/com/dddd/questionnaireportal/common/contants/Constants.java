@@ -7,6 +7,8 @@ public class Constants {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
     public static final String EMAIL = "email";
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
     public static final String RESPONSES_URL = "responses";
     public static final String RESPONSE_ADD_URL = "";
     public static final String LOGIN_URL = "login";
