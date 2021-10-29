@@ -47,6 +47,5 @@ public class UserService {
         userActivation.setUuid(UUID.randomUUID().toString());
         SaverHelperDAO.update(userActivation);
         UserDAO.update(user);
-
     }
 }

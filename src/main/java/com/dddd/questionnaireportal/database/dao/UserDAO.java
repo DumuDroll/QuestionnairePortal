@@ -1,13 +1,18 @@
 package com.dddd.questionnaireportal.database.dao;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 public class UserDAO {
+
+    private static final Logger logger = LogManager.getLogger();
 
     public static void update(User entity) {
         Transaction transaction = null;
@@ -27,7 +32,7 @@ public class UserDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
     }
 
@@ -43,7 +48,7 @@ public class UserDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
         return user;
     }
@@ -56,14 +61,14 @@ public class UserDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(User.class)
-                    .add(Restrictions.like("email", email));
+                    .add(Restrictions.like(Constants.EMAIL, email));
             result = (User) criteria.uniqueResult();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
         return result;
     }

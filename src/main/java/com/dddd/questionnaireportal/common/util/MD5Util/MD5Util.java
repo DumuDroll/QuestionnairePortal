@@ -1,11 +1,16 @@
 package com.dddd.questionnaireportal.common.util.MD5Util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 
 public class MD5Util {
+
+    private static final Logger logger = LogManager.getLogger();
 
     private final static String MD5 = "MD5";
     private final static String SHA1PRNG = "SHA1PRNG";
@@ -24,7 +29,7 @@ public class MD5Util {
             generatedPassword = sb.toString();
         }
         catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            logger.catching(e);
         }
         return generatedPassword;
     }
@@ -35,8 +40,8 @@ public class MD5Util {
             byte[] salt = new byte[16];
             sr.nextBytes(salt);
             return salt;
-        } catch (NoSuchAlgorithmException | NoSuchProviderException exception){
-            exception.printStackTrace();
+        } catch (NoSuchAlgorithmException | NoSuchProviderException e){
+            logger.catching(e);
             return null;
         }
     }

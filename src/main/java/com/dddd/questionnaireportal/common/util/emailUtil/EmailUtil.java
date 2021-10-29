@@ -2,6 +2,8 @@ package com.dddd.questionnaireportal.common.util.emailUtil;
 
 
 import com.dddd.questionnaireportal.common.contants.Constants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -10,6 +12,8 @@ import java.util.Date;
 import java.util.Properties;
 
 public class EmailUtil {
+
+    private static final Logger logger = LogManager.getLogger();
 
     private static final String SENDER_USERNAME = "studyloaddocs@gmail.com";
     private static final String SENDER_PASSWORD = "rT7un34Lm5";

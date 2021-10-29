@@ -3,6 +3,8 @@ package com.dddd.questionnaireportal.database.dao;
 import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +13,8 @@ import org.hibernate.criterion.Restrictions;
 import java.util.UUID;
 
 public class UserActivationDAO {
+
+    private static final Logger logger = LogManager.getLogger();
 
     public static void update(UserActivation entity) {
         Transaction transaction = null;
@@ -23,7 +27,7 @@ public class UserActivationDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
     }
 
@@ -42,7 +46,7 @@ public class UserActivationDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
         return result;
     }

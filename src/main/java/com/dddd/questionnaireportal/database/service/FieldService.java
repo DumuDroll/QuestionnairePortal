@@ -12,7 +12,7 @@ public class FieldService {
     }
 
     public static void updateField(Field field){
-        FieldDAO.update(field);
+        SaverHelperDAO.update(field);
     }
 
     public static void deleteField(int id){

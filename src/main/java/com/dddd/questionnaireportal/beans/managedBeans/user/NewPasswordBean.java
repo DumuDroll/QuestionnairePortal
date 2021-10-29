@@ -4,6 +4,8 @@ import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +16,8 @@ import java.io.IOException;
 @ManagedBean
 @ViewScoped
 public class NewPasswordBean {
+
+    private static final Logger logger = LogManager.getLogger();
 
     private String newPassword;
 
@@ -43,7 +47,7 @@ public class NewPasswordBean {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../fields/fieldList.xhtml");
             }catch (IOException e){
-                e.printStackTrace();
+                logger.catching(e);
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(

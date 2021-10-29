@@ -3,11 +3,15 @@ package com.dddd.questionnaireportal.database.dao;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.Field;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class FieldsOptionDAO {
+
+    private static final Logger logger = LogManager.getLogger();
 
     public static void deleteOptionsByField(Field field) {
         Transaction transaction = null;
@@ -22,7 +26,7 @@ public class FieldsOptionDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.catching(e);
         }
     }
 }

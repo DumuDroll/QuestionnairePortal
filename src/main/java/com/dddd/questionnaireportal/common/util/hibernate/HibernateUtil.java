@@ -1,6 +1,9 @@
 package com.dddd.questionnaireportal.common.util.hibernate;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -11,13 +14,7 @@ import java.util.Properties;
 
 public class HibernateUtil {
 
-    private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://localhost:5432/QPortal";
-    private static final String USER = "postgres";
-    private static final String PASS = "root";
-    private static final String SHOW_SQL = "true";
-    private static final String CURRENT_SESSION_CONTEXT_CLASS = "thread";
-    private static final String HBM2DDL_AUTO = "update";
+    private static final Logger logger = LogManager.getLogger();
 
     private static SessionFactory sessionFactory;
 
@@ -27,13 +24,13 @@ public class HibernateUtil {
                 Configuration configuration = new Configuration();
 
                 Properties settings = new Properties();
-                settings.put(Environment.DRIVER, DRIVER);
-                settings.put(Environment.URL, URL);
-                settings.put(Environment.USER, USER);
-                settings.put(Environment.PASS, PASS);
-                settings.put(Environment.SHOW_SQL, SHOW_SQL);
-                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, CURRENT_SESSION_CONTEXT_CLASS);
-                settings.put(Environment.HBM2DDL_AUTO, HBM2DDL_AUTO);
+                settings.put(Environment.DRIVER, "org.postgresql.Driver");
+                settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/QPortal");
+                settings.put(Environment.USER, "postgres");
+                settings.put(Environment.PASS, "root");
+                settings.put(Environment.SHOW_SQL, Constants.TRUE);
+                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
@@ -46,7 +43,7 @@ public class HibernateUtil {
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.catching(e);
             }
         }
         return sessionFactory;
