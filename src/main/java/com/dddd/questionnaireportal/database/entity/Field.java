@@ -5,18 +5,25 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "fields")
-public class Field {
+public class Field implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String label;
+
     private boolean required;
+
     private boolean active;
+
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 

@@ -2,10 +2,13 @@ package com.dddd.questionnaireportal.database.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="authorities")
-public class Authority {
+public class Authority implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

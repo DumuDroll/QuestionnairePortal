@@ -3,15 +3,19 @@ package com.dddd.questionnaireportal.database.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "options")
 @NamedQuery(name="FieldsOption.deleteOptionsById", query = "delete from FieldsOption where field = :field")
-public class FieldsOption {
+public class FieldsOption implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String option;
 
     @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)

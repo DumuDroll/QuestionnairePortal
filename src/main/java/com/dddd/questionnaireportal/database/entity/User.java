@@ -2,22 +2,30 @@ package com.dddd.questionnaireportal.database.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String email;
+
     private String password;
+
     private String firstName;
+
     private String lastName;
+
     private boolean isActive;
+
     private String phoneNumber;
 
     @OneToOne(mappedBy = "user")

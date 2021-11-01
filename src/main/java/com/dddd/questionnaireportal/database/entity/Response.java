@@ -3,18 +3,25 @@ package com.dddd.questionnaireportal.database.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "responses")
-public class Response {
+public class Response implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String label;
+
     private String response;
+
     private UUID responsePerUser;
+
     @Transient
     private Date date;
 

@@ -12,7 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class UserDAO {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(UserDAO.class);
 
     public static void update(User entity) {
         Transaction transaction = null;

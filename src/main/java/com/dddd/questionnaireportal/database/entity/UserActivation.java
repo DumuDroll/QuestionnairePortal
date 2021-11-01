@@ -1,11 +1,14 @@
 package com.dddd.questionnaireportal.database.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="user_activation")
-public class UserActivation {
+public class UserActivation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +18,13 @@ public class UserActivation {
     private User user;
 
     private String uuid;
+
     private Date confirmationExpireDate;
+
     private Date passChangeExpireDate;
+
     private Date forgotPassExpireDate;
+
     private String newPass;
 
     public int getId() {
