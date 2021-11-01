@@ -2,7 +2,8 @@ package com.dddd.questionnaireportal.database.entity;
 
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -18,29 +19,19 @@ public class User {
     private String lastName;
     private boolean isActive;
     private String phoneNumber;
-    private byte[] salt;
-    private String confirmationHash;
-    private Date expirationDate;
 
     @OneToOne(mappedBy = "user")
     @JoinColumn(
             name="id", unique=true, nullable=false, updatable=false)
     private UserActivation userActivation;
 
-    public User(String email, String password, String firstName, String lastName, boolean isActive,
-                String phoneNumber, Date expirationDate) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.isActive = isActive;
-        this.phoneNumber = phoneNumber;
-        this.expirationDate=expirationDate;
-    }
-
-    public User() {
-
-    }
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_authority",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id")
+    )
+    private Set<Authority> authorities = new HashSet<>();
 
     public String getName(){
         return firstName + " " + firstName;
@@ -100,14 +91,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getConfirmationHash() {
-        return confirmationHash;
-    }
-
-    public void setConfirmationHash(String confirmationHash) {
-        this.confirmationHash = confirmationHash;
     }
 
     public UserActivation getUserActivation() {

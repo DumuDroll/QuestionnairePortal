@@ -80,8 +80,13 @@ public class SignUpMB {
 
         if (UserService.findByEmail(getEmail()) == null) {
             if (confirmPassword()) {
-                User user = new User(getEmail(), MD5Util.getSecurePassword(password),
-                        getFirstName(), getLastName(), false, getPhoneNumber(), null);
+                User user = new User();
+                user.setEmail(getEmail());
+                user.setPassword(MD5Util.getSecurePassword(password));
+                user.setFirstName(getFirstName());
+                user.setLastName(getLastName());
+                user.setActive(false);
+                user.setPhoneNumber(getPhoneNumber());
                 UserService.createUser(user);
             } else {
                 FacesContext.getCurrentInstance().addMessage(
