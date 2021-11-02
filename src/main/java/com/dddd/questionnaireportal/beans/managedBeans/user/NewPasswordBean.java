@@ -1,11 +1,12 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.common.contants.Constants;
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -40,7 +41,8 @@ public class NewPasswordBean {
     }
 
     public void change() {
-        User user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = UserService.findByEmail(myUserDetails.getUsername());
         if (newPassword.equals(newPassConfirm)) {
             UserService.updateUserForPassReset(user, newPassword);
             try {

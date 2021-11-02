@@ -8,7 +8,7 @@
 </h:head>
 <h:body>
     <div id="centeredDiv">
-        <h:form id="loginForm">
+        <h:form id="loginForm" prependId="false">
             <p:growl showDetail="true" life="3000"/>
             <p:panel header="Login" style="width: 360px;">
                 <h:panelGrid id="loginPanel" columns="2">
@@ -24,9 +24,11 @@
                     <p:message for="password"></p:message>
                     <p:link value="Forgot your password?" outcome="forgotPass"/>
                     <p:spacer></p:spacer>
-                    <p:commandButton action="#{loginMB.logIn}" value="Login" update="loginForm"></p:commandButton>
+                    <p:commandButton action="#{loginMB.logIn}" value="Login" ajax="true" update="loginForm">
+                    </p:commandButton>
                     <p:spacer></p:spacer>
-                    <p:outputLabel value="Not registered yet?"></p:outputLabel><p:link value="Sign Up" outcome="signUp"/>
+                    <p:outputLabel value="Not registered yet?"></p:outputLabel><p:link value="Sign Up"
+                                                                                       outcome="signUp"/>
 
                 </h:panelGrid>
             </p:panel>

@@ -1,9 +1,9 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
-import com.dddd.questionnaireportal.common.contants.Constants;
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -18,7 +18,8 @@ public class EditUserMB {
 
     @PostConstruct
     private void init(){
-        user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user = UserService.findByEmail(myUserDetails.getUsername());
     }
 
     public User getUser() {
@@ -31,8 +32,9 @@ public class EditUserMB {
 
     public void edit() {
         UserService.updateUser(user);
-        SessionUtil.getSession().setAttribute(Constants.FIRST_NAME, user.getFirstName());
-        SessionUtil.getSession().setAttribute(Constants.LAST_NAME, user.getLastName());
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        myUserDetails.setFirstName(user.getFirstName());
+        myUserDetails.setLastName(user.getLastName());
         FacesContext.getCurrentInstance().addMessage(
                 null,
                 new FacesMessage(FacesMessage.SEVERITY_WARN,

@@ -2,18 +2,24 @@ package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
 
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.jsf.FacesContextUtils;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @ManagedBean
@@ -24,6 +30,15 @@ public class LoginMB {
 
     private String email;
     private String password;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @PostConstruct
+    public void init(){
+        FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
+                .getAutowireCapableBeanFactory().autowireBean(this);
+    }
 
     public String getPassword() {
         return password;
@@ -46,10 +61,14 @@ public class LoginMB {
         if (user!=null) {
             if (user.isActive()) {
                 if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
-                    HttpSession session = SessionUtil.getSession();
-                    session.setAttribute(Constants.EMAIL, email);
-                    session.setAttribute(Constants.FIRST_NAME, user.getFirstName());
-                    session.setAttribute(Constants.LAST_NAME, user.getLastName());
+                    try {
+                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken( email, password );
+                        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    } catch (Exception e) {
+                        logger.catching(e);
+                        SecurityContextHolder.getContext().setAuthentication(null);
+                    }
                     try {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
                     } catch (IOException e){
@@ -79,8 +98,7 @@ public class LoginMB {
     }
 
     public void logOut() {
-        HttpSession session = SessionUtil.getSession();
-        session.invalidate();
+        SecurityContextHolder.getContext().setAuthentication(null);
         try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
         }catch (IOException e){

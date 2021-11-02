@@ -17,6 +17,36 @@
         <view-id value="/signUp.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="responseAdd">
+        <pattern value="/"/>
+        <view-id value="/responseAdd.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="newPassConfirm">
+        <pattern value="/newPassConfirm"/>
+        <view-id value="/newPassConfirmation.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="passChangeAct">
+        <pattern value="/passChangeActivation"/>
+        <view-id value="/passChangeActivation.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="registrationAct">
+        <pattern value="/registrationActivation"/>
+        <view-id value="/registrationActivation.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="responseAddSuccess">
+        <pattern value="/success"/>
+        <view-id value="/responseAddSuccess.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="forgotPass">
+        <pattern value="/forgotPass"/>
+        <view-id value="/forgotPass.xhtml"/>
+    </url-mapping>
+
     <url-mapping id="userEdit">
         <pattern value="/editUser"/>
         <view-id value="/secured/user/userEdit.xhtml"/>
@@ -27,19 +57,9 @@
         <view-id value="/secured/user/passChange.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="newPassConfirm">
-        <pattern value="/newPassConfirm"/>
-        <view-id value="/newPassConfirmation.xhtml"/>
-    </url-mapping>
-
     <url-mapping id="fields">
         <pattern value="/fields"/>
         <view-id value="/secured/fields/fieldList.xhtml"/>
-    </url-mapping>
-
-    <url-mapping id="responseAdd">
-        <pattern value="/"/>
-        <view-id value="/responseAdd.xhtml"/>
     </url-mapping>
 
     <url-mapping id="responseList">

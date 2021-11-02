@@ -39,7 +39,7 @@ public class ResponsesAddMB {
     public void save() {
         ResponseService.saveResponsesAndSendThemViaWebsocket(responses);
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/responseAddSuccess.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/success");
         }catch (Exception e){
             logger.catching(e);
         }

@@ -1,11 +1,12 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.service.UserActivationService;
 import com.dddd.questionnaireportal.database.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -47,7 +48,8 @@ public class ChangePasswordMB {
     }
 
     public void change() {
-        User user = UserService.findByEmail(SessionUtil.getSession().getAttribute(Constants.EMAIL).toString());
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = UserService.findByEmail(myUserDetails.getUsername());
         if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
             if (newPassword.equals(newPassConfirm)) {
                 UserActivationService.updateForPassChange(user, newPassword);

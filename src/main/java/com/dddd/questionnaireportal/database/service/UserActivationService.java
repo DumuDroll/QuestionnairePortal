@@ -1,14 +1,16 @@
 package com.dddd.questionnaireportal.database.service;
 
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
 import com.dddd.questionnaireportal.common.util.date.DateHelper;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -47,7 +49,7 @@ public class UserActivationService {
         userActivation.setForgotPassExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.update(userActivation);
         EmailUtil.sendEmail(user.getEmail(), "Questionnaire Portal: new password",
-                "http://localhost:8080/newPassConfirmation.xhtml?key=" + userActivation.getUuid());
+                "http://localhost:8080/newPassConfirmation?key=" + userActivation.getUuid());
     }
 
     public static boolean updateForNewPassConfirmation(UserActivation userActivation) {
@@ -55,10 +57,7 @@ public class UserActivationService {
         if (date.compareTo(userActivation.getForgotPassExpireDate()) <= 0) {
             userActivation.setForgotPassExpireDate(date);
             SaverHelperDAO.update(userActivation);
-            HttpSession session = SessionUtil.getSession();
-            session.setAttribute(Constants.EMAIL, userActivation.getUser().getEmail());
-            session.setAttribute(Constants.FIRST_NAME, userActivation.getUser().getFirstName());
-            session.setAttribute(Constants.LAST_NAME, userActivation.getUser().getLastName());
+            //TO DO
             return true;
         }
         return false;

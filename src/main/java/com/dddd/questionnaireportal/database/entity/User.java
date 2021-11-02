@@ -108,4 +108,12 @@ public class User implements Serializable {
     public void setUserActivation(UserActivation userActivation) {
         this.userActivation = userActivation;
     }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

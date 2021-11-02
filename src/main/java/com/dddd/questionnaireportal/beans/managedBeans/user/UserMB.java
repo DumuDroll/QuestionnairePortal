@@ -1,6 +1,7 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
-import com.dddd.questionnaireportal.common.util.SessionUtil.SessionUtil;
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,8 +13,9 @@ public class UserMB {
     public String getFullName() {
         String fullName;
         try{
-            fullName = SessionUtil.getSession().getAttribute("firstName").toString() + " " +
-                   SessionUtil.getSession().getAttribute("lastName").toString();
+            MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            fullName =  myUserDetails.getFirstName() + " " +
+                    myUserDetails.getLastName();
        } catch (NullPointerException npe){
            return null;
        }

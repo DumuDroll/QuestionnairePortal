@@ -88,6 +88,7 @@ public class SignUpMB {
                 user.setActive(false);
                 user.setPhoneNumber(getPhoneNumber());
                 UserService.createUser(user);
+                
             } else {
                 FacesContext.getCurrentInstance().addMessage(
                         null,

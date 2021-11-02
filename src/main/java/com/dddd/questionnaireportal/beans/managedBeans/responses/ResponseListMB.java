@@ -57,9 +57,9 @@ public class ResponseListMB {
                 currentUuid.append(response.getResponsePerUser().toString());
                 tempResponses = new HashMap<>();
             }
-            if(response.getResponse()==null){
+            if (response.getResponse() == null) {
                 tempResponses.put(response.getLabel(), "N/A");
-            }else{
+            } else {
                 tempResponses.put(response.getLabel(), response.getResponse());
             }
             if (!iterator.hasNext()) {
@@ -71,12 +71,14 @@ public class ResponseListMB {
         fields.forEach(field -> columns.add(field.getLabel()));
     }
 
-    public void addRow(){
-        Map<String, Object> map1 = new Gson()
-                .fromJson(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param1"),
-                        new TypeToken<HashMap<String, Object>>() {
+    public void addRow() {
+        Map<String, Object> map1;
+        Gson gson = new Gson();
+        String json = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+        map1 = gson.fromJson(json,
+                new TypeToken<HashMap<String, Object>>() {
                 }.getType());
-       rows.add(map1);
+        rows.add(map1);
     }
 
 }
