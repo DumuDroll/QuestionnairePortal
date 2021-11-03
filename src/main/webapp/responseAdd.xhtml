@@ -4,71 +4,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>Response add page</title>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
-    <p:toolbar>
-        <p:toolbarGroup align="left">LOGO</p:toolbarGroup>
-        <p:toolbarGroup></p:toolbarGroup>
-        <p:toolbarGroup align="right">
-            <p:link outcome="login" value="Log In">
-            </p:link>
-        </p:toolbarGroup>
-    </p:toolbar>
-    <div id="centeredDiv">
+    <ui:insert name="divTop">
+        <ui:include src="/topUnauth.xhtml"/>
+    </ui:insert>
+    <div id="centeredDivResponseAdd">
             <h:form id="form">
-                <p:panel>
+                <p:panel header="Questionnaire" style="width: 330px;">
                     <p:growl id="msg" showDetail="true"></p:growl>
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
-                        <p:column>
                             <div class="field">
-                                <p:column
-                                        rendered="#{response.field.type == 'SINGLE_LINE_TEXT' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
+                                and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="inputText" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
-                                    <h:inputText id="inputText" value="#{response.response}"
+                                    <p:inputText id="inputText" value="#{response.response}"
                                                  required="#{response.field.required}"/>
                                 </p:column>
-                                <p:column
-                                        rendered="#{response.field.type == 'MULTILINE_TEXT' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'MULTILINE_TEXT'
+                                and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="inputTA" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
-                                    <h:inputTextarea id="inputTA" value="#{response.response}"
+                                    <p:inputTextarea id="inputTA" value="#{response.response}"
                                                      required="#{response.field.required}"/>
                                 </p:column>
-                                <p:column
-                                        rendered="#{response.field.type == 'RADIO_BUTTON' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'RADIO_BUTTON'
+                                 and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="radio" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
-                                    <h:selectOneRadio id="radio" value="#{response.response}"
+                                    <p:selectOneRadio id="radio" value="#{response.response}"
                                                       required="#{response.field.required}">
                                         <f:selectItems value="#{response.field.options}" var="option"
                                                        itemLabel="#{option.option}"
                                                        itemValue="#{option.option}"/>
-                                    </h:selectOneRadio>
+                                    </p:selectOneRadio>
                                 </p:column>
-                                <p:column
-                                        rendered="#{response.field.type == 'CHECKBOX' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'CHECKBOX'
+                                 and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="checkbox" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
-                                    <h:selectBooleanCheckbox id="checkbox" value="#{response.response}"
+                                    <p:selectBooleanCheckbox id="checkbox" value="#{response.response}"
                                                              required="#{response.field.required}">
-                                    </h:selectBooleanCheckbox>
+                                    </p:selectBooleanCheckbox>
                                 </p:column>
-                                <p:column
-                                        rendered="#{response.field.type == 'COMBOBOX' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'COMBOBOX'
+                                 and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="combobox" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
-                                    <h:selectOneMenu id="combobox" value="#{response.response}"
+                                    <p:selectOneMenu id="combobox" value="#{response.response}"
                                                      required="#{response.field.required}">
                                         <f:selectItems value="#{response.field.options}" var="option"
                                                        itemValue="#{option.option}" itemLabel="#{option.option}"/>
-                                    </h:selectOneMenu>
+                                    </p:selectOneMenu>
                                 </p:column>
-                                <p:column rendered="#{response.field.type == 'DATE' and response.field.active==true}">
+                                <p:column rendered="#{response.field.type == 'DATE'
+                                and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="button" value="#{response.field.label}"/>
                                     <br></br>
                                     <p:calendar id="button" value="#{response.date}" showOn="button">
@@ -76,7 +72,6 @@
                                     </p:calendar>
                                 </p:column>
                             </div>
-                        </p:column>
                     </p:repeat>
                 </p:panel>
                 <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"

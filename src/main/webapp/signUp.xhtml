@@ -10,26 +10,20 @@
 <h:body>
 <div id="centeredDiv">
     <h:form id="signUpForm">
-        <p:panel header="Sign Up" style="width: 500px;">
+        <p:panel header="Sign Up" style="width: 250px;">
             <p:growl showDetail="true" life="3000"/>
-            <h:panelGrid columns="2">
-                <p:outputLabel value="Email:"/>
-                <p:inputText id="email" value="#{signUpMB.email}" label="UserName"/>
+            <h:panelGrid columns="1">
+                <p:inputText id="email" placeholder="Email" value="#{signUpMB.email}" label="UserName"/>
 
-                <p:outputLabel value="Password:"/>
-                <p:password id="password" value="#{signUpMB.password}" label="Password"/>
+                <p:password id="password" placeholder="Password" value="#{signUpMB.password}" label="Password"/>
 
-                <p:outputLabel value="Confirm Password:"/>
-                <p:password id="confirmPassword" value="#{signUpMB.passwordConfirm}" label="Password"/>
+                <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}" label="Password"/>
 
-                <p:outputLabel value="FirstName:"/>
-                <p:inputText id="firstName" value="#{signUpMB.firstName}" label="FirstName"/>
+                <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" label="FirstName"/>
 
-                <p:outputLabel value="LastName:"/>
-                <p:inputText id="lastName" value="#{signUpMB.lastName}"/>
+                <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}"/>
 
-                <p:outputLabel value="Phone number:"/>
-                <p:inputText id="phoneNumber" value="#{signUpMB.phoneNumber}"/>
+                <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpMB.phoneNumber}"/>
 
                 <p:outputLabel value=""/>
                 <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>

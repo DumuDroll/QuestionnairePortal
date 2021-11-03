@@ -8,8 +8,6 @@ import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 
 import java.util.Date;
 import java.util.UUID;
@@ -24,7 +22,9 @@ public class UserActivationService {
         UserActivation userActivation = user.getUserActivation();
         userActivation.setPassChangeExpireDate(DateHelper.currentDatePlusOneDay());
         userActivation.setNewPass(MD5Util.getSecurePassword(newPass));
-        EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT, Constants.PASSWORD_CHANGE_LINK + userActivation.getUuid());
+        EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT,
+                "Confirm password change on a link: http://localhost:8080/passChangeActivation?key="
+                + userActivation.getUuid());
         update(userActivation);
     }
 

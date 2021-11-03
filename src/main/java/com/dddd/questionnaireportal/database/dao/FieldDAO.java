@@ -40,7 +40,8 @@ public class FieldDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
-            fields = criteria.addOrder(Order.asc("id"))
+            fields = criteria
+                    .addOrder(Order.asc("id"))
                     .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
             transaction.commit();
         } catch (Exception e) {

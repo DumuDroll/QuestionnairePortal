@@ -10,22 +10,21 @@
     <div id="centeredDiv">
         <h:form id="loginForm" prependId="false">
             <p:growl showDetail="true" life="3000"/>
-            <p:panel header="Login" style="width: 360px;">
-                <h:panelGrid id="loginPanel" columns="2">
-
-                    <h:outputText value="Username"/>
-                    <p:inputText id="username" value="#{loginMB.email}"></p:inputText>
-                    <p:spacer></p:spacer>
+            <p:panel header="Login" style="width: 250px;">
+                <h:panelGrid id="loginPanel" columns="1">
+                    <p:inputText id="username" placeholder="Email" value="#{loginMB.email}"></p:inputText>
                     <p:message for="username"></p:message>
-
-                    <h:outputText value="Password"/>
-                    <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
-                    <p:spacer></p:spacer>
+                    <p:password id="password" placeholder="Password" value="#{loginMB.password}"
+                                feedback="false"></p:password>
                     <p:message for="password"></p:message>
+                </h:panelGrid>
+                <h:panelGrid id="loginPanel2" columns="2">
                     <p:outputLabel value="Remember me"></p:outputLabel>
                     <h:selectBooleanCheckbox id="remember-me" value="#{loginMB.rememberMe}">
                     </h:selectBooleanCheckbox>
                     <p:link value="Forgot your password?" outcome="forgotPass"/>
+                </h:panelGrid>
+                <h:panelGrid id="loginPanel3" columns="1">
                     <p:spacer></p:spacer>
                     <p:commandButton action="#{loginMB.logIn}" value="Login" ajax="true" update="loginForm">
                     </p:commandButton>

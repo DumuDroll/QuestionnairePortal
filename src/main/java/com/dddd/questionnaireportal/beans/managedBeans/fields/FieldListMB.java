@@ -76,7 +76,8 @@ public class FieldListMB {
     }
 
     public void save() {
-        boolean optionsNeeded = selectedField.getType().equals(Type.COMBOBOX) || selectedField.getType().equals(Type.RADIO_BUTTON);
+        boolean optionsNeeded = selectedField.getType().equals(Type.COMBOBOX)
+                || selectedField.getType().equals(Type.RADIO_BUTTON);
         if (selectedField.getId() == 0) {
             if (optionsNeeded) {
                 selectedField.setOptions(new ArrayList<>());

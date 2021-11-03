@@ -36,8 +36,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         String password = user.getPassword();
 
-        CurrentUser currentUser = new CurrentUser(username, password, true, true, true,
-                true, authorities);
+        CurrentUser currentUser = new CurrentUser(username, password, true, true,
+                true, true, authorities);
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
         return currentUser;

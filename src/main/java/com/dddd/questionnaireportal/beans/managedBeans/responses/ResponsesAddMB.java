@@ -1,6 +1,5 @@
 package com.dddd.questionnaireportal.beans.managedBeans.responses;
 
-import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.service.FieldService;
@@ -12,7 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ManagedBean
 @ViewScoped

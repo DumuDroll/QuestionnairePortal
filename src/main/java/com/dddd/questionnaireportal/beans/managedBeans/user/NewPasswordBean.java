@@ -41,7 +41,9 @@ public class NewPasswordBean {
     }
 
     public void change() {
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
         User user = UserService.findByEmail(myUserDetails.getUsername());
         if (newPassword.equals(newPassConfirm)) {
             UserService.updateUserForPassReset(user, newPassword);

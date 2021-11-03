@@ -18,7 +18,8 @@ public class EditUserMB {
 
     @PostConstruct
     private void init(){
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
         user = UserService.findByEmail(myUserDetails.getUsername());
     }
 
@@ -32,7 +33,8 @@ public class EditUserMB {
 
     public void edit() {
         UserService.updateUser(user);
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
         myUserDetails.setFirstName(user.getFirstName());
         myUserDetails.setLastName(user.getLastName());
         FacesContext.getCurrentInstance().addMessage(

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
     <title>Edit profile</title>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
+    <ui:insert name="divTop">
+        <ui:include src="/topUnauth.xhtml"/>
+    </ui:insert>
     <div id="centeredDiv">
         <h:form id="editForm">
             <p:panel header="Email for pass reset letter" style="width: 500px;">

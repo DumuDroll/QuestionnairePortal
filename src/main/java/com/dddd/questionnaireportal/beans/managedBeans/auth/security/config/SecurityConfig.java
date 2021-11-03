@@ -61,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public TokenBasedRememberMeServices tokenBasedRememberMeServices(){
-        TokenBasedRememberMeServices services = new TokenBasedRememberMeServices("jsf-spring-security", userDetailsService());
+        TokenBasedRememberMeServices services = new TokenBasedRememberMeServices("jsf-spring-security",
+                userDetailsService());
         services.setCookieName("remember-me");
         return services;
     }

@@ -48,7 +48,8 @@ public class ChangePasswordMB {
     }
 
     public void change() {
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
         User user = UserService.findByEmail(myUserDetails.getUsername());
         if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
             if (newPassword.equals(newPassConfirm)) {

@@ -13,7 +13,10 @@ public class UserMB {
     public String getFullName() {
         String fullName;
         try{
-            MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                    .getAuthentication().getPrincipal();
+
             fullName =  myUserDetails.getFirstName() + " " +
                     myUserDetails.getLastName();
        } catch (NullPointerException npe){

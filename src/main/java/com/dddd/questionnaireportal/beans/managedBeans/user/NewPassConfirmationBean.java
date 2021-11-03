@@ -1,12 +1,9 @@
 package com.dddd.questionnaireportal.beans.managedBeans.user;
 
-import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
 import com.dddd.questionnaireportal.database.service.UserActivationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
