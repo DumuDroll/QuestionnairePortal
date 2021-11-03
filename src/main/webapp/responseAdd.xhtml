@@ -17,7 +17,6 @@
     <div id="centeredDivResponseAdd">
             <h:form id="form">
                 <p:panel header="Questionnaire" style="width: 330px">
-                    <p:growl id="msg" showDetail="true"></p:growl>
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
                             <div class="field">
                                 <p:column rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
@@ -68,7 +67,8 @@
                                 and response.field.active==true}" styleClass="responseAddColumn">
                                     <p:outputLabel for="button" value="#{response.field.label}"/>
                                     <br></br>
-                                    <p:calendar id="button" value="#{response.date}" showOn="button">
+                                    <p:calendar required="#{response.field.required}" id="button"
+                                                value="#{response.date}" showOn="button">
                                         <f:convertDateTime pattern="dd.MM.yyyy"></f:convertDateTime>
                                     </p:calendar>
                                 </p:column>

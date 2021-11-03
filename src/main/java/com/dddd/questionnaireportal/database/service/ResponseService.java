@@ -12,18 +12,20 @@ import java.util.*;
 
 public class ResponseService {
 
-    public static List<Response> findAll(){
+    public static List<Response> findAll() {
         return ResponseDAO.findAll();
     }
 
-    public static void saveResponsesAndSendThemViaWebsocket(List<Response> responses){
+    public static void saveResponsesAndSendThemViaWebsocket(List<Response> responses) {
         Map<String, String> responseMap = new HashMap<>();
         UUID responsePerUser = UUID.randomUUID();
         SimpleDateFormat formatter2 = new SimpleDateFormat("dd MMM yyy", Locale.ENGLISH);
         responses.forEach(response -> {
             if (response.getField().getType() == Type.DATE) {
-                response.setResponse(formatter2.format(response.getDate()));
-                response.setDate(null);
+                if (response.getDate() != null) {
+                    response.setResponse(formatter2.format(response.getDate()));
+                    response.setDate(null);
+                }
             }
             response.setResponsePerUser(responsePerUser);
             SaverHelperDAO.save(response);
