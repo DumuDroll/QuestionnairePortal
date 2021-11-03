@@ -22,6 +22,9 @@
                     <p:password id="password" value="#{loginMB.password}" feedback="false"></p:password>
                     <p:spacer></p:spacer>
                     <p:message for="password"></p:message>
+                    <p:outputLabel value="Remember me"></p:outputLabel>
+                    <h:selectBooleanCheckbox id="remember-me" value="#{loginMB.rememberMe}">
+                    </h:selectBooleanCheckbox>
                     <p:link value="Forgot your password?" outcome="forgotPass"/>
                     <p:spacer></p:spacer>
                     <p:commandButton action="#{loginMB.logIn}" value="Login" ajax="true" update="loginForm">

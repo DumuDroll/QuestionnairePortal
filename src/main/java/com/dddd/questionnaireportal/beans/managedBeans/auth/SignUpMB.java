@@ -10,10 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.mail.MessagingException;
 import javax.validation.constraints.Email;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 
 @ManagedBean
 @RequestScoped

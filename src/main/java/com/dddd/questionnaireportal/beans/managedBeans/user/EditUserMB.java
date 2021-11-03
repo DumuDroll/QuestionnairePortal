@@ -38,6 +38,6 @@ public class EditUserMB {
         FacesContext.getCurrentInstance().addMessage(
                 null,
                 new FacesMessage(FacesMessage.SEVERITY_WARN,
-                        "Your profile info has been updated", ""));
+                        "Your profile info has been updated", "Refresh page to see the changes"));
     }
 }

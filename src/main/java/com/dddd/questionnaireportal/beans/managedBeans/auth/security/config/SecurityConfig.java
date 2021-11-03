@@ -13,7 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
 @EnableWebSecurity
@@ -52,25 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    @Bean("AuthenticationManager")
+    @Bean("authenticationManager")
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers("/javax.faces.resource/**",
-//                "/resources/**",
-//                "/login",
-//                "/signUp",
-//                "/",
-//                "/newPassConfirm",
-//                "/passChangeActivation",
-//                "/registrationActivation",
-//                "/success",
-//                "/forgotPass");
-//    }
+    @Bean
+    public TokenBasedRememberMeServices tokenBasedRememberMeServices(){
+        TokenBasedRememberMeServices services = new TokenBasedRememberMeServices("jsf-spring-security", userDetailsService());
+        services.setCookieName("remember-me");
+        return services;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -80,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .disable()
                 .addFilterAfter(
-                        new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                        new AuthorizationFilter(), RememberMeAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/javax.faces.resource/**",
                 "/resources/**",
@@ -93,7 +87,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/success",
                 "/forgotPass").anonymous()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .rememberMe()
+                .userDetailsService(userDetailsService());
 
     }
 }

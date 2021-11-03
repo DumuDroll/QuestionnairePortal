@@ -1,6 +1,7 @@
 package com.dddd.questionnaireportal.beans.managedBeans.auth;
 
 
+import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.entity.User;
@@ -9,10 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.web.jsf.FacesContextUtils;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +23,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @ManagedBean
@@ -30,12 +35,16 @@ public class LoginMB {
 
     private String email;
     private String password;
+    private boolean rememberMe;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenBasedRememberMeServices rememberMeServices;
+
     @PostConstruct
-    public void init(){
+    public void init() {
         FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
                 .getAutowireCapableBeanFactory().autowireBean(this);
     }
@@ -56,14 +65,36 @@ public class LoginMB {
         this.email = email;
     }
 
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
+
     public void logIn() {
         User user = UserService.findByEmail(email);
-        if (user!=null) {
+        if (user != null) {
             if (user.isActive()) {
                 if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
+                    Authentication authentication;
+                    UsernamePasswordAuthenticationToken authenticationToken = new
+                            UsernamePasswordAuthenticationToken(email, password);
+                    authentication = authenticationManager.authenticate(authenticationToken);
+                    if (rememberMe) {
+                        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+                        RememberMeAuthenticationToken rememberMeAuthenticationToken = new RememberMeAuthenticationToken(
+                                "jsf-spring-security", userDetails,
+                                userDetails.getAuthorities());
+                        HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequest();
+                        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext
+                                .getCurrentInstance().getExternalContext().getResponse();
+                        rememberMeServices.loginSuccess(httpServletRequest, httpServletResponse,
+                                rememberMeAuthenticationToken);
+                    }
                     try {
-                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken( email, password );
-                        Authentication authentication = authenticationManager.authenticate(authenticationToken);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     } catch (Exception e) {
                         logger.catching(e);
@@ -71,7 +102,7 @@ public class LoginMB {
                     }
                     try {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
-                    } catch (IOException e){
+                    } catch (IOException e) {
                         logger.catching(e);
                     }
                 } else {
@@ -88,7 +119,7 @@ public class LoginMB {
                                 "Account Is Not Activated!",
                                 "Please Confirm Registration!"));
             }
-        }else {
+        } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -99,9 +130,9 @@ public class LoginMB {
 
     public void logOut() {
         SecurityContextHolder.getContext().setAuthentication(null);
-        try{
+        try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.RESPONSE_ADD_URL);
-        }catch (IOException e){
+        } catch (IOException e) {
             logger.catching(e);
         }
 
