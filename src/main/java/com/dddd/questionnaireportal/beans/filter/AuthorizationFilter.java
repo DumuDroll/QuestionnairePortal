@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.beans.filter;
 
+import com.dddd.questionnaireportal.common.contants.Constants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,13 +25,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             if (authentication.isAuthenticated()) {
                 filterChain.doFilter(httpServletRequest, httpServletResponse);
             } else {
-                httpServletResponse.sendRedirect("/login");
+                httpServletResponse.sendRedirect(Constants.LOGIN_URL);
             }
         } else {
             if (pageInFreeAccess) {
                 filterChain.doFilter(httpServletRequest, httpServletResponse);
             } else {
-                httpServletResponse.sendRedirect("/login");
+                httpServletResponse.sendRedirect(Constants.LOGIN_URL);
             }
         }
     }

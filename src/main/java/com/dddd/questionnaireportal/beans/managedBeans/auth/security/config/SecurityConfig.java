@@ -77,12 +77,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         new AuthorizationFilter(), RememberMeAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/javax.faces.resource/**",
-                "/resources/**",
-                "/login",
+                "/resources/**").permitAll()
+                .antMatchers("/login",
                 "/signUp",
                 "/",
-                "/newPassConfirm",
-                "/passChangeActivation",
+                "/newPassConfirmation",
                 "/registrationActivation",
                 "/success",
                 "/forgotPass").anonymous()

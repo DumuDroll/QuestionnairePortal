@@ -4,6 +4,7 @@ public class Constants {
 
     public static final String DELETE_OPTIONS_BY_ID = "FieldsOption.deleteOptionsById";
     public static final String FIELDS_URL = "fields";
+    public static final String LOGIN_URL = "/login";
     public static final String TRUE = "true";
     public static final String FALSE = "false";
     public static final String EMAIL = "email";

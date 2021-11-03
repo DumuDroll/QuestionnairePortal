@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <ui:fragment rendered="#{passChangeActivationBean.valid}">
-        <meta http-equiv="refresh" content="3;url=login"/>
+        <meta http-equiv="refresh" content="3;url=fields"/>
     </ui:fragment>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
@@ -15,7 +15,7 @@
             <p:growl life="3000"/>
             <h:panelGroup layout="block" rendered="#{passChangeActivationBean.valid}">
                 <h:outputText value="Your password change is confirmed!"></h:outputText>
-                <h:outputText value="You will be redirected to a login page in a 3 seconds"></h:outputText>
+                <h:outputText value="You will be redirected to a fields page in a 3 seconds"></h:outputText>
             </h:panelGroup>
             <h:panelGroup layout="block" rendered="#{!passChangeActivationBean.valid}">
                         <h:outputText value="Your confirmation link is already expired,

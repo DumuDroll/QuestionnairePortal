@@ -23,7 +23,7 @@
     </url-mapping>
 
     <url-mapping id="newPassConfirm">
-        <pattern value="/newPassConfirm"/>
+        <pattern value="/newPassConfirmation"/>
         <view-id value="/newPassConfirmation.xhtml"/>
     </url-mapping>
 
@@ -50,6 +50,11 @@
     <url-mapping id="userEdit">
         <pattern value="/editUser"/>
         <view-id value="/secured/user/userEdit.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="newPass">
+        <pattern value="/newPass"/>
+        <view-id value="/secured/user/newPass.xhtml"/>
     </url-mapping>
 
     <url-mapping id="passChange">

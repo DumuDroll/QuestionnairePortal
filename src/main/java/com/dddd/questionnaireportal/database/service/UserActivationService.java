@@ -1,6 +1,5 @@
 package com.dddd.questionnaireportal.database.service;
 
-import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.MyUserDetails;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import com.dddd.questionnaireportal.common.util.date.DateHelper;
@@ -9,10 +8,9 @@ import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
 import com.dddd.questionnaireportal.database.entity.User;
 import com.dddd.questionnaireportal.database.entity.UserActivation;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.UUID;
 
@@ -57,7 +55,6 @@ public class UserActivationService {
         if (date.compareTo(userActivation.getForgotPassExpireDate()) <= 0) {
             userActivation.setForgotPassExpireDate(date);
             SaverHelperDAO.update(userActivation);
-            //TO DO
             return true;
         }
         return false;

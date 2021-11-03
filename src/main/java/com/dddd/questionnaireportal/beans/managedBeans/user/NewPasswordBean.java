@@ -46,7 +46,7 @@ public class NewPasswordBean {
         if (newPassword.equals(newPassConfirm)) {
             UserService.updateUserForPassReset(user, newPassword);
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../fields/fieldList.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
             }catch (IOException e){
                 logger.catching(e);
             }
