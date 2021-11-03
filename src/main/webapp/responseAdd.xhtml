@@ -16,7 +16,7 @@
     </ui:insert>
     <div id="centeredDivResponseAdd">
             <h:form id="form">
-                <p:panel header="Questionnaire" style="width: 330px;">
+                <p:panel header="Questionnaire" style="width: 330px">
                     <p:growl id="msg" showDetail="true"></p:growl>
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
                             <div class="field">
@@ -39,7 +39,8 @@
                                     <p:outputLabel for="radio" value="#{response.field.label}"></p:outputLabel>
                                     <br></br>
                                     <p:selectOneRadio id="radio" value="#{response.response}"
-                                                      required="#{response.field.required}">
+                                                      required="#{response.field.required}"
+                                                      layout="responsive" columns="2">
                                         <f:selectItems value="#{response.field.options}" var="option"
                                                        itemLabel="#{option.option}"
                                                        itemValue="#{option.option}"/>
@@ -73,11 +74,12 @@
                                 </p:column>
                             </div>
                     </p:repeat>
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
+                                     update="form" process="form">
+                        <p:resetInput target="form"/>
+                    </p:commandButton>
                 </p:panel>
-                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
-                                 update="form" process="form">
-                    <p:resetInput target="form"/>
-                </p:commandButton>
+
             </h:form>
     </div>
 </h:body>
