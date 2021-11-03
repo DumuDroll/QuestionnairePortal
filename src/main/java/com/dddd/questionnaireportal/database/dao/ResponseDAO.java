@@ -42,7 +42,9 @@ public class ResponseDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Response.class);
-            responses = criteria.addOrder(Order.asc("id")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            criteria.addOrder(Order.asc("id"));
+            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            responses = criteria.list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

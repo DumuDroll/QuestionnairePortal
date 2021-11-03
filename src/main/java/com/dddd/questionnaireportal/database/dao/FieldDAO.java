@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,11 @@ public class FieldDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
-            fields = criteria
-                    .addOrder(Order.asc("id"))
-                    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+            criteria.createAlias("options", "o", JoinType.LEFT_OUTER_JOIN);
+            criteria.addOrder(Order.asc("id"));
+            criteria.addOrder(Order.asc("o.id"));
+            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            fields = criteria.list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -61,10 +64,10 @@ public class FieldDAO {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
-            fields = criteria.addOrder(Order.asc("id")).
-                    add(Restrictions.eq("active", true)).
-                    setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).
-                    list();
+            criteria.addOrder(Order.asc("id"));
+            criteria.add(Restrictions.eq("active", true));
+            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            fields = criteria.list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
