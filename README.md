@@ -1,6 +1,6 @@
 # QuestionnairePortal
 
-####Stack:
+#### Stack:
 
 - Java 13
 - Hibernate 5
@@ -10,7 +10,7 @@
 - PostgreSQL 11
 - Spring Security 5
 
-####To run:
+#### To run:
 
 Maven clean package and place .war into your web server\
 Don't forget to change domain_address constant to yours domain
