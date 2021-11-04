@@ -22,9 +22,6 @@ public class Response implements Serializable {
 
     private UUID responsePerUser;
 
-    @Transient
-    private Date date;
-
     @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
     @JsonBackReference
     private Field field;
@@ -69,11 +66,4 @@ public class Response implements Serializable {
         this.responsePerUser = responsePerUser;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

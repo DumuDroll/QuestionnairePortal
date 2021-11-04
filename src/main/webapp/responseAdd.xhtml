@@ -68,8 +68,8 @@
                                     <p:outputLabel for="button" value="#{response.field.label}"/>
                                     <br/>
                                     <p:calendar required="#{response.field.required}" id="button"
-                                                value="#{response.date}" showOn="button">
-                                        <f:convertDateTime pattern="dd.MM.yyyy"/>
+                                                value="#{response.response}" showOn="button"
+                                                converter="MyDateConverter" pattern="dd MMM yyyy">
                                     </p:calendar>
                                 </p:column>
                             </div>

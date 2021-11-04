@@ -9,4 +9,9 @@
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
     </application>
+
+    <converter>
+        <converter-id>MyDateConverter</converter-id>
+        <converter-class>com.dddd.questionnaireportal.common.util.date.MyDateConverter</converter-class>
+    </converter>
 </faces-config>
