@@ -23,7 +23,7 @@ public class UserActivationService {
         userActivation.setPassChangeExpireDate(DateHelper.currentDatePlusOneDay());
         userActivation.setNewPass(MD5Util.getSecurePassword(newPass));
         EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT,
-                "Confirm password change on a link: http://localhost:8080/passChangeActivation?key="
+                "Confirm password change on a link:" + Constants.DOMAIN_ADDRESS + "passChangeActivation?key="
                 + userActivation.getUuid());
         update(userActivation);
     }
@@ -47,7 +47,7 @@ public class UserActivationService {
         userActivation.setForgotPassExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.update(userActivation);
         EmailUtil.sendEmail(user.getEmail(), "Questionnaire Portal: new password",
-                "http://localhost:8080/newPassConfirmation?key=" + userActivation.getUuid());
+                Constants.DOMAIN_ADDRESS+"newPassConfirmation?key=" + userActivation.getUuid());
     }
 
     public static boolean updateForNewPassConfirmation(UserActivation userActivation) {
