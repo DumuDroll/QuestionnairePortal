@@ -1,6 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans.auth.security.config;
 
-import com.dddd.questionnaireportal.beans.filter.AuthorizationFilter;
+import com.dddd.questionnaireportal.common.filter.AuthorizationFilter;
 import com.dddd.questionnaireportal.beans.managedBeans.auth.security.userDetails.UserDetailsServiceImpl;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
 import org.springframework.context.annotation.Bean;

@@ -12,8 +12,9 @@ public class SaverHelperDAO {
 
     public static void save(Object entity) {
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
@@ -22,13 +23,18 @@ public class SaverHelperDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     public static void update(Object entity) {
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.merge(entity);
             transaction.commit();
@@ -37,6 +43,10 @@ public class SaverHelperDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

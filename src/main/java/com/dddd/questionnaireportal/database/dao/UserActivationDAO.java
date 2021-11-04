@@ -17,8 +17,9 @@ public class UserActivationDAO {
     public static UserActivation findByUUID(String uuid) {
         UserActivation result = null;
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(UserActivation.class)
                     .add(Restrictions.like("uuid", uuid));
@@ -29,6 +30,10 @@ public class UserActivationDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return result;
     }

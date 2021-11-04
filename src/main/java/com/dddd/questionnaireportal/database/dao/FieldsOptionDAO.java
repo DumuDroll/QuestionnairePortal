@@ -15,8 +15,9 @@ public class FieldsOptionDAO {
 
     public static void deleteOptionsByField(Field field) {
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Query query = session.createNamedQuery(Constants.DELETE_OPTIONS_BY_ID);
             query.setParameter("field", field);
@@ -27,6 +28,10 @@ public class FieldsOptionDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

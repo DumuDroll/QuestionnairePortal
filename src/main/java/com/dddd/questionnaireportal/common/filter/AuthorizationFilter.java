@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.beans.filter;
+package com.dddd.questionnaireportal.common.filter;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import org.springframework.security.core.Authentication;

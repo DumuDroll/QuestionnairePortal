@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.database.entity;
 
+import com.dddd.questionnaireportal.common.enums.Type;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

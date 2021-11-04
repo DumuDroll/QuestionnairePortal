@@ -2,10 +2,9 @@ package com.dddd.questionnaireportal.beans.managedBeans.fields;
 
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.FieldsOption;
-import com.dddd.questionnaireportal.database.entity.Type;
+import com.dddd.questionnaireportal.common.enums.Type;
 import com.dddd.questionnaireportal.database.service.FieldService;
 import com.dddd.questionnaireportal.database.service.FieldsOptionService;
-import org.primefaces.PrimeFaces;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -67,7 +66,6 @@ public class FieldListMB {
         FieldService.deleteField(selectedField.getId());
         fields.remove(selectedField);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Field Removed"));
-        PrimeFaces.current().ajax().update("form:messages", "form:fields");
     }
 
     public void openNew() {
@@ -95,8 +93,6 @@ public class FieldListMB {
             FieldService.updateField(selectedField);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Field Updated"));
         }
-        PrimeFaces.current().executeScript("PF('manageFieldDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:fields");
     }
 
     public void addOptionsToField() {

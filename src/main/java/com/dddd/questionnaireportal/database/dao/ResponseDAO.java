@@ -18,8 +18,9 @@ public class ResponseDAO {
 
     public static void update(Response entity) {
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Response persistedEntity = session.find(Response.class, entity.getId());
             persistedEntity.setResponse(entity.getResponse());
@@ -31,6 +32,10 @@ public class ResponseDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -38,8 +43,9 @@ public class ResponseDAO {
     public static List<Response> findAll() {
         List<Response> responses = new ArrayList<>();
         Transaction transaction = null;
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Response.class);
             criteria.addOrder(Order.asc("id"));
@@ -51,6 +57,10 @@ public class ResponseDAO {
                 transaction.rollback();
             }
             logger.catching(e);
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return responses;
     }

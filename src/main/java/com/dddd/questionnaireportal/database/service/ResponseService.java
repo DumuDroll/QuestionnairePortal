@@ -4,7 +4,7 @@ import com.dddd.questionnaireportal.common.util.wsmessageUtil.MessageSenderUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.ResponseDAO;
 import com.dddd.questionnaireportal.database.entity.Response;
-import com.dddd.questionnaireportal.database.entity.Type;
+import com.dddd.questionnaireportal.common.enums.Type;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;

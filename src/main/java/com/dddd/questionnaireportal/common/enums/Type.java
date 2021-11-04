@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.database.entity;
+package com.dddd.questionnaireportal.common.enums;
 
 public enum Type {
 
@@ -11,7 +11,7 @@ public enum Type {
 
     private final String label;
 
-    private Type(String label) {
+    Type(String label) {
         this.label = label;
     }
 

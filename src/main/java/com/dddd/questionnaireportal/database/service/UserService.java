@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public static void updateUser(User user) {
-        UserDAO.update(user);
+        SaverHelperDAO.update(user);
     }
 
     public static void updateUserForPassReset(User user, String newPass) {
@@ -45,5 +45,5 @@ public class UserService {
         UserActivation userActivation = user.getUserActivation();
         userActivation.setUuid(UUID.randomUUID().toString());
         SaverHelperDAO.update(userActivation);
-        UserDAO.update(user);    }
+        SaverHelperDAO.update(user);    }
 }
