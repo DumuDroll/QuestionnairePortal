@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Edit profile</title>
@@ -15,7 +16,7 @@
     <div id="centeredDiv">
         <h:form id="editForm">
             <p:panel header="Edit Profile" style="width: 500px;">
-                <p:messages showDetail="true"/>
+                <p:messages skipDetailIfEqualsSummary="true" showDetail="true"/>
                 <h:panelGrid columns="2">
 
                     <p:outputLabel value="FirstName:"/>
@@ -25,10 +26,16 @@
                     <p:inputText id="lastName" value="#{editUserMB.user.lastName}"/>
 
                     <p:outputLabel value="Email:"/>
-                    <p:inputText id="email" value="#{editUserMB.user.email}" label="UserName"/>
-
+                    <p:inputText id="email" value="#{editUserMB.user.email}" label="UserName"
+                                 validatorMessage="It is not a valid email.">
+                        <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
+                    </p:inputText>
                     <p:outputLabel value="Phone number:"/>
-                    <p:inputText id="phoneNumber" value="#{editUserMB.user.phoneNumber}"/>
+                    <p:inputText id="phoneNumber" value="#{editUserMB.user.phoneNumber}"
+                                 validatorMessage="It is not a valid phone number.">
+                        <f:validateRegex pattern="^(\+)?([ 0-9]){10,16}$"/>
+                    </p:inputText>
+
 
                     <p:outputLabel value=""/>
                     <p:commandButton action="#{editUserMB.edit}" value="SAVE" update="editForm"/>

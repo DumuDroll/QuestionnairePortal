@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Login page</title>
     <h:outputStylesheet library="css" name="style.css"/>
@@ -12,25 +13,28 @@
             <p:growl showDetail="true" life="3000"/>
             <p:panel header="Login" style="width: 250px;">
                 <h:panelGrid id="loginPanel" columns="1">
-                    <p:inputText id="username" placeholder="Email" value="#{loginMB.email}"></p:inputText>
-                    <p:message for="username"></p:message>
+                    <p:message for="username"/>
+                    <p:inputText id="username" placeholder="Email" value="#{loginMB.email}"
+                                 validatorMessage="It is not a valid email.">
+                        <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
+                    </p:inputText>
+                    <p:message for="username"/>
                     <p:password id="password" placeholder="Password" value="#{loginMB.password}"
-                                feedback="false"></p:password>
-                    <p:message for="password"></p:message>
+                                feedback="false"/>
+                    <p:message for="password"/>
                 </h:panelGrid>
                 <h:panelGrid id="loginPanel2" columns="2">
-                    <p:outputLabel value="Remember me"></p:outputLabel>
+                    <p:outputLabel value="Remember me"/>
                     <h:selectBooleanCheckbox id="remember-me" value="#{loginMB.rememberMe}">
                     </h:selectBooleanCheckbox>
                     <p:link value="Forgot your password?" outcome="forgotPass"/>
                 </h:panelGrid>
                 <h:panelGrid id="loginPanel3" columns="1">
-                    <p:spacer></p:spacer>
+                    <p:spacer/>
                     <p:commandButton action="#{loginMB.logIn}" value="Login" ajax="true" update="loginForm">
                     </p:commandButton>
-                    <p:spacer></p:spacer>
-                    <p:outputLabel value="Not registered yet?"></p:outputLabel><p:link value="Sign Up"
-                                                                                       outcome="signUp"/>
+                    <p:spacer/>
+                    <p:outputLabel value="Not registered yet?"/><p:link value="Sign Up" outcome="signUp"/>
 
                 </h:panelGrid>
             </p:panel>

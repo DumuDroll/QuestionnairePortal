@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Registration</title>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
-<div id="centeredDiv">
-    <h:form id="signUpForm">
-        <p:panel header="Sign Up" style="width: 250px;">
-            <p:growl showDetail="true" life="3000"/>
-            <h:panelGrid columns="1">
-                <p:inputText id="email" placeholder="Email" required="true" value="#{signUpMB.email}"/>
+    <div id="centeredDiv">
+        <h:form id="signUpForm">
+            <p:panel header="Sign Up" style="width: 250px;">
+                <p:growl showDetail="true" life="9000" rendered="#{not facesContext.validationFailed}"/>
+                <h:panelGrid columns="1">
+                    <p:message for="email"/>
+                    <p:inputText id="email" placeholder="Email" required="true" value="#{signUpMB.email}"
+                                 validatorMessage="It is not a valid email.">
+                        <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
+                    </p:inputText>
+                    <p:password id="password" placeholder="Password" value="#{signUpMB.password}" required="true"/>
 
-                <p:password id="password" placeholder="Password"  value="#{signUpMB.password}" required="true"/>
+                    <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}"
+                                required="true"/>
 
-                <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}"
-                            required="true"/>
+                    <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" required="true"/>
 
-                <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" required="true"/>
+                    <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}" required="true"/>
 
-                <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}" required="true"/>
+                    <p:message for="phoneNumber"/>
+                    <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpMB.phoneNumber}"
+                                 validatorMessage="It is not a valid phone number.">
+                        <f:validateRegex pattern="^(\+)?([ 0-9]){10,16}$"/>
+                    </p:inputText>
 
-                <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpMB.phoneNumber}"/>
-
-                <p:outputLabel value=""/>
-                <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>
-                <p:spacer></p:spacer>
-                <p:outputLabel value="Already have an account?"></p:outputLabel>
-                <p:link value="Log In" outcome="login"/>
-            </h:panelGrid>
-        </p:panel>
-    </h:form>
-</div>
+                    <p:outputLabel value=""/>
+                    <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>
+                    <p:spacer/>
+                    <p:outputLabel value="Already have an account?"/>
+                    <p:link value="Log In" outcome="login"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </div>
 </h:body>
 </html>
