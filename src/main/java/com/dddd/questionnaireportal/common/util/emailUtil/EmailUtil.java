@@ -16,20 +16,18 @@ public class EmailUtil {
     private static final Logger logger = LogManager.getLogger();
 
     private static final String SENDER_USERNAME = "studyloaddocs@gmail.com";
-    private static final String SENDER_PASSWORD = "rT7un34Lm5";
+    private static final String SENDER_PASSWORD = "kytttjlniejtdeeh";
 
     public static void sendEmail(String toAddress, String subject, String message) {
 
         // sets SMTP server properties
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "25");
+        properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.auth", Constants.TRUE);
         properties.put("mail.debug", Constants.TRUE);
-        properties.put("mail.smtp.starttls.enable", Constants.TRUE);
-        properties.put("mail.smtp.EnableSSL.enable", Constants.TRUE);
+        properties.put("mail.smtp.ssl.checkserveridentity", Constants.TRUE);
         properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.setProperty("mail.smtp.socketFactory.fallback", Constants.FALSE);
         properties.setProperty("mail.smtp.socketFactory.port", "465");
 
         // creates a new session with an authenticator
@@ -52,7 +50,7 @@ public class EmailUtil {
             // sends the e-mail
             Transport.send(msg);
         } catch (MessagingException mex) {
-            mex.printStackTrace();
+            logger.catching(mex);
         }
     }
 }

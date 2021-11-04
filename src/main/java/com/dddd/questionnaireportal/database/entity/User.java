@@ -28,7 +28,7 @@ public class User implements Serializable {
 
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JoinColumn(
             name="id", unique=true, nullable=false, updatable=false)
     private UserActivation userActivation;
