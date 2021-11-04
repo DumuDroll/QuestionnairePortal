@@ -13,15 +13,16 @@
         <p:panel header="Sign Up" style="width: 250px;">
             <p:growl showDetail="true" life="3000"/>
             <h:panelGrid columns="1">
-                <p:inputText id="email" placeholder="Email" value="#{signUpMB.email}" label="UserName"/>
+                <p:inputText id="email" placeholder="Email" required="true" value="#{signUpMB.email}"/>
 
-                <p:password id="password" placeholder="Password" value="#{signUpMB.password}" label="Password"/>
+                <p:password id="password" placeholder="Password"  value="#{signUpMB.password}" required="true"/>
 
-                <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}" label="Password"/>
+                <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}"
+                            required="true"/>
 
-                <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" label="FirstName"/>
+                <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" required="true"/>
 
-                <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}"/>
+                <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}" required="true"/>
 
                 <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpMB.phoneNumber}"/>
 

@@ -1,4 +1,4 @@
-const host = "ws://localhost:8080/responsesWS";
+const host = "wss://dddd-questionnaire-portal.herokuapp.com/responsesWS";
 const wSocket = new WebSocket(host);
 const browserSupport = ("WebSocket" in window);
 

@@ -25,7 +25,7 @@ public class UserService {
         userActivation.setConfirmationExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.save(userActivation);
         EmailUtil.sendEmail(user.getEmail(), Constants.USER_REGISTRATION_SUBJECT,
-                Constants.USER_ACTIVATION_LINK + uuid);
+                "Activate account on a link:" + Constants.DOMAIN_ADDRESS + "registrationActivation?key=" + uuid);
     }
 
     public static void updateActivationLink(User user) {
@@ -33,7 +33,7 @@ public class UserService {
         userActivation.setConfirmationExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.update(userActivation);
         EmailUtil.sendEmail(user.getEmail(), Constants.USER_REGISTRATION_SUBJECT,
-                Constants.USER_ACTIVATION_LINK + userActivation.getUuid());
+                "Activate account on a link:" + Constants.DOMAIN_ADDRESS + "registrationActivation?key=" + userActivation.getUuid());
     }
 
     public static void updateUser(User user) {
