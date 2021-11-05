@@ -14,27 +14,32 @@
     <ui:insert name="divTop">
         <ui:include src="/topUnauth.xhtml"/>
     </ui:insert>
-    <div id="centeredDivResponseAdd">
             <h:form id="form">
-                <p:panel header="Questionnaire" style="width: 330px">
+                <p:panel header="Questionnaire" width="90%">
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
                             <div class="field">
-                                <p:column rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
-                                and response.field.active==true}" styleClass="responseAddColumn">
+                                <p:panel rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
+                                and response.field.active==true}" styleClass="responseAddColumn"
+                                          style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="inputText" value="#{response.field.label}"/>
                                     <br/>
                                     <p:inputText id="inputText" value="#{response.response}"
                                                  required="#{response.field.required}"/>
-                                </p:column>
-                                <p:column rendered="#{response.field.type == 'MULTILINE_TEXT'
-                                and response.field.active==true}" styleClass="responseAddColumn">
+                                </p:panel>
+                                <p:panel rendered="#{response.field.type == 'MULTILINE_TEXT'
+                                and response.field.active==true}" styleClass="responseAddColumn"
+                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="inputTA" value="#{response.field.label}"/>
                                     <br/>
                                     <p:inputTextarea id="inputTA" value="#{response.response}"
                                                      required="#{response.field.required}"/>
-                                </p:column>
-                                <p:column rendered="#{response.field.type == 'RADIO_BUTTON'
-                                 and response.field.active==true}" styleClass="responseAddColumn">
+                                </p:panel>
+                                <p:panel rendered="#{response.field.type == 'RADIO_BUTTON'
+                                 and response.field.active==true}" styleClass="responseAddColumn"
+                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="radio" value="#{response.field.label}"/>
                                     <br/>
                                     <p:selectOneRadio id="radio" value="#{response.response}"
@@ -44,17 +49,21 @@
                                                        itemLabel="#{option.option}"
                                                        itemValue="#{option.option}"/>
                                     </p:selectOneRadio>
-                                </p:column>
-                                <p:column rendered="#{response.field.type == 'CHECKBOX'
-                                 and response.field.active==true}" styleClass="responseAddColumn">
+                                </p:panel>
+                                <p:panel rendered="#{response.field.type == 'CHECKBOX'
+                                 and response.field.active==true}" styleClass="responseAddColumn"
+                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="checkbox" value="#{response.field.label}"/>
                                     <br/>
                                     <p:selectBooleanCheckbox id="checkbox" value="#{response.response}"
                                                              required="#{response.field.required}">
                                     </p:selectBooleanCheckbox>
-                                </p:column>
-                                <p:column rendered="#{response.field.type == 'COMBOBOX'
-                                 and response.field.active==true}" styleClass="responseAddColumn">
+                                </p:panel>
+                                <p:panel rendered="#{response.field.type == 'COMBOBOX'
+                                 and response.field.active==true}" styleClass="responseAddColumn"
+                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="combobox" value="#{response.field.label}"/>
                                     <br/>
                                     <p:selectOneMenu id="combobox" value="#{response.response}"
@@ -62,16 +71,18 @@
                                         <f:selectItems value="#{response.field.options}" var="option"
                                                        itemValue="#{option.option}" itemLabel="#{option.option}"/>
                                     </p:selectOneMenu>
-                                </p:column>
-                                <p:column rendered="#{response.field.type == 'DATE'
-                                and response.field.active==true}" styleClass="responseAddColumn">
+                                </p:panel>
+                                <p:panel rendered="#{response.field.type == 'DATE'
+                                and response.field.active==true}" styleClass="responseAddColumn"
+                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="button" value="#{response.field.label}"/>
                                     <br/>
                                     <p:calendar required="#{response.field.required}" id="button"
                                                 value="#{response.response}" showOn="button"
                                                 converter="MyDateConverter" pattern="dd MMM yyyy">
                                     </p:calendar>
-                                </p:column>
+                                </p:panel>
                             </div>
                     </p:repeat>
                     <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
@@ -81,6 +92,5 @@
                 </p:panel>
 
             </h:form>
-    </div>
 </h:body>
 </html>

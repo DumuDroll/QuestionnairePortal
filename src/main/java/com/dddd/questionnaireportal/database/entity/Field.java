@@ -21,6 +21,12 @@ public class Field implements Serializable {
 
     private String label;
 
+    private String ui_id;
+
+    private String positionTop;
+
+    private String positionLeft;
+
     private boolean required;
 
     private boolean active;
@@ -102,6 +108,30 @@ public class Field implements Serializable {
 
     public void setResponses(List<Response> responses) {
         this.responses = responses;
+    }
+
+    public String getUi_id() {
+        return ui_id;
+    }
+
+    public void setUi_id(String ui_id) {
+        this.ui_id = ui_id;
+    }
+
+    public String getPositionTop() {
+        return positionTop;
+    }
+
+    public void setPositionTop(String positionTop) {
+        this.positionTop = positionTop;
+    }
+
+    public String getPositionLeft() {
+        return positionLeft;
+    }
+
+    public void setPositionLeft(String positionLeft) {
+        this.positionLeft = positionLeft;
     }
 
     @Override

@@ -29,6 +29,9 @@
 #responseAddColumn{
     padding-bottom: 4px;
 }
+#fieldsPanel{
+    width: 270px;
+}
 .ui-growl {
     left: 40%;
     position: fixed;

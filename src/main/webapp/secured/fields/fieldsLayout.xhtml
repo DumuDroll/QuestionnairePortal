@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Fields Layout</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript name="draggablePosition.js"/>
+</h:head>
+<h:body>
+    <ui:insert name="divTop">
+        <ui:include src="/secured/top.xhtml"/>
+    </ui:insert>
+
+    <p:commandButton id="pnlBtn" value="Block Panel" type="button" onclick="PF('blockT').show()"
+                     styleClass="p-mt-5 p-mr-2"/>
+    <p:commandButton id="wqe" value="unBlock Panel" type="button" onclick="PF('blockT').hide()"
+                     styleClass="p-mt-5 p-mr-2"/>
+    <h:form id="form">
+        <p:panel id="layout" header="Fields Layout" width="90%">
+            <p:repeat id="repeat" value="#{fieldsLayoutBean.fields}" var="field">
+                <p:panel id="iText" rendered="#{field.type == 'SINGLE_LINE_TEXT'
+                                and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="inputText" value="#{field.label}"/>
+                    <br/>
+                    <p:inputText id="inputText" disabled="true"/>
+                    <p:blockUI block="iText" widgetVar="blockT">
+                        <h:outputText value="Please wait..."/>
+                    </p:blockUI>
+                </p:panel>
+                <p:draggable snap="true" for="iText" grid="20,40" stack=".fieldPanel" containment="parent"/>
+
+
+                <p:panel id="TextA" rendered="#{field.type == 'MULTILINE_TEXT'
+                                and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="inputTA" value="#{field.label}"/>
+                    <br/>
+                    <p:inputTextarea id="inputTA" disabled="true"/>
+                </p:panel>
+                <p:draggable snap="true" for="TextA" grid="20,40" stack=".fieldPanel" containment="parent"/>
+
+                <p:panel id="Radio" rendered="#{field.type == 'RADIO_BUTTON'
+                                 and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="radio" value="#{field.label}"/>
+                    <br/>
+                    <p:selectOneRadio id="radio" layout="responsive" columns="2" disabled="true">
+                        <f:selectItems value="#{field.options}" var="option"
+                                       itemLabel="#{option.option}"
+                                       itemValue="#{option.option}"/>
+                    </p:selectOneRadio>
+                </p:panel>
+                <p:draggable snap="true" for="Radio" grid="20,40" stack=".fieldPanel" containment="parent"/>
+
+                <p:panel id="check" rendered="#{field.type == 'CHECKBOX'
+                                 and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="checkbox" value="#{field.label}"/>
+                    <br/>
+                    <p:selectBooleanCheckbox id="checkbox" disabled="true">
+                    </p:selectBooleanCheckbox>
+                </p:panel>
+                <p:draggable snap="true" for="check" grid="20,40" stack=".fieldPanel" containment="parent"/>
+
+                <p:panel id="combo" rendered="#{field.type == 'COMBOBOX'
+                                 and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="combobox" value="#{field.label}"/>
+                    <br/>
+                    <p:selectOneMenu disabled="true" id="combobox">
+                        <f:selectItems value="#{field.options}" var="option"
+                                       itemValue="#{option.option}" itemLabel="#{option.option}"/>
+                    </p:selectOneMenu>
+                </p:panel>
+                <p:draggable snap="true" for="combo" grid="20,40" stack=".fieldPanel" containment="parent"/>
+
+                <p:panel id="cDate" rendered="#{field.type == 'DATE'
+                                and field.active==true}" style="width: 280px; top: #{field.positionTop}px;
+                                left: #{field.positionLeft}px" styleClass="fieldPanel">
+                    <p:outputLabel for="button" value="#{field.label}"/>
+                    <br/>
+                    <p:calendar id="button" showOn="button" disabled="true"
+                                converter="MyDateConverter" pattern="dd MMM yyyy">
+                    </p:calendar>
+                </p:panel>
+                <p:draggable snap="true" for="cDate" grid="20,40" stack=".fieldPanel" containment="parent"/>
+            </p:repeat>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:commandButton id="setDefault" value="Set default layout"
+                                     actionListener="#{fieldsLayoutBean.setDefault}"
+                                     update="@form" process="@this"
+                                     styleClass="p-mt-5 p-mr-2"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:menu>
+                        <p:menuitem icon="pi pi-times" value="Cancel" url="/fields"/>
+                    </p:menu>
+                    <p:menu>
+                        <p:menuitem icon="pi pi-check" value="Save" action="#{fieldsLayoutBean.save}"
+                                    update=":form:layout" process="@this" id="buttonId"/>
+                    </p:menu>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <f:facet name="footer">
+
+            </f:facet>
+            <p:droppable for="layout">
+                <p:ajax listener="#{fieldsLayoutBean.onDrop}"/>
+            </p:droppable>
+        </p:panel>
+    </h:form>
+
+</h:body>
+</html>

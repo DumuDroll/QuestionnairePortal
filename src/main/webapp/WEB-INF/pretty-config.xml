@@ -67,6 +67,12 @@
         <view-id value="/secured/fields/fieldList.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="fieldsLayout">
+        <pattern value="/fieldsLayout"/>
+        <view-id value="/secured/fields/fieldsLayout.xhtml"/>
+    </url-mapping>
+
+
     <url-mapping id="responseList">
         <pattern value="/responses"/>
         <view-id value="/secured/responses/responsesList.xhtml"/>

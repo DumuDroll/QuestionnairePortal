@@ -27,6 +27,9 @@
                                      styleClass="p-mr-2">
                         <p:resetInput target=":form:manage-field"/>
                     </p:commandButton>
+                    <p:menu>
+                        <p:menuitem icon="pi pi-table" value="Fields layout" url="/fieldsLayout"/>
+                    </p:menu>
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -65,7 +68,7 @@
                 </p:column>
             </p:dataTable>
 
-            <p:dialog widgetVar="manageFieldDialog" header="Add Field" modal="true">
+            <p:dialog id="fieldAdd" widgetVar="manageFieldDialog" header="Add Field" modal="true">
                 <p:outputPanel id="manage-field" class="ui-fluid">
                     <p:outputPanel rendered="#{not empty fieldListMB.selectedField}">
                         <div class="p-field">
@@ -115,10 +118,12 @@
             <p:confirmDialog widgetVar="deleteFieldDialog" showEffect="fade" width="300"
                              message="Delete the product?" header="Confirm" severity="warn">
                 <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{fieldListMB.deleteField}"
-                                 process="@this" update="form:messages form:fields" oncomplete="PF('deleteFieldDialog').hide()"/>
+                                 process="@this" update="form:messages form:fields"
+                                 oncomplete="PF('deleteFieldDialog').hide()"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
                                  onclick="PF('deleteFieldDialog').hide()"/>
             </p:confirmDialog>
+
         </div>
     </h:form>
 
