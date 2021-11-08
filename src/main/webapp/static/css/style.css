@@ -29,8 +29,8 @@
 #responseAddColumn{
     padding-bottom: 4px;
 }
-#fieldsPanel{
-    width: 270px;
+.fieldsPanel{
+    width: 280px;
 }
 .ui-growl {
     left: 40%;
