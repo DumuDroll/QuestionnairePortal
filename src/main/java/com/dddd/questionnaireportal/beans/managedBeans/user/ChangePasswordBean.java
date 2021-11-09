@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class ChangePasswordMB {
+public class ChangePasswordBean {
 
     private String password;
 

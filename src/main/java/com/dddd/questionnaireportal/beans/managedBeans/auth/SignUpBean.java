@@ -14,7 +14,7 @@ import javax.validation.constraints.Email;
 
 @ManagedBean
 @RequestScoped
-public class SignUpMB {
+public class SignUpBean {
 
     @Email(message = "must be a valid email")
     private String email;

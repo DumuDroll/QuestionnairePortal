@@ -23,8 +23,8 @@
         <p:panel id="layout" header="Fields Layout" width="90%">
             <p:growl showDetail="true" life="9000"/>
             <p:repeat id="repeat" value="#{fieldsLayoutBean.fields}" var="field">
-                <p:panel id="iText" rendered="#{field.type == 'SINGLE_LINE_TEXT'
-                                and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="iText" rendered="#{fieldsLayoutBean.singleLineText(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="inputText" value="#{field.label}"/>
                     <br/>
@@ -33,8 +33,8 @@
                 <p:draggable stack=".fieldsPanel" snap="true" for="iText" grid="20,40" containment="parent"/>
 
 
-                <p:panel id="TextA" rendered="#{field.type == 'MULTILINE_TEXT'
-                                and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="TextA" rendered="#{fieldsLayoutBean.multiLineText(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="inputTA" value="#{field.label}"/>
                     <br/>
@@ -42,8 +42,8 @@
                 </p:panel>
                 <p:draggable stack=".fieldsPanel" snap="true" for="TextA" grid="20,40" containment="parent"/>
 
-                <p:panel id="Radio" rendered="#{field.type == 'RADIO_BUTTON'
-                                 and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="Radio" rendered="#{fieldsLayoutBean.radioButton(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="radio" value="#{field.label}"/>
                     <br/>
@@ -55,8 +55,8 @@
                 </p:panel>
                 <p:draggable stack=".fieldsPanel" snap="true" for="Radio" grid="20,40" containment="parent"/>
 
-                <p:panel id="check" rendered="#{field.type == 'CHECKBOX'
-                                 and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="check" rendered="#{fieldsLayoutBean.checkbox(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="checkbox" value="#{field.label}"/>
                     <br/>
@@ -65,8 +65,8 @@
                 </p:panel>
                 <p:draggable stack=".fieldsPanel" snap="true" for="check" grid="20,40" containment="parent"/>
 
-                <p:panel id="combo" rendered="#{field.type == 'COMBOBOX'
-                                 and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="combo" rendered="#{fieldsLayoutBean.combobox(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="combobox" value="#{field.label}"/>
                     <br/>
@@ -77,8 +77,8 @@
                 </p:panel>
                 <p:draggable stack=".fieldsPanel" snap="true" for="combo" grid="20,40" containment="parent"/>
 
-                <p:panel id="cDate" rendered="#{field.type == 'DATE'
-                                and field.active==true}" style="top: #{field.fieldUiDimensions.positionTop}px;
+                <p:panel id="cDate" rendered="#{fieldsLayoutBean.date(field)}"
+                         style="top: #{field.fieldUiDimensions.positionTop}px;
                                 left: #{field.fieldUiDimensions.positionLeft}px" styleClass="fieldsPanel">
                     <p:outputLabel for="button" value="#{field.label}"/>
                     <br/>

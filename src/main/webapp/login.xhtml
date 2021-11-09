@@ -14,24 +14,24 @@
             <p:panel header="Login" style="width: 250px;">
                 <h:panelGrid id="loginPanel" columns="1">
                     <p:message for="username"/>
-                    <p:inputText id="username" placeholder="Email" value="#{loginMB.email}"
+                    <p:inputText id="username" placeholder="Email" value="#{loginBean.email}"
                                  validatorMessage="It is not a valid email.">
                         <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
                     </p:inputText>
                     <p:message for="username"/>
-                    <p:password id="password" placeholder="Password" value="#{loginMB.password}"
+                    <p:password id="password" placeholder="Password" value="#{loginBean.password}"
                                 feedback="false"/>
                     <p:message for="password"/>
                 </h:panelGrid>
                 <h:panelGrid id="loginPanel2" columns="2">
                     <p:outputLabel value="Remember me"/>
-                    <h:selectBooleanCheckbox id="remember-me" value="#{loginMB.rememberMe}">
+                    <h:selectBooleanCheckbox id="remember-me" value="#{loginBean.rememberMe}">
                     </h:selectBooleanCheckbox>
                     <p:link value="Forgot your password?" outcome="forgotPass"/>
                 </h:panelGrid>
                 <h:panelGrid id="loginPanel3" columns="1">
                     <p:spacer/>
-                    <p:commandButton action="#{loginMB.logIn}" value="Login" ajax="true" update="loginForm">
+                    <p:commandButton action="#{loginBean.logIn}" value="Login" ajax="true" update="loginForm">
                     </p:commandButton>
                     <p:spacer/>
                     <p:outputLabel value="Not registered yet?"/><p:link value="Sign Up" outcome="signUp"/>

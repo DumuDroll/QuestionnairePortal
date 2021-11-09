@@ -20,16 +20,16 @@
                 <h:panelGrid columns="2">
 
                     <p:outputLabel value="Current Password:"/>
-                    <p:inputText id="currentPass" type="password" value="#{changePasswordMB.password}"/>
+                    <p:inputText id="currentPass" type="password" value="#{changePasswordBean.password}"/>
 
                     <p:outputLabel value="New Password:"/>
-                    <p:inputText id="newPass" type="password" value="#{changePasswordMB.newPassword}"/>
+                    <p:inputText id="newPass" type="password" value="#{changePasswordBean.newPassword}"/>
 
                     <p:outputLabel value="Repeat New Password:"/>
-                    <p:inputText id="newPassConfirm" type="password" value="#{changePasswordMB.newPassConfirm}"/>
+                    <p:inputText id="newPassConfirm" type="password" value="#{changePasswordBean.newPassConfirm}"/>
 
                     <p:outputLabel value=""/>
-                    <p:commandButton action="#{changePasswordMB.change}" value="CHANGE" update="changePassForm"/>
+                    <p:commandButton action="#{changePasswordBean.change}" value="CHANGE" update="changePassForm"/>
                 </h:panelGrid>
             </p:panel>
         </h:form>

@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class EditUserMB {
+public class EditUserBean {
     private User user;
 
     @PostConstruct

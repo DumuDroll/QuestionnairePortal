@@ -22,7 +22,7 @@
             <p:toolbar>
                 <p:toolbarGroup/>
                 <p:toolbarGroup align="right">
-                    <p:commandButton value="ADD FIELD" icon="pi pi-plus" actionListener="#{fieldListMB.openNew}"
+                    <p:commandButton value="ADD FIELD" icon="pi pi-plus" actionListener="#{fieldListBean.openNew}"
                                      update=":form:manage-field" oncomplete="PF('manageFieldDialog').show()"
                                      styleClass="p-mr-2">
                         <p:resetInput target=":form:manage-field"/>
@@ -33,7 +33,7 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:dataTable id="fields" var="field" value="#{fieldListMB.fields}"
+            <p:dataTable id="fields" var="field" value="#{fieldListBean.fields}"
                          reflow="true" rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                          currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -58,49 +58,49 @@
                                      oncomplete="PF('manageFieldDialog').show()"
                                      styleClass="edit-button rounded-button ui-button-success"
                                      process="@this">
-                        <f:setPropertyActionListener value="#{field}" target="#{fieldListMB.selectedField}"/>
+                        <f:setPropertyActionListener value="#{field}" target="#{fieldListBean.selectedField}"/>
                         <p:resetInput target=":form:manage-field"/>
                     </p:commandButton>
                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
                                      oncomplete="PF('deleteFieldDialog').show()">
-                        <f:setPropertyActionListener value="#{field}" target="#{fieldListMB.selectedField}"/>
+                        <f:setPropertyActionListener value="#{field}" target="#{fieldListBean.selectedField}"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
 
             <p:dialog id="fieldAdd" widgetVar="manageFieldDialog" header="Add Field" modal="true">
                 <p:outputPanel id="manage-field" class="ui-fluid">
-                    <p:outputPanel rendered="#{not empty fieldListMB.selectedField}">
+                    <p:outputPanel rendered="#{not empty fieldListBean.selectedField}">
                         <div class="p-field">
                             <p:outputLabel for="label" value="Label:"/>
-                            <p:inputText id="label" value="#{fieldListMB.selectedField.label}"/>
+                            <p:inputText id="label" value="#{fieldListBean.selectedField.label}"/>
                         </div>
                         <div class="p-field">
                             <p:outputLabel for="type" value="Type:"/>
-                            <p:selectOneMenu id="type" value="#{fieldListMB.selectedField.type}">
-                                <f:selectItems value="#{fieldListMB.types}" var="type"
+                            <p:selectOneMenu id="type" value="#{fieldListBean.selectedField.type}">
+                                <f:selectItems value="#{fieldListBean.types}" var="type"
                                                itemValue="#{type}" itemLabel="#{type.label}"/>
                                 <p:ajax event="change" update=":form:ta-options"/>
                             </p:selectOneMenu>
                         </div>
                         <div class="p-field">
                             <p:outputPanel id="ta-options">
-                                <p:outputPanel rendered="#{fieldListMB.selectedField.type eq 'COMBOBOX'
-                            || fieldListMB.selectedField.type eq 'RADIO_BUTTON'}">
+                                <p:outputPanel rendered="#{fieldListBean.selectedField.type eq 'COMBOBOX'
+                            || fieldListBean.selectedField.type eq 'RADIO_BUTTON'}">
                                     <p:outputLabel value="Options:"/>
                                     <p:inputTextarea id="options" rows="6" cols="33"
-                                                     value="#{fieldListMB.options}"/>
+                                                     value="#{fieldListBean.options}"/>
                                 </p:outputPanel>
                             </p:outputPanel>
                         </div>
                         <div class="p-formgrid p-grid">
                             <div class="p-field p-col">
                                 <p:outputLabel value="Required"/>
-                                <p:selectBooleanCheckbox value="#{fieldListMB.selectedField.required}"/>
+                                <p:selectBooleanCheckbox value="#{fieldListBean.selectedField.required}"/>
                             </div>
                             <div class="p-field p-col">
                                 <p:outputLabel value="Active"/>
-                                <p:selectBooleanCheckbox value="#{fieldListMB.selectedField.active}"/>
+                                <p:selectBooleanCheckbox value="#{fieldListBean.selectedField.active}"/>
                             </div>
                         </div>
                     </p:outputPanel>
@@ -108,7 +108,7 @@
                 <f:facet name="footer">
                     <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageFieldDialog').hide()"
                                      class="ui-button-secondary"/>
-                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{fieldListMB.save}"
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{fieldListBean.save}"
                                      update=":form:manage-field form:messages form:fields"
                                      process=":form:manage-field @this" oncomplete="PF('manageFieldDialog').hide()">
                     </p:commandButton>
@@ -117,7 +117,7 @@
 
             <p:confirmDialog widgetVar="deleteFieldDialog" showEffect="fade" width="300"
                              message="Delete the product?" header="Confirm" severity="warn">
-                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{fieldListMB.deleteField}"
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{fieldListBean.deleteField}"
                                  process="@this" update="form:messages form:fields"
                                  oncomplete="PF('deleteFieldDialog').hide()"/>
                 <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"

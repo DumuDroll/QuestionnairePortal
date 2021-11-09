@@ -16,7 +16,7 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class FieldListMB {
+public class FieldListBean {
 
     private static final String OPTIONS_REGEX = "\\r?\\n";
 

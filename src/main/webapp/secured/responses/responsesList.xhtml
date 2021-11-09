@@ -18,21 +18,21 @@
         <h:form id="form">
             <p:growl id="messages" showDetail="true"/>
 
-            <p:remoteCommand name="rc" update="dt-responses" action="#{responseListMB.addRow}"/>
+            <p:remoteCommand name="rc" update="dt-responses" action="#{responseListBean.addRow}"/>
 
             <p:dataTable id="dt-responses" widgetVar="responses"
-                         value="#{responseListMB.rows}" var="row" rows="10" paginator="true"
+                         value="#{responseListBean.rows}" var="row" rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                          currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                          rowsPerPageTemplate="5,10,{ShowAll|'All'}" paginatorPosition="bottom">>
                 <p:columnGroup type="header">
                     <p:row>
-                        <ui:repeat value="#{responseListMB.columns}" var="column">
+                        <ui:repeat value="#{responseListBean.columns}" var="column">
                             <p:column headerText="#{column}"/>
                         </ui:repeat>
                     </p:row>
                 </p:columnGroup>
-                <p:columns value="#{responseListMB.columns}" var="column">
+                <p:columns value="#{responseListBean.columns}" var="column">
                     #{empty row[column]?'N/A':row[column]}
                 </p:columns>
             </p:dataTable>

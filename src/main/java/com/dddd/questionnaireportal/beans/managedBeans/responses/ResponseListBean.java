@@ -15,7 +15,7 @@ import java.util.*;
 
 @ManagedBean
 @ViewScoped
-public class ResponseListMB {
+public class ResponseListBean {
 
     private List<Response> responses;
     private List<String> columns = new ArrayList<>();
@@ -56,13 +56,13 @@ public class ResponseListMB {
     }
 
     public void addRow() {
-        Map<String, Object> map1;
+        Map<String, Object> responsesThruWS;
         Gson gson = new Gson();
         String json = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
-        map1 = gson.fromJson(json,
+        responsesThruWS = gson.fromJson(json,
                 new TypeToken<HashMap<String, Object>>() {
                 }.getType());
-        getRows().add(map1);
+        getRows().add(responsesThruWS);
     }
 
     public List<String> getColumns() {

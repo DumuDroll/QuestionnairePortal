@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 @SessionScoped
 @ManagedBean
-public class UserMB {
+public class UserBean {
 
     public String getFullName() {
         String fullName;

@@ -16,15 +16,13 @@
     </ui:insert>
     <h:form id="form">
         <p:panel header="Questionnaire" width="90%">
-            <p:repeat value="#{responsesAddMB.responses}" var="response">
-                <p:panel rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
-                                and response.field.active==true}" styleClass="fieldsPanel"
+            <p:repeat value="#{responsesAddBean.responses}" var="response">
+                <p:panel rendered="#{responsesAddBean.singleLineText(response.field)}" styleClass="fieldsPanel"
                          style="top: #{response.field.fieldUiDimensions.positionTop}px;
                                 left: #{response.field.fieldUiDimensions.positionLeft}px; position: relative">
                     <p:outputLabel for="inputText" value="#{response.field.label}"/>
                     <br/>
-                    <p:inputText id="inputText" value="#{response.response}"
-                                 required="#{response.field.required}"/>
+                    <p:inputText id="inputText" value="#{responsesAddBean.multiLineText(response.field)}"/>
                 </p:panel>
                 <p:panel rendered="#{response.field.type == 'MULTILINE_TEXT'
                                 and response.field.active==true}" styleClass="fieldsPanel"
@@ -35,8 +33,7 @@
                     <p:inputTextarea id="inputTA" value="#{response.response}"
                                      required="#{response.field.required}"/>
                 </p:panel>
-                <p:panel rendered="#{response.field.type == 'RADIO_BUTTON'
-                                 and response.field.active==true}" styleClass="fieldsPanel"
+                <p:panel rendered="#{responsesAddBean.radioButton(response.field)}" styleClass="fieldsPanel"
                          style="top: #{response.field.fieldUiDimensions.positionTop}px;
                                 left: #{response.field.fieldUiDimensions.positionLeft}px; position: relative">
                     <p:outputLabel for="radio" value="#{response.field.label}"/>
@@ -49,8 +46,7 @@
                                        itemValue="#{option.option}"/>
                     </p:selectOneRadio>
                 </p:panel>
-                <p:panel rendered="#{response.field.type == 'CHECKBOX'
-                                 and response.field.active==true}" styleClass="fieldsPanel"
+                <p:panel rendered="#{responsesAddBean.checkbox(response.field)}" styleClass="fieldsPanel"
                          style="top: #{response.field.fieldUiDimensions.positionTop}px;
                                 left: #{response.field.fieldUiDimensions.positionLeft}px; position: relative">
                     <p:outputLabel for="checkbox" value="#{response.field.label}"/>
@@ -59,8 +55,7 @@
                                              required="#{response.field.required}">
                     </p:selectBooleanCheckbox>
                 </p:panel>
-                <p:panel rendered="#{response.field.type == 'COMBOBOX'
-                                 and response.field.active==true}" styleClass="fieldsPanel"
+                <p:panel rendered="#{responsesAddBean.combobox(response.field)}" styleClass="fieldsPanel"
                          style="top: #{response.field.fieldUiDimensions.positionTop}px;
                                 left: #{response.field.fieldUiDimensions.positionLeft}px; position: relative">
                     <p:outputLabel for="combobox" value="#{response.field.label}"/>
@@ -71,8 +66,7 @@
                                        itemValue="#{option.option}" itemLabel="#{option.option}"/>
                     </p:selectOneMenu>
                 </p:panel>
-                <p:panel rendered="#{response.field.type == 'DATE'
-                                and response.field.active==true}" styleClass="fieldsPanel"
+                <p:panel rendered="#{responsesAddBean.date(response.field)}" styleClass="fieldsPanel"
                          style="top: #{response.field.fieldUiDimensions.positionTop}px;
                                 left: #{response.field.fieldUiDimensions.positionLeft}px; position: relative">
                     <p:outputLabel for="button" value="#{response.field.label}"/>
@@ -87,7 +81,7 @@
             </p:repeat>
             <p:toolbar>
                 <p:toolbarGroup align="left">
-                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddBean.save}"
                                      update="form" process="form">
                         <p:resetInput target="form"/>
                     </p:commandButton>

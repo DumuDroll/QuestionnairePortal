@@ -1,5 +1,6 @@
 package com.dddd.questionnaireportal.beans.managedBeans.responses;
 
+import com.dddd.questionnaireportal.common.enums.Type;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.Response;
 import com.dddd.questionnaireportal.database.service.FieldService;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class ResponsesAddMB {
+public class ResponsesAddBean {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -49,6 +50,24 @@ public class ResponsesAddMB {
         }
     }
 
+    public boolean singleLineText(Field field){
+        return (field.isActive() && field.getType().equals(Type.SINGLE_LINE_TEXT));
+    }
+    public boolean multiLineText(Field field){
+        return (field.isActive() && field.getType().equals(Type.MULTILINE_TEXT));
+    }
+    public boolean radioButton(Field field){
+        return (field.isActive() && field.getType().equals(Type.RADIO_BUTTON));
+    }
+    public boolean checkbox(Field field){
+        return (field.isActive() && field.getType().equals(Type.CHECKBOX));
+    }
+    public boolean combobox(Field field){
+        return (field.isActive() && field.getType().equals(Type.COMBOBOX));
+    }
+    public boolean date(Field field){
+        return (field.isActive() && field.getType().equals(Type.DATE));
+    }
     public List<Response> getResponses() {
         return responses;
     }

@@ -29,7 +29,7 @@ import java.io.IOException;
 @SuppressWarnings("SpringJavaAutowiredMembersInspection")
 @ManagedBean
 @RequestScoped
-public class LoginMB {
+public class LoginBean {
 
     private static final Logger logger = LogManager.getLogger();
 

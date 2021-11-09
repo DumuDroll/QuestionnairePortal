@@ -1,6 +1,7 @@
 package com.dddd.questionnaireportal.beans.managedBeans.fields;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
+import com.dddd.questionnaireportal.common.enums.Type;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.FieldUiDimensions;
@@ -135,6 +136,25 @@ public class FieldsLayoutBean {
         rectangle.x = (int) Double.parseDouble(field.getFieldUiDimensions().getPositionLeftForCollision());
         rectangle.y = (int) Double.parseDouble(field.getFieldUiDimensions().getPositionTopForCollision());
         return rectangle;
+    }
+
+    public boolean singleLineText(Field field){
+        return (field.isActive() && field.getType().equals(Type.SINGLE_LINE_TEXT));
+    }
+    public boolean multiLineText(Field field){
+        return (field.isActive() && field.getType().equals(Type.MULTILINE_TEXT));
+    }
+    public boolean radioButton(Field field){
+        return (field.isActive() && field.getType().equals(Type.RADIO_BUTTON));
+    }
+    public boolean checkbox(Field field){
+        return (field.isActive() && field.getType().equals(Type.CHECKBOX));
+    }
+    public boolean combobox(Field field){
+        return (field.isActive() && field.getType().equals(Type.COMBOBOX));
+    }
+    public boolean date(Field field){
+        return (field.isActive() && field.getType().equals(Type.DATE));
     }
 
     static class ItemDTO {

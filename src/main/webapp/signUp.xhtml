@@ -15,27 +15,27 @@
                 <p:growl showDetail="true" life="9000" rendered="#{not facesContext.validationFailed}"/>
                 <h:panelGrid columns="1">
                     <p:message for="email"/>
-                    <p:inputText id="email" placeholder="Email" required="true" value="#{signUpMB.email}"
+                    <p:inputText id="email" placeholder="Email" required="true" value="#{signUpBean.email}"
                                  validatorMessage="It is not a valid email.">
                         <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
                     </p:inputText>
-                    <p:password id="password" placeholder="Password" value="#{signUpMB.password}" required="true"/>
+                    <p:password id="password" placeholder="Password" value="#{signUpBean.password}" required="true"/>
 
-                    <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpMB.passwordConfirm}"
+                    <p:password id="confirmPassword" placeholder="Confirm Password" value="#{signUpBean.passwordConfirm}"
                                 required="true"/>
 
-                    <p:inputText id="firstName" placeholder="First Name" value="#{signUpMB.firstName}" required="true"/>
+                    <p:inputText id="firstName" placeholder="First Name" value="#{signUpBean.firstName}" required="true"/>
 
-                    <p:inputText id="lastName" placeholder="Last Name" value="#{signUpMB.lastName}" required="true"/>
+                    <p:inputText id="lastName" placeholder="Last Name" value="#{signUpBean.lastName}" required="true"/>
 
                     <p:message for="phoneNumber"/>
-                    <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpMB.phoneNumber}"
+                    <p:inputText id="phoneNumber" placeholder="Phone Number" value="#{signUpBean.phoneNumber}"
                                  validatorMessage="It is not a valid phone number.">
                         <f:validateRegex pattern="^(\+)?([ 0-9]){10,16}$"/>
                     </p:inputText>
 
                     <p:outputLabel value=""/>
-                    <p:commandButton action="#{signUpMB.signUp()}" value="SignUp" update="signUpForm"/>
+                    <p:commandButton action="#{signUpBean.signUp()}" value="SignUp" update="signUpForm"/>
                     <p:spacer/>
                     <p:outputLabel value="Already have an account?"/>
                     <p:link value="Log In" outcome="login"/>

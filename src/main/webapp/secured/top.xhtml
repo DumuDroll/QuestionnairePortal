@@ -19,10 +19,10 @@
                     <p:menuitem value="Responses" url="/responses"/>
                 </p:menu>
                 <h:form>
-                    <p:menuButton value="#{userMB.getFullName()}">
+                    <p:menuButton value="#{userBean.getFullName()}">
                         <p:menuitem value="Edit Profile" url="/editUser"/>
                         <p:menuitem value="Change Password" url="/changePassword"/>
-                        <p:menuitem value="Log Out" action="#{loginMB.logOut()}"/>
+                        <p:menuitem value="Log Out" action="#{loginBean.logOut()}"/>
                     </p:menuButton>
                 </h:form>
             </p:toolbarGroup>
