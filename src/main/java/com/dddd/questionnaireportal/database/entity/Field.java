@@ -24,8 +24,14 @@ public class Field implements Serializable {
     private String ui_id;
 
     private String positionTop;
+    private String positionTopForCollision;
 
     private String positionLeft;
+    private String positionLeftForCollision;
+
+    private String width;
+
+    private String height;
 
     private boolean required;
 
@@ -132,6 +138,38 @@ public class Field implements Serializable {
 
     public void setPositionLeft(String positionLeft) {
         this.positionLeft = positionLeft;
+    }
+
+    public String getPositionTopForCollision() {
+        return positionTopForCollision;
+    }
+
+    public void setPositionTopForCollision(String positionTopForCollision) {
+        this.positionTopForCollision = positionTopForCollision;
+    }
+
+    public String getPositionLeftForCollision() {
+        return positionLeftForCollision;
+    }
+
+    public void setPositionLeftForCollision(String positionLeftForCollision) {
+        this.positionLeftForCollision = positionLeftForCollision;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
     }
 
     @Override
