@@ -1,6 +1,6 @@
 function getDimensionsInJson() {
     let jsonObj = [];
-    $(".fieldsPanel").each(function(element, index) {
+    $(".fieldsPanel").each(function() {
 
         const width = $(this).width();
         const height = $(this).height();
@@ -10,8 +10,8 @@ function getDimensionsInJson() {
         let item = {}
         item ["width"] = width;
         item ["height"] = height;
-        item ["positionTop"] = positionTop;
-        item ["positionLeft"] = positionLeft;
+        item ["positionTopForCollision"] = positionTop;
+        item ["positionLeftForCollision"] = positionLeft;
 
         jsonObj.push(item);
     });

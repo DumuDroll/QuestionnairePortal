@@ -17,7 +17,6 @@
             <h:form id="form">
                 <p:panel header="Questionnaire" width="90%">
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
-                            <div class="field">
                                 <p:panel rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
                                 and response.field.active==true}" styleClass="responseAddColumn"
                                           style="width: 280px; top: #{response.field.positionTop}px;
@@ -83,12 +82,15 @@
                                                 converter="MyDateConverter" pattern="dd MMM yyyy">
                                     </p:calendar>
                                 </p:panel>
-                            </div>
                     </p:repeat>
-                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
-                                     update="form" process="form">
-                        <p:resetInput target="form"/>
-                    </p:commandButton>
+                   <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="Save" icon="pi pi-check" actionListener="#{responsesAddMB.save}"
+                                         update="form" process="form">
+                            <p:resetInput target="form"/>
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                   </p:toolbar>
                 </p:panel>
 
             </h:form>

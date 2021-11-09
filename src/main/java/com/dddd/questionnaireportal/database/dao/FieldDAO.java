@@ -77,7 +77,9 @@ public class FieldDAO {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
+            criteria.createAlias("options", "o", JoinType.LEFT_OUTER_JOIN);
             criteria.addOrder(Order.asc("id"));
+            criteria.addOrder(Order.asc("o.id"));
             criteria.add(Restrictions.eq("active", true));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             fields = criteria.list();

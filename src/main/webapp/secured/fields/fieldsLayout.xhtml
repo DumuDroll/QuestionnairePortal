@@ -30,7 +30,7 @@
                     <br/>
                     <p:inputText id="inputText" disabled="true"/>
                 </p:panel>
-                <p:draggable snap="true" for="iText" grid="20,40" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="iText" grid="20,40" containment="parent"/>
 
 
                 <p:panel id="TextA" rendered="#{field.type == 'MULTILINE_TEXT'
@@ -40,7 +40,7 @@
                     <br/>
                     <p:inputTextarea id="inputTA" disabled="true"/>
                 </p:panel>
-                <p:draggable snap="true" for="TextA" grid="20,40" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="TextA" grid="20,40" containment="parent"/>
 
                 <p:panel id="Radio" rendered="#{field.type == 'RADIO_BUTTON'
                                  and field.active==true}" style="top: #{field.positionTop}px;
@@ -53,7 +53,7 @@
                                        itemValue="#{option.option}"/>
                     </p:selectOneRadio>
                 </p:panel>
-                <p:draggable snap="true" for="Radio" grid="20,40" stack=".fieldsPanel" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="Radio" grid="20,40" containment="parent"/>
 
                 <p:panel id="check" rendered="#{field.type == 'CHECKBOX'
                                  and field.active==true}" style="top: #{field.positionTop}px;
@@ -63,7 +63,7 @@
                     <p:selectBooleanCheckbox id="checkbox" disabled="true">
                     </p:selectBooleanCheckbox>
                 </p:panel>
-                <p:draggable snap="true" for="check" grid="20,40" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="check" grid="20,40" containment="parent"/>
 
                 <p:panel id="combo" rendered="#{field.type == 'COMBOBOX'
                                  and field.active==true}" style="top: #{field.positionTop}px;
@@ -75,7 +75,7 @@
                                        itemValue="#{option.option}" itemLabel="#{option.option}"/>
                     </p:selectOneMenu>
                 </p:panel>
-                <p:draggable snap="true" for="combo" grid="20,40" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="combo" grid="20,40" containment="parent"/>
 
                 <p:panel id="cDate" rendered="#{field.type == 'DATE'
                                 and field.active==true}" style="top: #{field.positionTop}px;
@@ -86,7 +86,7 @@
                                 converter="MyDateConverter" pattern="dd MMM yyyy">
                     </p:calendar>
                 </p:panel>
-                <p:draggable snap="true" for="cDate" grid="20,40" containment="parent"/>
+                <p:draggable stack=".fieldsPanel" snap="true" for="cDate" grid="20,40" containment="parent"/>
             </p:repeat>
             <p:toolbar>
                 <p:toolbarGroup align="left">

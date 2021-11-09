@@ -21,24 +21,26 @@ public class Field implements Serializable {
 
     private String label;
 
-    private String ui_id;
-
-    private String positionTop;
-    private String positionTopForCollision;
-
-    private String positionLeft;
-    private String positionLeftForCollision;
-
-    private String width;
-
-    private String height;
-
     private boolean required;
 
     private boolean active;
 
     @Enumerated(EnumType.ORDINAL)
     private Type type;
+
+    private String ui_id;
+
+    private String positionTop;
+
+    private String positionTopForCollision;
+
+    private String positionLeft;
+
+    private String positionLeftForCollision;
+
+    private String width;
+
+    private String height;
 
     @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -132,20 +134,20 @@ public class Field implements Serializable {
         this.positionTop = positionTop;
     }
 
-    public String getPositionLeft() {
-        return positionLeft;
-    }
-
-    public void setPositionLeft(String positionLeft) {
-        this.positionLeft = positionLeft;
-    }
-
     public String getPositionTopForCollision() {
         return positionTopForCollision;
     }
 
     public void setPositionTopForCollision(String positionTopForCollision) {
         this.positionTopForCollision = positionTopForCollision;
+    }
+
+    public String getPositionLeft() {
+        return positionLeft;
+    }
+
+    public void setPositionLeft(String positionLeft) {
+        this.positionLeft = positionLeft;
     }
 
     public String getPositionLeftForCollision() {
