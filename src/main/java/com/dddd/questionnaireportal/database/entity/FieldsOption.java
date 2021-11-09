@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "options")
+@NamedQuery(name="FieldsOption.deleteOptionsById", query = "delete from FieldsOption where field = :field")
 public class FieldsOption implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,7 +18,7 @@ public class FieldsOption implements Serializable {
 
     private String option;
 
-    @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     private Field field;
 

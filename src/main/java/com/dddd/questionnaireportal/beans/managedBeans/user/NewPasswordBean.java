@@ -24,6 +24,27 @@ public class NewPasswordBean {
 
     private String newPassConfirm;
 
+    public void change() {
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
+        User user = UserService.findByEmail(myUserDetails.getUsername());
+        if (getNewPassword().equals(getNewPassConfirm())) {
+            UserService.updateUserForPassReset(user, getNewPassword());
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
+            } catch (IOException e) {
+                logger.catching(e);
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            Constants.PASSWORDS_DONT_MATCH,
+                            Constants.TRY_AGAIN));
+        }
+    }
+
     public String getNewPassword() {
         return newPassword;
     }
@@ -38,26 +59,5 @@ public class NewPasswordBean {
 
     public void setNewPassConfirm(String newPassConfirm) {
         this.newPassConfirm = newPassConfirm;
-    }
-
-    public void change() {
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-
-        User user = UserService.findByEmail(myUserDetails.getUsername());
-        if (newPassword.equals(newPassConfirm)) {
-            UserService.updateUserForPassReset(user, newPassword);
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(Constants.FIELDS_URL);
-            }catch (IOException e){
-                logger.catching(e);
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            Constants.PASSWORDS_DONT_MATCH,
-                            Constants.TRY_AGAIN));
-        }
     }
 }

@@ -22,7 +22,7 @@ public class Response implements Serializable {
 
     private UUID responsePerUser;
 
-    @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     private Field field;
 

@@ -17,10 +17,22 @@ public class EditUserMB {
     private User user;
 
     @PostConstruct
-    private void init(){
+    private void init() {
         MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        user = UserService.findByEmail(myUserDetails.getUsername());
+        setUser(UserService.findByEmail(myUserDetails.getUsername()));
+    }
+
+    public void edit() {
+        UserService.updateUser(getUser());
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        myUserDetails.setFirstName(getUser().getFirstName());
+        myUserDetails.setLastName(getUser().getLastName());
+        FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "Your profile info has been updated", "Refresh page to see the changes"));
     }
 
     public User getUser() {
@@ -29,17 +41,5 @@ public class EditUserMB {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void edit() {
-        UserService.updateUser(user);
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-        myUserDetails.setFirstName(user.getFirstName());
-        myUserDetails.setLastName(user.getLastName());
-        FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_WARN,
-                        "Your profile info has been updated", "Refresh page to see the changes"));
     }
 }

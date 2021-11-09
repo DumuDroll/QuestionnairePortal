@@ -16,29 +16,29 @@ public class ForgotPassBean {
 
     private String email;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void sendResetPassLetter(){
-        User user = UserService.findByEmail(email);
-        if(user!=null){
+    public void sendResetPassLetter() {
+        User user = UserService.findByEmail(getEmail());
+        if (user != null) {
             UserActivationService.updateForForgotPassLetter(user);
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             Constants.EMAIL_SENT,
                             null));
-        }else {
+        } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             Constants.NO_USER_WITH_THIS_EMAIL,
                             Constants.TRY_AGAIN));
         }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

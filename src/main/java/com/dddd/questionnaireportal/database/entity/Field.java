@@ -30,7 +30,7 @@ public class Field implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
-    private FieldUiDimensions fieldUiDimensions;
+    private FieldUiDimensions fieldUiDimensions = new FieldUiDimensions();
 
     @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -40,10 +40,6 @@ public class Field implements Serializable {
     @JsonManagedReference
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Response> responses;
-
-    public Field(){
-        fieldUiDimensions = new FieldUiDimensions();
-    }
 
     public int getId() {
         return id;

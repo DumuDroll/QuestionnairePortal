@@ -28,6 +28,27 @@ public class ResponsesAddMB {
         populateResponses(fields);
     }
 
+    public void save() {
+        ResponseService.saveResponsesAndSendThemViaWebsocket(getResponses());
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/success");
+        } catch (Exception e) {
+            logger.catching(e);
+        }
+    }
+
+    public void populateResponses(List<Field> fields) {
+        setResponses(new ArrayList<>());
+        if (fields != null) {
+            for (Field field : fields) {
+                Response response = new Response();
+                response.setField(field);
+                response.setLabel(field.getLabel());
+                getResponses().add(response);
+            }
+        }
+    }
+
     public List<Response> getResponses() {
         return responses;
     }
@@ -36,24 +57,4 @@ public class ResponsesAddMB {
         this.responses = responses;
     }
 
-    public void save() {
-        ResponseService.saveResponsesAndSendThemViaWebsocket(responses);
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/success");
-        }catch (Exception e){
-            logger.catching(e);
-        }
-    }
-
-    public void populateResponses(List<Field> fields) {
-        responses = new ArrayList<>();
-        if (fields != null) {
-            for (Field field : fields) {
-                Response response = new Response();
-                response.setField(field);
-                response.setLabel(field.getLabel());
-                responses.add(response);
-            }
-        }
-    }
 }

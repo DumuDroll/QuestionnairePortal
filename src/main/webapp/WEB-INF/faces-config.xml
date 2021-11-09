@@ -12,6 +12,6 @@
 
     <converter>
         <converter-id>MyDateConverter</converter-id>
-        <converter-class>com.dddd.questionnaireportal.common.util.date.MyDateConverter</converter-class>
+        <converter-class>com.dddd.questionnaireportal.common.util.dateConverter.MyDateConverter</converter-class>
     </converter>
 </faces-config>

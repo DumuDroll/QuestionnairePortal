@@ -10,7 +10,7 @@ public class MD5Util {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static String getSecurePassword(String passwordToHash){
+    public static String getSecurePassword(String passwordToHash) {
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -20,8 +20,7 @@ public class MD5Util {
                 sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             logger.catching(e);
         }
         return generatedPassword;

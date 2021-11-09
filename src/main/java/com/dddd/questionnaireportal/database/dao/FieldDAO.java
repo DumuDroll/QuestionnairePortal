@@ -32,7 +32,7 @@ public class FieldDAO {
                 transaction.rollback();
             }
             logger.catching(e);
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }
@@ -42,25 +42,19 @@ public class FieldDAO {
     @SuppressWarnings("deprecation")
     public static List<Field> findAll() {
         List<Field> fields = new ArrayList<>();
-        Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
             criteria.createAlias("options", "o", JoinType.LEFT_OUTER_JOIN);
             criteria.addOrder(Order.asc("id"));
             criteria.addOrder(Order.asc("o.id"));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             fields = criteria.list();
-            transaction.commit();
             session.close();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.catching(e);
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }
@@ -71,11 +65,9 @@ public class FieldDAO {
     @SuppressWarnings("deprecation")
     public static List<Field> findAllActive() {
         List<Field> fields = new ArrayList<>();
-        Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Field.class);
             criteria.createAlias("options", "o", JoinType.LEFT_OUTER_JOIN);
             criteria.addOrder(Order.asc("id"));
@@ -83,12 +75,8 @@ public class FieldDAO {
             criteria.add(Restrictions.eq("active", true));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             fields = criteria.list();
-            transaction.commit();
 
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.catching(e);
         } finally {
             if (session != null) {

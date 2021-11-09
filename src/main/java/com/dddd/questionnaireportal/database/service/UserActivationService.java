@@ -2,7 +2,7 @@ package com.dddd.questionnaireportal.database.service;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
-import com.dddd.questionnaireportal.common.util.date.DateHelper;
+import com.dddd.questionnaireportal.common.util.dateJava.DateHelper;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.UserActivationDAO;
@@ -24,7 +24,7 @@ public class UserActivationService {
         userActivation.setNewPass(MD5Util.getSecurePassword(newPass));
         EmailUtil.sendEmail(user.getEmail(), Constants.PASSWORD_CHANGE_SUBJECT,
                 "Confirm password change on a link:" + Constants.DOMAIN_ADDRESS + "passChangeActivation?key="
-                + userActivation.getUuid());
+                        + userActivation.getUuid());
         update(userActivation);
     }
 
@@ -47,7 +47,7 @@ public class UserActivationService {
         userActivation.setForgotPassExpireDate(DateHelper.currentDatePlusOneDay());
         SaverHelperDAO.update(userActivation);
         EmailUtil.sendEmail(user.getEmail(), "Questionnaire Portal: new password",
-                Constants.DOMAIN_ADDRESS+"newPassConfirmation?key=" + userActivation.getUuid());
+                Constants.DOMAIN_ADDRESS + "newPassConfirmation?key=" + userActivation.getUuid());
     }
 
     public static boolean updateForNewPassConfirmation(UserActivation userActivation) {
@@ -59,6 +59,7 @@ public class UserActivationService {
         }
         return false;
     }
+
     public static UserActivation findByUUID(String uuid) {
         return UserActivationDAO.findByUUID(uuid);
     }

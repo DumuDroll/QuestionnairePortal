@@ -1,4 +1,4 @@
-package com.dddd.questionnaireportal.common.util.date;
+package com.dddd.questionnaireportal.common.util.dateConverter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

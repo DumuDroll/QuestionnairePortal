@@ -49,40 +49,16 @@ public class LoginMB {
                 .getAutowireCapableBeanFactory().autowireBean(this);
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isRememberMe() {
-        return rememberMe;
-    }
-
-    public void setRememberMe(boolean rememberMe) {
-        this.rememberMe = rememberMe;
-    }
-
     public void logIn() {
-        User user = UserService.findByEmail(email);
+        User user = UserService.findByEmail(getEmail());
         if (user != null) {
             if (user.isActive()) {
-                if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
+                if (user.getPassword().equals(MD5Util.getSecurePassword(getPassword()))) {
                     Authentication authentication;
                     UsernamePasswordAuthenticationToken authenticationToken = new
-                            UsernamePasswordAuthenticationToken(email, password);
+                            UsernamePasswordAuthenticationToken(getEmail(), getPassword());
                     authentication = authenticationManager.authenticate(authenticationToken);
-                    if (rememberMe) {
+                    if (isRememberMe()) {
                         MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
                         RememberMeAuthenticationToken rememberMeAuthenticationToken = new RememberMeAuthenticationToken(
                                 "jsf-spring-security", userDetails,
@@ -138,4 +114,27 @@ public class LoginMB {
 
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
 }

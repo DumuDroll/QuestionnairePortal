@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class User implements Serializable {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JoinColumn(
-            name="id", unique=true, nullable=false, updatable=false)
+            name = "id", unique = true, nullable = false, updatable = false)
     private UserActivation userActivation;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -41,7 +41,7 @@ public class User implements Serializable {
     )
     private Set<Authority> authorities = new HashSet<>();
 
-    public String getName(){
+    public String getName() {
         return firstName + " " + firstName;
     }
 

@@ -30,13 +30,13 @@ public class NewPassConfirmationBean {
 
     @PostConstruct
     public void init() {
-        UserActivation userActivation = UserActivationService.findByUUID(key);
+        UserActivation userActivation = UserActivationService.findByUUID(getKey());
         if (userActivation != null) {
-            valid = UserActivationService.updateForNewPassConfirmation(userActivation);
-            if(valid){
+            setValid(UserActivationService.updateForNewPassConfirmation(userActivation));
+            if (isValid()) {
                 FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
                         .getAutowireCapableBeanFactory().autowireBean(this);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(userActivation.getUser().getEmail());
+                UserDetails userDetails = getUserDetailsService().loadUserByUsername(userActivation.getUser().getEmail());
                 UsernamePasswordAuthenticationToken authenticationToken = new
                         UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -58,5 +58,13 @@ public class NewPassConfirmationBean {
 
     public void setValid(boolean valid) {
         this.valid = valid;
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 }

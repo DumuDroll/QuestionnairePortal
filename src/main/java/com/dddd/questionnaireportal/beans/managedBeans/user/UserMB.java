@@ -12,16 +12,16 @@ public class UserMB {
 
     public String getFullName() {
         String fullName;
-        try{
+        try {
 
             MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext()
                     .getAuthentication().getPrincipal();
 
-            fullName =  myUserDetails.getFirstName() + " " +
+            fullName = myUserDetails.getFirstName() + " " +
                     myUserDetails.getLastName();
-       } catch (NullPointerException npe){
-           return null;
-       }
+        } catch (NullPointerException npe) {
+            return null;
+        }
         return fullName;
     }
 

@@ -20,7 +20,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                Map<String,String> jdbcUrlSettings = new HashMap<>();
+                Map<String, String> jdbcUrlSettings = new HashMap<>();
                 String jdbcDbUrl = System.getenv("JDBC_DATABASE_URL");
                 if (null != jdbcDbUrl) {
                     jdbcUrlSettings.put("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));

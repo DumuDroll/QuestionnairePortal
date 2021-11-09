@@ -2,7 +2,7 @@ package com.dddd.questionnaireportal.database.service;
 
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.MD5Util.MD5Util;
-import com.dddd.questionnaireportal.common.util.date.DateHelper;
+import com.dddd.questionnaireportal.common.util.dateJava.DateHelper;
 import com.dddd.questionnaireportal.common.util.emailUtil.EmailUtil;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.dao.UserDAO;
@@ -45,5 +45,6 @@ public class UserService {
         UserActivation userActivation = user.getUserActivation();
         userActivation.setUuid(UUID.randomUUID().toString());
         SaverHelperDAO.update(userActivation);
-        SaverHelperDAO.update(user);    }
+        SaverHelperDAO.update(user);
+    }
 }

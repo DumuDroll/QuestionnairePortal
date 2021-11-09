@@ -23,6 +23,34 @@ public class ChangePasswordMB {
 
     private String newPassConfirm;
 
+    public void change() {
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        User user = UserService.findByEmail(myUserDetails.getUsername());
+        if (user.getPassword().equals(MD5Util.getSecurePassword(getPassword()))) {
+            if (getNewPassword().equals(getNewPassConfirm())) {
+                UserActivationService.updateForPassChange(user, getNewPassword());
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                Constants.EMAIL_SENT,
+                                "Check your mailbox to confirm password change!"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                Constants.PASSWORDS_DONT_MATCH,
+                                Constants.TRY_AGAIN));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            Constants.INVALID_PASSWORD,
+                            Constants.TRY_AGAIN));
+        }
+    }
+
     public String getPassword() {
         return password;
     }
@@ -45,33 +73,5 @@ public class ChangePasswordMB {
 
     public void setNewPassConfirm(String newPassConfirm) {
         this.newPassConfirm = newPassConfirm;
-    }
-
-    public void change() {
-        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        User user = UserService.findByEmail(myUserDetails.getUsername());
-        if (user.getPassword().equals(MD5Util.getSecurePassword(password))) {
-            if (newPassword.equals(newPassConfirm)) {
-                UserActivationService.updateForPassChange(user, newPassword);
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                Constants.EMAIL_SENT,
-                                "Check your mailbox to confirm password change!"));
-            } else {
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                Constants.PASSWORDS_DONT_MATCH,
-                                Constants.TRY_AGAIN));
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            Constants.INVALID_PASSWORD,
-                            Constants.TRY_AGAIN));
-        }
     }
 }

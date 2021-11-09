@@ -23,8 +23,46 @@ public class ResponseListMB {
 
     @PostConstruct
     public void init() {
-        responses = ResponseService.findAll();
+        setResponses(ResponseService.findAll());
         populateRows();
+    }
+
+    public void populateRows() {
+        Map<String, Object> tempResponses = new HashMap<>();
+        StringBuilder currentUuid = new StringBuilder();
+        Iterator<Response> iterator = getResponses().iterator();
+        while (iterator.hasNext()) {
+            Response response = iterator.next();
+            if (!currentUuid.toString().equals(response.getResponsePerUser().toString())) {
+                if (!currentUuid.toString().equals("")) {
+                    getRows().add(tempResponses);
+                    currentUuid.setLength(0);
+                }
+                currentUuid.append(response.getResponsePerUser().toString());
+                tempResponses = new HashMap<>();
+            }
+            if (response.getResponse() == null) {
+                tempResponses.put(response.getLabel(), "N/A");
+            } else {
+                tempResponses.put(response.getLabel(), response.getResponse());
+            }
+            if (!iterator.hasNext()) {
+                getRows().add(tempResponses);
+            }
+        }
+        //Getting headers from only active fields
+        List<Field> fields = FieldService.findAllActive();
+        fields.forEach(field -> getColumns().add(field.getLabel()));
+    }
+
+    public void addRow() {
+        Map<String, Object> map1;
+        Gson gson = new Gson();
+        String json = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+        map1 = gson.fromJson(json,
+                new TypeToken<HashMap<String, Object>>() {
+                }.getType());
+        getRows().add(map1);
     }
 
     public List<String> getColumns() {
@@ -43,42 +81,11 @@ public class ResponseListMB {
         this.rows = rows;
     }
 
-    public void populateRows() {
-        Map<String, Object> tempResponses = new HashMap<>();
-        StringBuilder currentUuid = new StringBuilder();
-        Iterator<Response> iterator = responses.iterator();
-        while (iterator.hasNext()) {
-            Response response = iterator.next();
-            if (!currentUuid.toString().equals(response.getResponsePerUser().toString())) {
-                if (!currentUuid.toString().equals("")) {
-                    rows.add(tempResponses);
-                    currentUuid.setLength(0);
-                }
-                currentUuid.append(response.getResponsePerUser().toString());
-                tempResponses = new HashMap<>();
-            }
-            if (response.getResponse() == null) {
-                tempResponses.put(response.getLabel(), "N/A");
-            } else {
-                tempResponses.put(response.getLabel(), response.getResponse());
-            }
-            if (!iterator.hasNext()) {
-                rows.add(tempResponses);
-            }
-        }
-        //Getting headers from only active fields
-        List<Field> fields = FieldService.findAllActive();
-        fields.forEach(field -> columns.add(field.getLabel()));
+    public List<Response> getResponses() {
+        return responses;
     }
 
-    public void addRow() {
-        Map<String, Object> map1;
-        Gson gson = new Gson();
-        String json = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
-        map1 = gson.fromJson(json,
-                new TypeToken<HashMap<String, Object>>() {
-                }.getType());
-        rows.add(map1);
+    public void setResponses(List<Response> responses) {
+        this.responses = responses;
     }
-
 }

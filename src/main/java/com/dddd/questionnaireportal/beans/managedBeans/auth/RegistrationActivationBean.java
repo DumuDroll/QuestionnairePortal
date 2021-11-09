@@ -25,14 +25,14 @@ public class RegistrationActivationBean {
 
     @PostConstruct
     public void init() {
-        UserActivation userActivation = UserActivationService.findByUUID(key);
+        UserActivation userActivation = UserActivationService.findByUUID(getKey());
         if (userActivation != null) {
             if (userActivation.getUser().isActive()) {
-                valid = true;
+                setValid(true);
             } else {
                 Date date = new Date();
                 if (date.compareTo(userActivation.getConfirmationExpireDate()) <= 0) {
-                    valid = true;
+                    setValid(true);
                     User user = userActivation.getUser();
                     user.setActive(true);
                     UserService.updateUser(user);
@@ -40,6 +40,25 @@ public class RegistrationActivationBean {
                 }
             }
         }
+    }
+
+    public String send() {
+        User user = UserService.findByEmail(getEmail());
+        if (user != null) {
+            UserService.updateActivationLink(user);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Check your email for new confirmation letter",
+                            null));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            Constants.NO_USER_WITH_THIS_EMAIL,
+                            null));
+        }
+        return "reActivation";
     }
 
     public String getKey() {
@@ -64,25 +83,6 @@ public class RegistrationActivationBean {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String send() {
-        User user = UserService.findByEmail(email);
-        if (user != null) {
-            UserService.updateActivationLink(user);
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "Check your email for new confirmation letter",
-                            null));
-        } else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            Constants.NO_USER_WITH_THIS_EMAIL,
-                            null));
-        }
-        return "reActivation";
     }
 
 }

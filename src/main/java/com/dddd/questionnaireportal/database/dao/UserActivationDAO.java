@@ -16,19 +16,13 @@ public class UserActivationDAO {
     @SuppressWarnings("deprecation")
     public static UserActivation findByUUID(String uuid) {
         UserActivation result = null;
-        Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(UserActivation.class)
                     .add(Restrictions.like("uuid", uuid));
             result = (UserActivation) criteria.uniqueResult();
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.catching(e);
         } finally {
             if (session != null) {

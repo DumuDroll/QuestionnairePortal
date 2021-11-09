@@ -19,9 +19,9 @@ public class PassChangeActivationBean {
 
     @PostConstruct
     public void init() {
-        UserActivation userActivation = UserActivationService.findByUUID(key);
+        UserActivation userActivation = UserActivationService.findByUUID(getKey());
         if (userActivation != null) {
-            valid = UserActivationService.updateForPassChangeConfirmation(userActivation);
+            setValid(UserActivationService.updateForPassChangeConfirmation(userActivation));
         }
     }
 

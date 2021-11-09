@@ -30,20 +30,12 @@ public class FieldsLayoutBean {
 
     private List<Field> fields;
 
-    public List<Field> getFields() {
-        return fields;
-    }
-
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
-    }
-
     @PostConstruct
     public void init() {
-        fields = FieldService.findAllActive();
-        for (int i = 0; i < fields.size(); i++) {
-            FieldUiDimensions fieldUiDimensions = fields.get(i).getFieldUiDimensions();
-            switch (fields.get(i).getType()) {
+        setFields(FieldService.findAllActive());
+        for (int i = 0; i < getFields().size(); i++) {
+            FieldUiDimensions fieldUiDimensions = getFields().get(i).getFieldUiDimensions();
+            switch (getFields().get(i).getType()) {
                 case SINGLE_LINE_TEXT:
                     fieldUiDimensions.setUi_id(i + ":iText");
                     break;
@@ -72,21 +64,21 @@ public class FieldsLayoutBean {
         List<ItemDTO> items = gson.fromJson(json, new TypeToken<List<ItemDTO>>() {
         }.getType());
 
-        for (int i = 0; i < fields.size(); i++) {
-            fields.get(i).getFieldUiDimensions().setHeight(items.get(i).getHeight());
-            fields.get(i).getFieldUiDimensions().setWidth(items.get(i).getWidth());
-            fields.get(i).getFieldUiDimensions().setPositionTopForCollision(items.get(i).getPositionTopForCollision());
-            fields.get(i).getFieldUiDimensions().setPositionLeftForCollision(items.get(i).getPositionLeftForCollision());
+        for (int i = 0; i < getFields().size(); i++) {
+            getFields().get(i).getFieldUiDimensions().setHeight(items.get(i).getHeight());
+            getFields().get(i).getFieldUiDimensions().setWidth(items.get(i).getWidth());
+            getFields().get(i).getFieldUiDimensions().setPositionTopForCollision(items.get(i).getPositionTopForCollision());
+            getFields().get(i).getFieldUiDimensions().setPositionLeftForCollision(items.get(i).getPositionLeftForCollision());
         }
 
-        if (loopForOverlap(fields)) {
+        if (loopForOverlap(getFields())) {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Some fields are overlapped!",
                             "Move them and try again"));
         } else {
-            for (Field field : fields) {
+            for (Field field : getFields()) {
 
                 SaverHelperDAO.update(field);
             }
@@ -104,7 +96,7 @@ public class FieldsLayoutBean {
         String left = params.get(dragId + "_left");
         String top = params.get(dragId + "_top");
         String s = dragId.substring(dragId.length() - 7);
-        for (Field field : fields) {
+        for (Field field : getFields()) {
             if (field.getFieldUiDimensions().getUi_id().equals(s)) {
                 field.getFieldUiDimensions().setPositionLeft(left);
                 field.getFieldUiDimensions().setPositionTop(top);
@@ -113,7 +105,7 @@ public class FieldsLayoutBean {
     }
 
     public void setDefault() {
-        for (Field field : fields) {
+        for (Field field : getFields()) {
             field.getFieldUiDimensions().setPositionTop(null);
             field.getFieldUiDimensions().setPositionLeft(null);
         }
@@ -145,7 +137,7 @@ public class FieldsLayoutBean {
         return rectangle;
     }
 
-    static class ItemDTO{
+    static class ItemDTO {
 
         private String height;
         private String width;
@@ -184,4 +176,13 @@ public class FieldsLayoutBean {
             this.positionLeftForCollision = positionLeftForCollision;
         }
     }
+
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
+
 }

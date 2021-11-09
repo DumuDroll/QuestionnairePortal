@@ -17,21 +17,15 @@ public class UserDAO {
     @SuppressWarnings("deprecation")
     public static User findByEmail(String email) {
         User result = null;
-        Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(User.class)
                     .add(Restrictions.like(Constants.EMAIL, email));
             result = (User) criteria.uniqueResult();
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.catching(e);
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }

@@ -32,7 +32,7 @@ public class ResponseDAO {
                 transaction.rollback();
             }
             logger.catching(e);
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }
@@ -42,22 +42,16 @@ public class ResponseDAO {
     @SuppressWarnings("deprecation")
     public static List<Response> findAll() {
         List<Response> responses = new ArrayList<>();
-        Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Response.class);
             criteria.addOrder(Order.asc("id"));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             responses = criteria.list();
-            transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             logger.catching(e);
-        }finally {
+        } finally {
             if (session != null) {
                 session.close();
             }
