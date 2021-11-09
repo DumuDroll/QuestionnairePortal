@@ -15,6 +15,7 @@
         <ui:include src="/topUnauth.xhtml"/>
     </ui:insert>
             <h:form id="form">
+                <p:growl showDetail="true" life="9000" skipDetailIfEqualsSummary="true"/>
                 <p:panel header="Questionnaire" width="90%">
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
                                 <p:panel rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
@@ -79,7 +80,9 @@
                                     <br/>
                                     <p:calendar required="#{response.field.required}" id="button"
                                                 value="#{response.response}" showOn="button"
-                                                converter="MyDateConverter" pattern="dd MMM yyyy">
+                                                converter="MyDateConverter" pattern="dd MMM yyyy"
+                                                validatorMessage="It is not a valid date.">
+                                        <f:validateRegex pattern="^(([0-9])|([0-2][0-9])|([3][0-1]))\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{4}$"/>
                                     </p:calendar>
                                 </p:panel>
                     </p:repeat>
