@@ -15,12 +15,11 @@
         <ui:include src="/topUnauth.xhtml"/>
     </ui:insert>
             <h:form id="form">
-                <p:growl showDetail="true" life="9000" skipDetailIfEqualsSummary="true"/>
                 <p:panel header="Questionnaire" width="90%">
                     <p:repeat value="#{responsesAddMB.responses}" var="response">
                                 <p:panel rendered="#{response.field.type == 'SINGLE_LINE_TEXT'
-                                and response.field.active==true}" styleClass="responseAddColumn"
-                                          style="width: 280px; top: #{response.field.positionTop}px;
+                                and response.field.active==true}" styleClass="fieldsPanel"
+                                          style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="inputText" value="#{response.field.label}"/>
                                     <br/>
@@ -28,8 +27,8 @@
                                                  required="#{response.field.required}"/>
                                 </p:panel>
                                 <p:panel rendered="#{response.field.type == 'MULTILINE_TEXT'
-                                and response.field.active==true}" styleClass="responseAddColumn"
-                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                and response.field.active==true}" styleClass="fieldsPanel"
+                                         style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="inputTA" value="#{response.field.label}"/>
                                     <br/>
@@ -37,8 +36,8 @@
                                                      required="#{response.field.required}"/>
                                 </p:panel>
                                 <p:panel rendered="#{response.field.type == 'RADIO_BUTTON'
-                                 and response.field.active==true}" styleClass="responseAddColumn"
-                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                 and response.field.active==true}" styleClass="fieldsPanel"
+                                         style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="radio" value="#{response.field.label}"/>
                                     <br/>
@@ -51,8 +50,8 @@
                                     </p:selectOneRadio>
                                 </p:panel>
                                 <p:panel rendered="#{response.field.type == 'CHECKBOX'
-                                 and response.field.active==true}" styleClass="responseAddColumn"
-                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                 and response.field.active==true}" styleClass="fieldsPanel"
+                                         style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="checkbox" value="#{response.field.label}"/>
                                     <br/>
@@ -61,8 +60,8 @@
                                     </p:selectBooleanCheckbox>
                                 </p:panel>
                                 <p:panel rendered="#{response.field.type == 'COMBOBOX'
-                                 and response.field.active==true}" styleClass="responseAddColumn"
-                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                 and response.field.active==true}" styleClass="fieldsPanel"
+                                         style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="combobox" value="#{response.field.label}"/>
                                     <br/>
@@ -73,15 +72,14 @@
                                     </p:selectOneMenu>
                                 </p:panel>
                                 <p:panel rendered="#{response.field.type == 'DATE'
-                                and response.field.active==true}" styleClass="responseAddColumn"
-                                         style="width: 280px; top: #{response.field.positionTop}px;
+                                and response.field.active==true}" styleClass="fieldsPanel"
+                                         style="top: #{response.field.positionTop}px;
                                 left: #{response.field.positionLeft}px; position: relative">
                                     <p:outputLabel for="button" value="#{response.field.label}"/>
                                     <br/>
                                     <p:calendar required="#{response.field.required}" id="button"
                                                 value="#{response.response}" showOn="button"
-                                                converter="MyDateConverter" pattern="dd MMM yyyy"
-                                                validatorMessage="It is not a valid date.">
+                                                converter="MyDateConverter" pattern="dd MMM yyyy">
                                         <f:validateRegex pattern="^(([0-9])|([0-2][0-9])|([3][0-1]))\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{4}$"/>
                                     </p:calendar>
                                 </p:panel>
