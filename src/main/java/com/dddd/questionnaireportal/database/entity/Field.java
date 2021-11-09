@@ -28,19 +28,9 @@ public class Field implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    private String ui_id;
-
-    private String positionTop;
-
-    private String positionTopForCollision;
-
-    private String positionLeft;
-
-    private String positionLeftForCollision;
-
-    private String width;
-
-    private String height;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private FieldUiDimensions fieldUiDimensions;
 
     @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -51,15 +41,8 @@ public class Field implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Response> responses;
 
-    public Field(String label, boolean required, boolean active, Type type) {
-        this.label = label;
-        this.required = required;
-        this.active = active;
-        this.type = type;
-    }
-
-    public Field() {
-
+    public Field(){
+        fieldUiDimensions = new FieldUiDimensions();
     }
 
     public int getId() {
@@ -118,60 +101,12 @@ public class Field implements Serializable {
         this.responses = responses;
     }
 
-    public String getUi_id() {
-        return ui_id;
+    public FieldUiDimensions getFieldUiDimensions() {
+        return fieldUiDimensions;
     }
 
-    public void setUi_id(String ui_id) {
-        this.ui_id = ui_id;
-    }
-
-    public String getPositionTop() {
-        return positionTop;
-    }
-
-    public void setPositionTop(String positionTop) {
-        this.positionTop = positionTop;
-    }
-
-    public String getPositionTopForCollision() {
-        return positionTopForCollision;
-    }
-
-    public void setPositionTopForCollision(String positionTopForCollision) {
-        this.positionTopForCollision = positionTopForCollision;
-    }
-
-    public String getPositionLeft() {
-        return positionLeft;
-    }
-
-    public void setPositionLeft(String positionLeft) {
-        this.positionLeft = positionLeft;
-    }
-
-    public String getPositionLeftForCollision() {
-        return positionLeftForCollision;
-    }
-
-    public void setPositionLeftForCollision(String positionLeftForCollision) {
-        this.positionLeftForCollision = positionLeftForCollision;
-    }
-
-    public String getWidth() {
-        return width;
-    }
-
-    public void setWidth(String width) {
-        this.width = width;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
+    public void setFieldUiDimensions(FieldUiDimensions fieldUiDimensions) {
+        this.fieldUiDimensions = fieldUiDimensions;
     }
 
     @Override

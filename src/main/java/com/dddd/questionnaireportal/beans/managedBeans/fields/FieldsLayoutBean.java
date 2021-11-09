@@ -3,6 +3,7 @@ package com.dddd.questionnaireportal.beans.managedBeans.fields;
 import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.database.dao.SaverHelperDAO;
 import com.dddd.questionnaireportal.database.entity.Field;
+import com.dddd.questionnaireportal.database.entity.FieldUiDimensions;
 import com.dddd.questionnaireportal.database.service.FieldService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,25 +42,25 @@ public class FieldsLayoutBean {
     public void init() {
         fields = FieldService.findAllActive();
         for (int i = 0; i < fields.size(); i++) {
-            Field field = fields.get(i);
-            switch (field.getType()) {
+            FieldUiDimensions fieldUiDimensions = fields.get(i).getFieldUiDimensions();
+            switch (fields.get(i).getType()) {
                 case SINGLE_LINE_TEXT:
-                    field.setUi_id(i + ":iText");
+                    fieldUiDimensions.setUi_id(i + ":iText");
                     break;
                 case MULTILINE_TEXT:
-                    field.setUi_id(i + ":TextA");
+                    fieldUiDimensions.setUi_id(i + ":TextA");
                     break;
                 case RADIO_BUTTON:
-                    fields.get(i).setUi_id(i + ":Radio");
+                    fieldUiDimensions.setUi_id(i + ":Radio");
                     break;
                 case CHECKBOX:
-                    fields.get(i).setUi_id(i + ":check");
+                    fieldUiDimensions.setUi_id(i + ":check");
                     break;
                 case COMBOBOX:
-                    fields.get(i).setUi_id(i + ":combo");
+                    fieldUiDimensions.setUi_id(i + ":combo");
                     break;
                 case DATE:
-                    fields.get(i).setUi_id(i + ":cDate");
+                    fieldUiDimensions.setUi_id(i + ":cDate");
                     break;
             }
         }
@@ -68,13 +69,14 @@ public class FieldsLayoutBean {
     public void save() {
         String json = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
         Gson gson = new Gson();
-        List<Field> items = gson.fromJson(json, new TypeToken<List<Field>>() {}.getType());
+        List<ItemDTO> items = gson.fromJson(json, new TypeToken<List<ItemDTO>>() {
+        }.getType());
 
         for (int i = 0; i < fields.size(); i++) {
-            fields.get(i).setHeight(items.get(i).getHeight());
-            fields.get(i).setWidth(items.get(i).getWidth());
-            fields.get(i).setPositionTopForCollision(items.get(i).getPositionTopForCollision());
-            fields.get(i).setPositionLeftForCollision(items.get(i).getPositionLeftForCollision());
+            fields.get(i).getFieldUiDimensions().setHeight(items.get(i).getHeight());
+            fields.get(i).getFieldUiDimensions().setWidth(items.get(i).getWidth());
+            fields.get(i).getFieldUiDimensions().setPositionTopForCollision(items.get(i).getPositionTopForCollision());
+            fields.get(i).getFieldUiDimensions().setPositionLeftForCollision(items.get(i).getPositionLeftForCollision());
         }
 
         if (loopForOverlap(fields)) {
@@ -103,17 +105,17 @@ public class FieldsLayoutBean {
         String top = params.get(dragId + "_top");
         String s = dragId.substring(dragId.length() - 7);
         for (Field field : fields) {
-            if (field.getUi_id().equals(s)) {
-                field.setPositionLeft(left);
-                field.setPositionTop(top);
+            if (field.getFieldUiDimensions().getUi_id().equals(s)) {
+                field.getFieldUiDimensions().setPositionLeft(left);
+                field.getFieldUiDimensions().setPositionTop(top);
             }
         }
     }
 
     public void setDefault() {
         for (Field field : fields) {
-            field.setPositionTop(null);
-            field.setPositionLeft(null);
+            field.getFieldUiDimensions().setPositionTop(null);
+            field.getFieldUiDimensions().setPositionLeft(null);
         }
     }
 
@@ -136,10 +138,50 @@ public class FieldsLayoutBean {
 
     private static Rectangle getCoords(Field field) {
         Rectangle rectangle = new Rectangle();
-        rectangle.height = (int) Double.parseDouble(field.getHeight());
-        rectangle.width = (int) Double.parseDouble(field.getWidth());
-        rectangle.x = (int) Double.parseDouble(field.getPositionLeftForCollision());
-        rectangle.y = (int) Double.parseDouble(field.getPositionTopForCollision());
+        rectangle.height = (int) Double.parseDouble(field.getFieldUiDimensions().getHeight());
+        rectangle.width = (int) Double.parseDouble(field.getFieldUiDimensions().getWidth());
+        rectangle.x = (int) Double.parseDouble(field.getFieldUiDimensions().getPositionLeftForCollision());
+        rectangle.y = (int) Double.parseDouble(field.getFieldUiDimensions().getPositionTopForCollision());
         return rectangle;
+    }
+
+    static class ItemDTO{
+
+        private String height;
+        private String width;
+        private String positionTopForCollision;
+        private String positionLeftForCollision;
+
+        public String getHeight() {
+            return height;
+        }
+
+        public void setHeight(String height) {
+            this.height = height;
+        }
+
+        public String getWidth() {
+            return width;
+        }
+
+        public void setWidth(String width) {
+            this.width = width;
+        }
+
+        public String getPositionTopForCollision() {
+            return positionTopForCollision;
+        }
+
+        public void setPositionTopForCollision(String positionTopForCollision) {
+            this.positionTopForCollision = positionTopForCollision;
+        }
+
+        public String getPositionLeftForCollision() {
+            return positionLeftForCollision;
+        }
+
+        public void setPositionLeftForCollision(String positionLeftForCollision) {
+            this.positionLeftForCollision = positionLeftForCollision;
+        }
     }
 }

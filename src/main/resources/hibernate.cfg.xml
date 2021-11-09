@@ -28,6 +28,7 @@
         <mapping class="com.dddd.questionnaireportal.database.entity.User"/>
         <mapping class="com.dddd.questionnaireportal.database.entity.UserActivation"/>
         <mapping class="com.dddd.questionnaireportal.database.entity.FieldsOption"/>
+        <mapping class="com.dddd.questionnaireportal.database.entity.FieldUiDimensions"/>
         <mapping class="com.dddd.questionnaireportal.database.entity.Field"/>
         <mapping class="com.dddd.questionnaireportal.database.entity.Response"/>
     </session-factory>
