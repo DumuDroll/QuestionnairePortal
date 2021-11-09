@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "options")
-@NamedQuery(name="FieldsOption.deleteOptionsById", query = "delete from FieldsOption where field = :field")
 public class FieldsOption implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -30,14 +30,6 @@ public class FieldListMB {
         this.fields = FieldService.findAll();
     }
 
-
-    public String getOptions() {
-        if (selectedField.getId() != 0 && selectedField.getOptions() != null) {
-            return takeOptions();
-        }
-        return options;
-    }
-
     public void deleteField() {
         FieldService.deleteField(selectedField.getId());
         fields.remove(selectedField);
@@ -72,7 +64,7 @@ public class FieldListMB {
     }
 
     public void addOptionsToField() {
-        String[] lines = getOptions().split(OPTIONS_REGEX);
+        String[] lines = getOptions(true).split(OPTIONS_REGEX);
         for (String line : lines) {
             line = line.trim();
             FieldsOption fieldsOption = new FieldsOption();
@@ -107,6 +99,16 @@ public class FieldListMB {
 
     public void setOptions(String options) {
         this.options = options;
+    }
+
+    public String getOptions() {
+        if (selectedField.getId() != 0 && selectedField.getOptions() != null) {
+            return takeOptions();
+        }
+        return options;
+    }
+    public String getOptions(boolean needOptions){
+        return options;
     }
 
     public Type[] getTypes() {

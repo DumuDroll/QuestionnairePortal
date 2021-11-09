@@ -17,8 +17,8 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String url = httpServletRequest.getRequestURI();
-        boolean pageInFreeAccess = !(url.equals("/fields") || url.equals("/responses") || url.equals("/changePassword")
-                || url.equals("/editUser"));
+        boolean pageInFreeAccess = !(url.equals(Constants.FIELDS_URL) || url.equals(Constants.RESPONSES_URL)
+                || url.equals(Constants.CHANGE_PASSWORD_URL) || url.equals(Constants.EDIT_USER_URL));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
