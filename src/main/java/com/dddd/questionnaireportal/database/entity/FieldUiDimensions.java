@@ -8,7 +8,7 @@ public class FieldUiDimensions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String ui_id;
 
@@ -83,7 +83,7 @@ public class FieldUiDimensions {
         this.height = height;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

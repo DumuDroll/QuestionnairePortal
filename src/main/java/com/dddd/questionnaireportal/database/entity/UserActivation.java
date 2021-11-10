@@ -12,7 +12,7 @@ public class UserActivation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
@@ -27,7 +27,7 @@ public class UserActivation implements Serializable {
 
     private String newPass;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

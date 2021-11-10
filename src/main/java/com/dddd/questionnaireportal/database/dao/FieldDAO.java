@@ -18,7 +18,7 @@ public class FieldDAO {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static void delete(int id) {
+    public static void delete(long id) {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -36,6 +36,22 @@ public class FieldDAO {
                 session.close();
             }
         }
+    }
+
+    public static Field findById(long id) {
+        Field result = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            result = session.find(Field.class, id);
+        } catch (Exception e) {
+            logger.catching(e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return result;
     }
 
     @SuppressWarnings("deprecation")

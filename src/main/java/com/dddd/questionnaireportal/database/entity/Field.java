@@ -17,7 +17,7 @@ public class Field implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String label;
 
@@ -41,7 +41,7 @@ public class Field implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Response> responses;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

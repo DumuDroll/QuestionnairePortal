@@ -14,7 +14,7 @@ public class Response implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String label;
 
@@ -26,7 +26,7 @@ public class Response implements Serializable {
     @JsonBackReference
     private Field field;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

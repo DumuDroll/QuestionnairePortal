@@ -1,6 +1,5 @@
 package com.dddd.questionnaireportal.database.dao;
 
-import com.dddd.questionnaireportal.common.contants.Constants;
 import com.dddd.questionnaireportal.common.util.hibernate.HibernateUtil;
 import com.dddd.questionnaireportal.database.entity.Field;
 import com.dddd.questionnaireportal.database.entity.FieldsOption;
@@ -11,10 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
-import org.hibernate.sql.JoinType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FieldsOptionDAO {

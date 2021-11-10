@@ -12,11 +12,11 @@ public class Authority implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String name;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
