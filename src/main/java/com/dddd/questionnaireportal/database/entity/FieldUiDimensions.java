@@ -24,7 +24,7 @@ public class FieldUiDimensions {
 
     private String height;
 
-    @OneToOne(mappedBy = "fieldUiDimensions")
+    @OneToOne(cascade = CascadeType.ALL)
     private Field field;
 
     public String getUi_id() {

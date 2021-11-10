@@ -12,6 +12,7 @@ import com.dddd.questionnaireportal.database.entity.UserActivation;
 import java.util.UUID;
 
 public class UserService {
+
     public static User findByEmail(String email) {
         return UserDAO.findByEmail(email);
     }

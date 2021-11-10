@@ -107,7 +107,8 @@ public class FieldListBean {
         }
         return options;
     }
-    public String getOptions(boolean needOptions){
+
+    public String getOptions(boolean needOptions) {
         return options;
     }
 

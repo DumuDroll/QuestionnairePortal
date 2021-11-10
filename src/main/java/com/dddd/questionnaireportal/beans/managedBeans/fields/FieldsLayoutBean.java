@@ -36,6 +36,7 @@ public class FieldsLayoutBean {
         setFields(FieldService.findAllActive());
         for (int i = 0; i < getFields().size(); i++) {
             FieldUiDimensions fieldUiDimensions = getFields().get(i).getFieldUiDimensions();
+
             switch (getFields().get(i).getType()) {
                 case SINGLE_LINE_TEXT:
                     fieldUiDimensions.setUi_id(i + ":iText");
@@ -56,6 +57,7 @@ public class FieldsLayoutBean {
                     fieldUiDimensions.setUi_id(i + ":cDate");
                     break;
             }
+
         }
     }
 
@@ -138,62 +140,58 @@ public class FieldsLayoutBean {
         return rectangle;
     }
 
-    public boolean singleLineText(Field field){
+    public boolean singleLineText(Field field) {
         return (field.isActive() && field.getType().equals(Type.SINGLE_LINE_TEXT));
     }
-    public boolean multiLineText(Field field){
+
+    public boolean multiLineText(Field field) {
         return (field.isActive() && field.getType().equals(Type.MULTILINE_TEXT));
     }
-    public boolean radioButton(Field field){
+
+    public boolean radioButton(Field field) {
         return (field.isActive() && field.getType().equals(Type.RADIO_BUTTON));
     }
-    public boolean checkbox(Field field){
+
+    public boolean checkbox(Field field) {
         return (field.isActive() && field.getType().equals(Type.CHECKBOX));
     }
-    public boolean combobox(Field field){
+
+    public boolean combobox(Field field) {
         return (field.isActive() && field.getType().equals(Type.COMBOBOX));
     }
-    public boolean date(Field field){
+
+    public boolean date(Field field) {
         return (field.isActive() && field.getType().equals(Type.DATE));
     }
 
     static class ItemDTO {
 
-        private String height;
-        private String width;
-        private String positionTopForCollision;
-        private String positionLeftForCollision;
+        private final String height;
+        private final String width;
+        private final String positionTopForCollision;
+        private final String positionLeftForCollision;
+
+        ItemDTO(String height, String width, String positionTopForCollision, String positionLeftForCollision) {
+            this.height = height;
+            this.width = width;
+            this.positionTopForCollision = positionTopForCollision;
+            this.positionLeftForCollision = positionLeftForCollision;
+        }
 
         public String getHeight() {
             return height;
-        }
-
-        public void setHeight(String height) {
-            this.height = height;
         }
 
         public String getWidth() {
             return width;
         }
 
-        public void setWidth(String width) {
-            this.width = width;
-        }
-
         public String getPositionTopForCollision() {
             return positionTopForCollision;
         }
 
-        public void setPositionTopForCollision(String positionTopForCollision) {
-            this.positionTopForCollision = positionTopForCollision;
-        }
-
         public String getPositionLeftForCollision() {
             return positionLeftForCollision;
-        }
-
-        public void setPositionLeftForCollision(String positionLeftForCollision) {
-            this.positionLeftForCollision = positionLeftForCollision;
         }
     }
 

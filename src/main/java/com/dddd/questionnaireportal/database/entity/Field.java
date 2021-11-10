@@ -28,9 +28,9 @@ public class Field implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private Type type;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "field", cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
-    private FieldUiDimensions fieldUiDimensions = new FieldUiDimensions();
+    private FieldUiDimensions fieldUiDimensions;
 
     @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
