@@ -88,29 +88,29 @@
                 </p:panel>
                 <p:draggable stack=".fieldsPanel" snap="true" for="cDate" grid="20,40" containment="parent"/>
             </p:repeat>
-            <p:toolbar>
-                <p:toolbarGroup align="left">
-                    <p:commandButton id="setDefault" value="Set default layout"
-                                     actionListener="#{fieldsLayoutBean.setDefault}"
-                                     update="@form" process="@this"
-                                     styleClass="p-mt-5 p-mr-2"/>
-                </p:toolbarGroup>
-                <p:toolbarGroup align="right">
-                    <p:menu>
-                        <p:menuitem icon="pi pi-times" value="Cancel" url="/fields"/>
-                    </p:menu>
-                    <p:menu>
-                        <p:menuitem icon="pi pi-check" value="Save" onclick="getDimensionsInJson()"
-                                    id="buttonId"/>
-                    </p:menu>
-                    <p:remoteCommand name="save" action="#{fieldsLayoutBean.save}"
-                                     update=":form:layout" process="@this"/>
-                </p:toolbarGroup>
-            </p:toolbar>
             <p:droppable for="layout">
                 <p:ajax listener="#{fieldsLayoutBean.onDrop}"/>
             </p:droppable>
         </p:panel>
+        <p:toolbar>
+            <p:toolbarGroup align="left">
+                <p:commandButton id="setDefault" value="Set default layout"
+                                 actionListener="#{fieldsLayoutBean.setDefault}"
+                                 update="@form" process="@this"
+                                 styleClass="p-mt-5 p-mr-2"/>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <p:menu>
+                    <p:menuitem icon="pi pi-times" value="Cancel" url="/fields"/>
+                </p:menu>
+                <p:menu>
+                    <p:menuitem icon="pi pi-check" value="Save" onclick="getDimensionsInJson()"
+                                id="buttonId"/>
+                </p:menu>
+                <p:remoteCommand name="save" action="#{fieldsLayoutBean.save}"
+                                 update=":form:layout" process="@this"/>
+            </p:toolbarGroup>
+        </p:toolbar>
     </h:form>
 
 </h:body>
